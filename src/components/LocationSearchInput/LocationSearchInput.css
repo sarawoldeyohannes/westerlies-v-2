@@ -1,0 +1,45 @@
+.head .Location-suggestion{
+    display: flex;
+    gap: 10px;
+    flex: 0 0 auto;
+    flex-direction: row;
+}
+.head .Location-input {
+    align-items: center;
+    border: 1px solid;
+    border-color: #000000;
+    display: inline-flex;   
+    justify-content: center;
+    padding: 0px 10px;
+    position: relative;
+    color: #000000;
+    font-family: "Roboto-Regular", Helvetica;
+    font-size: 16px;
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: normal;
+  }
+  .head .Location-input::placeholder{
+    color: #000000;
+    font-family: "Roboto-Regular", Helvetica;
+    font-size: 16px;
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: normal;
+    margin-top: -1px;
+    position: relative;
+    white-space: nowrap;
+    width: fit-content;
+  } 
+  .head .search-button{
+    display: flex;
+    justify-content: center; /* Center content horizontally */
+    align-items: center; /* Center content vertically */
+    background-color: #000000;
+    padding: 0; /* Remove padding to ensure a perfect circle */
+    border-radius: 50%;
+    width: 50px; /* Set the width */
+    height: 50px; /* Set the height to be equal to the width */
+    font-size: 28px;
+    color: #ffffff; /* Optional: add color to make the text visible */
+  }

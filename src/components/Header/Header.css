@@ -1,0 +1,107 @@
+.head {
+    align-items: flex-start;
+    border-bottom-style: solid;
+    border-bottom-width: 0.8px;
+    border-color: #aaaaaa;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 0px 0px 20px;
+    padding-left:3% ;
+    position: relative;
+    width: 97%;
+  }
+  
+  .head .header {
+    align-items: center;
+    align-self: stretch;
+    display: flex;
+    flex: 0 0 auto;
+    padding: 20px 0px;
+    position: relative;
+    width: 100%;
+  }
+  
+  .head .header-nav-bar {
+    align-items: flex-start;
+    display: inline-flex;
+    flex: 0 0 auto;
+    gap: 20px;
+    position: relative;
+    width: 42%;
+  }
+  
+  .head .header-nav-bar-texts {
+    align-items: center;
+    display: inline-flex;
+    flex: 0 0 auto;
+    flex-direction: column;
+    gap: 12px;
+    justify-content: flex-end;
+    position: relative;
+  }
+  .head .header-nav-bar-texts a{
+    text-decoration: none;
+    color: #696363;
+
+  }
+  .head .text-wrapper {
+    color: #696363;
+    font-family: "Roboto-Regular", Helvetica;
+    font-size: 18px;
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: normal;
+    margin-top: -1px;
+    position: relative;
+    white-space: nowrap;
+    width: fit-content;
+  }
+  
+  .head .logo {
+    display: inline-flex;
+    flex: 0 0 auto;
+    flex-direction: column;
+    gap: 10px;
+    position: relative;
+  }
+  
+  .head .westerlieslogo {
+    height: 49.08px;
+    object-fit: cover;
+    position: relative;
+    width: 199.43px;
+
+  }
+  
+  .head .search {
+    align-items: center;
+    display: inline-flex;
+    flex: 0 0 auto;
+    gap: 15px;
+    position: relative;
+  }
+  
+  .head .div-wrapper {
+    align-items: center;
+    align-self: stretch;
+    display: inline-flex;
+    flex: 0 0 auto;
+    gap: 10px;
+    position: relative;
+  }
+  
+  .head .text-wrapper-2 {
+    color: #000000;
+    font-family: "Roboto-Regular", Helvetica;
+    font-size: 22px;
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: normal;
+    position: relative;
+    white-space: nowrap;
+    width: fit-content;
+  } 
+  .head .search-disabled{
+    display: none;
+  }
