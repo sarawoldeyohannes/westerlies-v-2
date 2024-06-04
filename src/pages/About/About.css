@@ -45,8 +45,8 @@
     gap: 40px;
     padding: 20px 20px;
     position: relative;
-    width: 45%;
-    margin-top: 5%;
+    width: 38%;
+    margin: 5% 5%;
   }
   
   .about .every-time-you-spend-wrapper {
@@ -101,7 +101,8 @@
     flex-grow: 1;
     display: flex;
     position: relative;
-    margin-right: -3%;
+    margin-right: -2%;
+    margin-top: 2%;
   }
   
   .about .images {
