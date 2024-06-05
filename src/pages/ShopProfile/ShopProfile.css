@@ -1,0 +1,384 @@
+.shop-profile {
+    align-items: flex-start;
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    position: relative;
+    padding: 0 3%;
+  }
+  
+  .shop-profile .section1 {
+    align-self: stretch;
+    display: flex;
+    flex: 0 0 auto;
+    gap: 30px;
+    position: relative;
+    width: 100%;
+  }
+  
+  .shop-profile .section1-part1 {
+    align-items: flex-start;
+    align-self: stretch;
+    display: flex;
+    flex: 1;
+    flex-grow: 1;
+    gap: 10px;
+    justify-content: space-around;
+    padding: 20px 0px;
+    position: relative;
+    width: 55%;
+  }
+  
+  .shop-profile .images-2 {
+    align-self: stretch;
+    flex: 1;
+    flex-grow: 1;
+    object-fit: cover;
+    position: relative;
+    height: 70dvh;
+    width: 100%;
+  }
+  
+  .shop-profile .section-part-2 {
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px 0px;
+    position: relative;
+    width: 45%;
+  }
+  
+  .shop-profile .frame-7 {
+    align-items: flex-start;
+    display: inline-flex;
+    flex: 0 0 auto;
+    gap: 10px;
+    position: relative;
+  }
+  
+  .shop-profile .text-wrapper-8 {
+    color: #000000;
+    font-family: "Roboto-Medium", Helvetica;
+    font-size: 32px;
+    font-weight: 500;
+    letter-spacing: 0;
+    line-height: normal;
+    margin-top: -1px;
+    position: relative;
+    white-space: nowrap;
+    width: fit-content;
+  }
+  
+  .shop-profile .store-description-wrapper {
+    align-items: center;
+    align-self: stretch;
+    display: flex;
+    flex: 0 0 auto;
+    gap: 10px;
+    justify-content: center;
+    position: relative;
+    width: 100%;
+  }
+  
+  .shop-profile .store-description {
+    color: #000000;
+    flex: 1;
+    font-family: "Roboto-Regular", Helvetica;
+    font-size: 20px;
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: normal;
+    margin-top: -1px;
+    position: relative;
+  }
+  
+  .shop-profile .frame-8 {
+    align-items: center;
+    align-self: stretch;
+    display: flex;
+    flex: 0 0 auto;
+    gap: 50px;
+    position: relative;
+    width: 100%;
+  }
+  
+  .shop-profile .text-wrapper-9 {
+    color: #000000;
+    font-family: "Roboto-Regular", Helvetica;
+    font-size: 24px;
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: normal;
+    position: relative;
+    text-align: center;
+    white-space: nowrap;
+    width: fit-content;
+  }
+  
+  .shop-profile .frame-9 {
+    align-items: center;
+    display: inline-flex;
+    flex: 0 0 auto;
+    gap: 10px;
+    justify-content: center;
+    position: relative;
+  }
+  
+  .shop-profile .vector {
+    height: 32px;
+    position: relative;
+    width: 32px;
+  }
+  
+  .shop-profile .vector-2 {
+    height: 32px;
+    position: relative;
+    width: 33px;
+  }
+  
+  .shop-profile .text-wrapper-10 {
+    color: #000000;
+    font-family: "Roboto-Regular", Helvetica;
+    font-size: 24px;
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: normal;
+    margin-top: -1px;
+    position: relative;
+    text-align: center;
+    white-space: nowrap;
+    width: fit-content;
+  }
+  
+  .shop-profile .section-2 {
+    align-items: center;
+    align-self: stretch;
+    background-color: #ffffff;
+    display: flex;
+    flex: 0 0 auto;
+    gap: 50px;
+    position: relative;
+    width: 100%;
+  }
+  
+  .shop-profile .frame-10 {
+    align-items: center;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    flex-grow: 1;
+    gap: 20px;
+    padding: 20px 0px 0px;
+    position: relative;
+  }
+  
+  .shop-profile .frame-11 {
+    align-items: center;
+    display: inline-flex;
+    flex: 0 0 auto;
+    gap: 50px;
+    position: relative;
+  }
+  
+  .shop-profile .frame-12 {
+    align-items: flex-start;
+    border-color: #000000;
+    border-right-style: solid;
+    border-right-width: 1px;
+    display: inline-flex;
+    flex: 0 0 auto;
+    flex-direction: column;
+    gap: 10px;
+    padding: 0px 50px 0px 0px;
+    position: relative;
+  }
+  .shop-profile .days {
+    color: #000000;
+    font-family: "Roboto-Regular", Helvetica;
+    font-size: 20px;
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: normal;
+    margin-top: -1px;
+    position: relative;
+    text-align: center;
+    white-space: nowrap;
+    width: fit-content;
+  }
+  
+  .shop-profile .frame-13 {
+    align-items: flex-start;
+    display: inline-flex;
+    flex: 0 0 auto;
+    flex-direction: column;
+    gap: 10px;
+    position: relative;
+  }
+  
+  .shop-profile .map-wrapper {
+    align-items: center;
+    display: flex;
+    gap: 10px;
+    height: 320px;
+    justify-content: center;
+    padding: 10px;
+    position: relative;
+    width: 752.95px;
+  }
+  
+  .shop-profile .map {
+    height: 310px;
+    margin-bottom: -5px;
+    margin-top: -5px;
+    object-fit: cover;
+    position: relative;
+    width: 396px;
+  }
+  
+  .shop-profile .frame-14 {
+    align-items: center;
+    align-self: stretch;
+    display: flex;
+    flex: 0 0 auto;
+    flex-direction: column;
+    gap: 30px;
+    position: relative;
+    width: 100%;
+  }
+  
+  .shop-profile .text-wrapper-11 {
+    color: #000000;
+    font-family: "Roboto-Regular", Helvetica;
+    font-size: 32px;
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: normal;
+    margin-top: -1px;
+    position: relative;
+    text-align: center;
+    white-space: nowrap;
+    width: fit-content;
+  }
+  
+  .shop-profile .frame-15 {
+    align-items: center;
+    display: inline-flex;
+    flex: 0 0 auto;
+    gap: 24px;
+    justify-content: center;
+    position: relative;
+  }
+  
+  .shop-profile .frame-wrapper {
+    align-items: flex-start;
+    display: inline-flex;
+    flex: 0 0 auto;
+    flex-direction: column;
+    position: relative;
+  }
+  
+  .shop-profile .images-3 {
+    height: 301.5px;
+    margin-bottom: -10.5px;
+    margin-left: -1.5px;
+    margin-right: -7.5px;
+    object-fit: cover;
+    position: relative;
+    width: 276px;
+  }
+  
+  .shop-profile .img-wrapper {
+    align-items: center;
+    display: inline-flex;
+    flex: 0 0 auto;
+    gap: 12.05px;
+    justify-content: center;
+    position: relative;
+  }
+  
+  .shop-profile .frame-16 {
+    align-items: center;
+    align-self: stretch;
+    display: flex;
+    flex: 0 0 auto;
+    flex-direction: column;
+    gap: 10px;
+    justify-content: center;
+    position: relative;
+    width: 100%;
+  }
+  
+  .shop-profile .read-reviews-on-yelp-wrapper {
+    align-items: center;
+    background-color: #000000;
+    border-radius: 30px;
+    display: inline-flex;
+    flex: 0 0 auto;
+    gap: 10px;
+    justify-content: center;
+    padding: 10px 20px;
+    position: relative;
+  }
+  
+  .shop-profile .read-reviews-on-yelp {
+    color: #ffffff;
+    font-family: "Roboto-Regular", Helvetica;
+    font-size: 20px;
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: normal;
+    margin-top: -1px;
+    position: relative;
+    text-align: center;
+    white-space: nowrap;
+    width: fit-content;
+  }
+  
+  .shop-profile .frame-17 {
+    height: 38.32px;
+    position: relative;
+    width: 38.32px;
+  }
+  
+  .shop-profile .search-card-instance {
+    flex: 0 0 auto !important;
+  }
+  
+  .shop-profile .search-card-2 {
+    height: 301.5px !important;
+    margin-bottom: -10.5px !important;
+    margin-left: -1.5px !important;
+    margin-right: -7.5px !important;
+    width: 276px !important;
+  }
+  
+  .shop-profile .search-card-3 {
+    gap: 12.05px !important;
+  }
+  
+  .shop-profile .search-card-4 {
+    gap: 2.41px !important;
+  }
+  
+  .shop-profile .search-card-5 {
+    font-family: "Roboto-Bold", Helvetica !important;
+    font-size: 18.1px !important;
+    font-weight: 700 !important;
+    line-height: 26.1px !important;
+    margin-top: -1.21px !important;
+  }
+  
+  .shop-profile .search-card-6 {
+    height: 361.16px !important;
+    margin-bottom: -10.5px !important;
+    margin-left: -1.5px !important;
+    margin-right: -7.5px !important;
+    width: 330.74px !important;
+  }
+  
+  .shop-profile .footer-instance {
+    background-color: transparent !important;
+    flex: 0 0 auto !important;
+  }
