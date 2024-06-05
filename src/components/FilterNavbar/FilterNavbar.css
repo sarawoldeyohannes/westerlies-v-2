@@ -1,0 +1,63 @@
+.filter-navbar {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    width: 100%;
+    padding: 2% 0;
+  }
+  
+  .filter-navbar .city-frame {
+    align-items: center;
+    display: inline-flex;
+    flex: 0 0 auto;
+    justify-content: center;
+    position: relative;
+  }
+  
+  .filter-navbar .text-wrapper {
+    color: #000000;
+    font-family: "Roboto-Bold", Helvetica;
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: 0;
+    line-height: normal;
+    margin-top: -1px;
+    position: relative;
+    white-space: nowrap;
+  }
+  
+  .filter-navbar .nav-list-frame {
+    align-items: center;
+    display: inline-flex;
+    flex: 0 0 auto;
+    gap: 40px;
+    justify-content: center;
+    position: relative;
+  }
+  
+  .filter-navbar .nav-lists{
+    align-items: center;
+    display: inline-flex;
+    flex: 0 0 auto;
+    gap: 10px;
+    justify-content: center;
+    padding: 10px;
+    position: relative;
+  }
+  
+  
+  .filter-navbar .text-wrapper-2 {
+    color: #000000;
+    font-family: "Roboto-Light", Helvetica;
+    font-size: 18px;
+    font-weight: 300;
+    letter-spacing: 0;
+    line-height: normal;
+    position: relative;
+    white-space: nowrap;
+    width: fit-content;
+  }
+  .filter-navbar .icons{
+    font-size: 22px;
+  }

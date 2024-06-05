@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Head } from "../../components/Header/Header";
-import { Footer } from "../../components/Footer/Footer";
+import Footer from "../../components/Footer/Footer";
 import "./About.css";
 import image from "../../assets/mockimg.png";
 const About = () => {
