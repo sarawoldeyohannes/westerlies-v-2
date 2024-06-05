@@ -1,4 +1,3 @@
-import React from "react";
 import "./EmailCollectionInput.css";
 import "./controller.emailCollectionInput";
 

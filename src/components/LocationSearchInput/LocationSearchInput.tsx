@@ -1,4 +1,3 @@
-import React from "react";
 import "./LocationSearchInput.css";
 import { CiSearch } from "react-icons/ci";
 

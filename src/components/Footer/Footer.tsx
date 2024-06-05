@@ -1,8 +1,8 @@
-import React, { forwardRef } from "react";
+import { forwardRef } from "react";
 import "./Footer.css";
 import { EmailCollectionInput } from "../EmailCollectionInput/EmailCollectionInput";
 import { FaInstagram } from "react-icons/fa";
-import { FooterProps, FooterPropsWithRef } from "./controller.footer";
+import { FooterPropsWithRef } from "./controller.footer";
 
 const Footer = forwardRef<HTMLDivElement, FooterPropsWithRef>(
   ({ type }, ref) => {

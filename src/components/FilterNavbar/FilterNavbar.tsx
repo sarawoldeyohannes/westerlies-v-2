@@ -1,4 +1,3 @@
-import React from "react";
 import "./FilterNavbar.css";
 import { FiPackage } from "react-icons/fi";
 import { BsStars } from "react-icons/bs";
