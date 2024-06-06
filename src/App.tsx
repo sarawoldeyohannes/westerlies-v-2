@@ -10,7 +10,7 @@ import SignUpPopUp from "./components/SignUpPopUp/SignUpPopUp";
 function App() {
   return (
     <>
-      <Router>
+      <Router basename="/westerlies-v-2">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />

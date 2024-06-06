@@ -1,4 +1,3 @@
-import React from "react";
 import "./FilterPopUp.css";
 const FilterPopUp = (): JSX.Element => {
   return (

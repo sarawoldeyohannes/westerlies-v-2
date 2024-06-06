@@ -1,4 +1,3 @@
-import React from "react";
 import "./SignUpPopUp.css";
 
 const SignUpPopUp = (): JSX.Element => {
