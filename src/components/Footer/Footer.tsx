@@ -27,7 +27,7 @@ const Footer = forwardRef<HTMLDivElement, FooterPropsWithRef>(
           <div className="about-us-button">
             <div className="about-us-button-btn">
               <p className="more-about-us">
-                <a href="/about" className="span">
+                <a href="about" className="span">
                   More about us
                 </a>
               </p>

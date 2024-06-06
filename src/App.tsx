@@ -13,11 +13,11 @@ function App() {
       <Router basename="/westerlies-v-2">
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/search" element={<Search />} />
-          <Route path="/shopProfile" element={<ShopProfile />} />
-          <Route path="/FilterPopUp" element={<FilterPopUp />} />
-          <Route path="/SignUpPopUp" element={<SignUpPopUp />} />
+          <Route path="about" element={<About />} />
+          <Route path="search" element={<Search />} />
+          <Route path="shopProfile" element={<ShopProfile />} />
+          <Route path="FilterPopUp" element={<FilterPopUp />} />
+          <Route path="SignUpPopUp" element={<SignUpPopUp />} />
         </Routes>
       </Router>
     </>

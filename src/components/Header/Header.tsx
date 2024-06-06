@@ -10,12 +10,12 @@ export const Head = ({ headerClassName, type }: HeaderProps): JSX.Element => {
         <div className="header-nav-bar">
           <div className="header-nav-bar-texts">
             <div className="text-wrapper">
-              <a href="/search">SEARCH</a>
+              <a href="search">SEARCH</a>
             </div>
           </div>
           <div className="header-nav-bar-texts">
             <div className="text-wrapper">
-              <a href="/about">ABOUT</a>
+              <a href="about">ABOUT</a>
             </div>
           </div>
           <div className="header-nav-bar-texts">
