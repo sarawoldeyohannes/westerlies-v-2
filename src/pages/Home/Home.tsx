@@ -6,11 +6,12 @@ import { items } from "./controller.home";
 import "./Home.css";
 import MapComponent from "../../components/Map/MapComponent";
 import FilterNavbar from "../../components/FilterNavbar/FilterNavbar";
-
+import SignUpPopUp from "../../components/SignUpPopUp/SignUpPopUp";
 const Home = () => {
   const [showMap, setShowMap] = useState(false);
   const [isFooterVisible, setIsFooterVisible] = useState(false);
   const footerRef = useRef(null);
+  const [showSignUp, setShowSignUp] = useState(true);
 
   const handleToggle = () => {
     setShowMap(!showMap);
@@ -36,12 +37,15 @@ const Home = () => {
       }
     };
   }, [footerRef]);
-
+  const handleCloseSignUp = () => {
+    setShowSignUp(false);
+  };
   return (
     <>
       <Head headerClassName="head-instance" />
       <div className="home-container">
         <FilterNavbar />
+        {showSignUp && <SignUpPopUp onClose={handleCloseSignUp} />}
         {showMap ? (
           <div className="map-container">
             <MapComponent />

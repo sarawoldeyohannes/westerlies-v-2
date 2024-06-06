@@ -1,5 +1,5 @@
   
-  .footer .email-collection {
+ .email-collection {
     align-items: center;
     background-color: #ffffff;
     border-radius: 60.78px;
@@ -7,11 +7,12 @@
     flex: 0 0 auto;
     gap: 20px;
     overflow: hidden;
-    padding: 10px 20px;
+    padding: 10px 10px;
     position: relative;
+    border:lightgray 0.01px solid;
   }
   
-  .footer .email-collection-input {
+  .email-collection .email-collection-input {
     align-items: center;
     display: inline-flex;
     flex: 0 0 auto;
@@ -26,7 +27,7 @@
     
   }
   
-  .footer .email-collection-input {
+  .email-collection .email-collection-input {
     color: #615f5f;
     font-family: "Roboto-Regular", Helvetica;
     font-size: 18px;
@@ -41,7 +42,7 @@
 
   }
   
-  .footer .div-wrapper {
+  .email-collection .div-wrapper {
     align-items: center;
     background-color: #000000;
     border-radius: 60.78px;
@@ -51,19 +52,19 @@
     padding: 10px 20px;
     position: relative;
   }
-  .footer .sign-up-btn {
+  .email-collection .sign-up-btn {
     text-decoration: none;
     background: none;
     color: transparent;
     border: none;
     padding: 0;
-  margin: 0;
-  color: inherit;
-  font: inherit;
-  cursor: pointer;
+    margin: 0;
+    color: inherit;
+    font: inherit;
+    cursor: pointer;
   }
   
-  .footer .text-wrapper-4 {
+  .email-collection .text-wrapper-4 {
     color: #ffffff;
     font-family: "Roboto-Regular", Helvetica;
     font-size: 18.7px;

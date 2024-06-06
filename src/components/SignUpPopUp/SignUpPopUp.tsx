@@ -1,21 +1,21 @@
+import { IoIosCloseCircleOutline } from "react-icons/io";
+import { EmailCollectionInput } from "../EmailCollectionInput/EmailCollectionInput";
 import "./SignUpPopUp.css";
+import { SignUpPopUpProps } from "./controller.signUpPopUp";
 
-const SignUpPopUp = (): JSX.Element => {
+const SignUpPopUp = ({ onClose }: SignUpPopUpProps): JSX.Element => {
   return (
     <div className="sign-up-pop-up">
+      <div className="overlay" onClick={onClose}></div>
       <div className="frame">
-        <div className="x">X</div>
-      </div>
-      <div className="div-wrapper">
-        <p className="text-wrapper">Sign up to explore with us!</p>
-      </div>
-      <div className="div">
-        <div className="frame-2">
-          <div className="text-wrapper-2">Email address</div>
+        <div className="close" onClick={onClose}>
+          <IoIosCloseCircleOutline />
         </div>
-        <div className="frame-3">
-          <div className="text-wrapper-3">Sign Up</div>
+
+        <div className="sign-wrapper">
+          <p className="text-wrapper">Sign up to explore with us!</p>
         </div>
+        <EmailCollectionInput />
       </div>
     </div>
   );

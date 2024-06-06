@@ -104,7 +104,8 @@
 }
 .filter-popup-container .frame-6{
   background-color: #ffff;
-  border: gray solid 0.5px ;
+  border:lightgray 0.01px solid;
+
 }
 .filter-popup-container .frame-7{
   background-color: black;

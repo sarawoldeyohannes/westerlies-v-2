@@ -9,7 +9,6 @@ export const EmailCollectionInput = () => {
         type="text"
         placeholder="Email address"
       />
-
       <div className="div-wrapper">
         <button className="sign-up-btn">
           <div className="text-wrapper-4">Sign Up</div>
