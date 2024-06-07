@@ -1,5 +1,6 @@
 import { forwardRef } from "react";
 import "./Footer.css";
+import "./mobile.footer.css";
 import { EmailCollectionInput } from "../EmailCollectionInput/EmailCollectionInput";
 import { FaInstagram } from "react-icons/fa";
 import { FooterPropsWithRef } from "./controller.footer";

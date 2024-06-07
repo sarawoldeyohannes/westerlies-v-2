@@ -1,0 +1,72 @@
+/* mobile.header.css */
+
+/* Styles for mobile view */
+@media (max-width: 768px) {
+    .head{
+        align-items: center;
+    }
+    .head .header {
+        align-items: center;
+        align-self: center;
+        display: flex;
+        flex-direction: row;
+        flex: 0 0 auto;
+        padding-left:3%;
+        position: relative;
+        width: 97%;
+      }
+  
+    .head .logo {
+      order: 2;
+    }
+  
+    .head .hamburger {
+      display: flex;
+      font-size: 2rem;
+      cursor: pointer;
+      order: 1;
+      margin: 10px 0;
+      justify-content: flex-start;
+      width: 35%;
+    }
+  
+    .head .header-nav-bar {
+      display: none;
+      flex-direction: column;
+      width: 10%;
+      z-index: 1;
+      background-color: #fff;
+    }
+    .head .search{
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+        flex: 0 0 auto;
+        gap: 15px;
+        position: relative;
+    }
+    .head .div-wrapper {
+        align-items: center;
+        display: flex;
+        flex: 0 0 auto;
+        gap: 10px;
+        position: relative;
+      }
+      
+      .head .text-wrapper-2 {
+        color: #000000;
+        font-family: "Roboto-Regular", Helvetica;
+        font-size: 22px;
+        font-weight: 400;
+        letter-spacing: 0;
+        line-height: normal;
+        position: relative;
+        white-space: nowrap;
+        display: flex;
+        text-align: center;
+      } 
+    .head .text-wrapper-3 {
+     display: none;
+      } 
+  }
+  

@@ -5,11 +5,9 @@
     border-color: #aaaaaa;
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    padding: 0px 0px 20px;
-    padding-left:3% ;
-    position: relative;
-    width: 97%;
+    gap: 20px;
+    padding: 20px 0px 20px;
+    width: 100%;
   }
   
   .head .header {
@@ -17,9 +15,9 @@
     align-self: stretch;
     display: flex;
     flex: 0 0 auto;
-    padding: 20px 0px;
+    padding-left:3%;
     position: relative;
-    width: 100%;
+    width: 97%;
   }
   
   .head .header-nav-bar {
@@ -80,6 +78,8 @@
     flex: 0 0 auto;
     gap: 15px;
     position: relative;
+    padding-left:3%;
+    width: 97%;
   }
   
   .head .div-wrapper {
@@ -102,6 +102,20 @@
     white-space: nowrap;
     width: fit-content;
   } 
+  .head .text-wrapper-3 {
+    color: #000000;
+    font-family: "Roboto-Regular", Helvetica;
+    font-size: 22px;
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: normal;
+    position: relative;
+    white-space: nowrap;
+    width: fit-content;
+  } 
   .head .search-disabled{
+    display: none;
+  }
+  .hamburger {
     display: none;
   }

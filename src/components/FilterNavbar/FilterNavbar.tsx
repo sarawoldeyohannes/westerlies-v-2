@@ -1,4 +1,5 @@
 import "./FilterNavbar.css";
+import "./mobile.filterNavbar.css";
 import { FiPackage } from "react-icons/fi";
 import { BsStars } from "react-icons/bs";
 import { IoIosPeople } from "react-icons/io";
