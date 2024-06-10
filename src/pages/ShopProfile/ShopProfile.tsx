@@ -82,52 +82,53 @@ const ShopProfile = () => {
           <div className="frame-10">
             <div className="frame-stop-by">
               <div className="text-wrapper-8">STOP BY</div>
-            </div>
-            <div className="frame-11">
-              <div className="frame-12">
-                <div className="frame-days">
-                  <div className="days">MONDAY</div>
-                  <div className="time">10:00PM</div>
-                </div>
-                <div className="frame-days">
-                  <div className="days">TUESDAY</div>
-                  <div className="time">10:00PM</div>
-                </div>
-                <div className="frame-days">
-                  <div className="days">WEDNESDAY</div>
-                  <div className="time">10:00PM</div>
-                </div>
-                <div className="frame-days">
-                  <div className="days">THURSDAY</div>
-                  <div className="time">10:00PM</div>
-                </div>
-                <div className="frame-days">
-                  <div className="days">FRIDAY</div>
-                  <div className="time">10:00PM</div>
-                </div>
-                <div className="frame-days">
-                  <div className="days">SATURDAY</div>
-                  <div className="time">10:00PM</div>
-                </div>
-                <div className="frame-days">
-                  <div className="days">SUNDAY</div>
-                  <div className="time">10:00PM</div>
-                </div>
-              </div>
-              <div className="frame-13">
-                <div className="frame-address">
-                  <div className="address">
-                    Bole Atlas area, opposite Sapphire Hotel
+
+              <div className="frame-11">
+                <div className="frame-12">
+                  <div className="frame-days">
+                    <div className="days">MONDAY</div>
+                    <div className="time">10:00PM</div>
+                  </div>
+                  <div className="frame-days">
+                    <div className="days">TUESDAY</div>
+                    <div className="time">10:00PM</div>
+                  </div>
+                  <div className="frame-days">
+                    <div className="days">WEDNESDAY</div>
+                    <div className="time">10:00PM</div>
+                  </div>
+                  <div className="frame-days">
+                    <div className="days">THURSDAY</div>
+                    <div className="time">10:00PM</div>
+                  </div>
+                  <div className="frame-days">
+                    <div className="days">FRIDAY</div>
+                    <div className="time">10:00PM</div>
+                  </div>
+                  <div className="frame-days">
+                    <div className="days">SATURDAY</div>
+                    <div className="time">10:00PM</div>
+                  </div>
+                  <div className="frame-days">
+                    <div className="days">SUNDAY</div>
+                    <div className="time">10:00PM</div>
                   </div>
                 </div>
-                <div className="frame-address">
-                  <div className="address">Addis Ababa, Addis Ababa</div>
-                </div>
-                <div className="frame-address">
-                  <div className="address">Ethiopia</div>
-                </div>
-                <div className="frame-address">
-                  <div className="address">+251 116 686 928</div>
+                <div className="frame-13">
+                  <div className="frame-address">
+                    <div className="address">
+                      Bole Atlas area, opposite Sapphire Hotel
+                    </div>
+                  </div>
+                  <div className="frame-address">
+                    <div className="address">Addis Ababa, Addis Ababa</div>
+                  </div>
+                  <div className="frame-address">
+                    <div className="address">Ethiopia</div>
+                  </div>
+                  <div className="frame-address">
+                    <div className="address">+251 116 686 928</div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -162,7 +163,7 @@ const ShopProfile = () => {
         </div>
         <div className="frame-14">
           <div className="frame-9">
-            <p className="text-wrapper-8">Others Stores you may Love</p>
+            <p className="text-wrapper-8">Others Stores You May Love</p>
           </div>
           <div className="frame-15">
             {items.map((item) => (

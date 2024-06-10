@@ -13,7 +13,7 @@ const SignUpPopUp = ({ onClose }: SignUpPopUpProps): JSX.Element => {
         </div>
 
         <div className="sign-wrapper">
-          <p className="text-wrapper">Sign up to explore with us!</p>
+          <p className="text-wrapper">Sign up to explore with us</p>
         </div>
         <EmailCollectionInput />
       </div>

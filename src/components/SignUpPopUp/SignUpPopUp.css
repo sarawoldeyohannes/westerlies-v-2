@@ -25,7 +25,7 @@
     padding: 20px;
     border-radius: 10px;
     z-index: 1001;
-    max-width: 400px;
+    max-width: 350px;
     width: 100%;
     max-height: 70vh;
     overflow: hidden;
@@ -36,10 +36,7 @@
   
   .sign-up-pop-up .close {
     color: #000000;
-    font-family: "Roboto-Bold", Helvetica;
     font-size: 24px;
-    font-weight: 700;
-    letter-spacing: 0;
     line-height: normal;
     margin-top: -1px;
     position: relative;
@@ -61,10 +58,10 @@
   
   .sign-up-pop-up .text-wrapper {
     color: #000000;
-    font-family: "Roboto-Medium", Helvetica;
-    font-size: 20px;
+    font-family: 'Freight Sans Pro Medium', sans-serif;
+    font-size: 1.2em;
     font-weight: 500;
-    letter-spacing: 0;
+    letter-spacing: 1px;
     line-height: normal;
     margin-top: -1px;
     position: relative;
@@ -98,18 +95,7 @@
     position: relative;
   }
   
-  .sign-up-pop-up .text-wrapper-2 {
-    color: #615f5f;
-    font-family: "Roboto-Regular", Helvetica;
-    font-size: 20px;
-    font-weight: 400;
-    letter-spacing: 0;
-    line-height: normal;
-    margin-top: -0.92px;
-    position: relative;
-    white-space: nowrap;
-    width: fit-content;
-  }
+  
   
   .sign-up-pop-up .frame-3 {
     align-items: center;
@@ -122,15 +108,3 @@
     position: relative;
   }
   
-  .sign-up-pop-up .text-wrapper-3 {
-    color: #ffffff;
-    font-family: "Roboto-Regular", Helvetica;
-    font-size: 20px;
-    font-weight: 400;
-    letter-spacing: 0;
-    line-height: normal;
-    margin-top: -0.62px;
-    position: relative;
-    white-space: nowrap;
-    width: fit-content;
-  }
