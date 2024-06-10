@@ -1,0 +1,171 @@
+@media screen and (max-width: 768px) {
+    .container-about{
+        position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+      }
+      .container-about .section-1{
+     width: 100%;
+     position: relative;
+    display: flex;
+    flex-direction: column-reverse;
+    }
+    
+    .container-about .section-1 .text-section {
+        background-position:center;
+        background-size: cover;
+        background-repeat: no-repeat;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin-left: 0;
+        margin-top: -10%;
+        color: var(--color1);
+        text-align: center;
+        width: 100%;
+    }
+    .container-about .description1{
+        width: 90%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        margin-top: 15%;
+    }
+    .container-about .section-1 .text-section .description1 br{
+        display: none;
+    }
+    .container-about .section-1 .text-section h1{
+        text-align: center;
+        font-family: "brandon-grotesque", sans-serif;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 30px;
+        line-height: 1.15;
+    }
+    .container-about .section-1 .text-section h3{
+        letter-spacing: 2px;
+        font-family: "brandon-grotesque", sans-serif;
+        font-weight: 500;
+        font-size: 2.2vh;
+        margin-bottom: 5%;
+        margin-top: 3%;
+        line-height: 1.15;
+    }
+   
+    
+    .container-about .section-1 .text-section .description{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        color: #202D3F;
+        font-size: 2.1vh;
+        font-weight: 500;
+        font-style: normal;
+        font-family:  'Alegreya', sans-serif;
+        width: 90%;
+    }
+    .container-about .section-1 .text-section .description p{
+        text-align: center;
+        justify-content: center;
+        line-height: 1.35;
+    }
+    
+    .container-about .section-1 .image-section{
+        width: 100%;
+        height: 40%;
+        
+    }
+    .container-about .section-1 .image-section img{
+      width: 100%;
+      height: 100%;
+    }
+    
+    .container-about .section-2{
+        display: flex;
+        flex-direction: column;
+        color: var(--color1);
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+    }
+    .container-about .section-2 br{
+        display: none;
+    }
+    .container-about .section-2 h1{
+        text-align: center;
+        margin-top: 10%;
+        margin-left: 10%;
+        margin-right: 10%;
+        font-family: "brandon-grotesque", sans-serif;
+        font-size: 30px;
+        font-weight: 500;
+        font-style: normal;
+        letter-spacing:1px;
+        line-height: 1.15;
+    }
+    .container-about .section-2 .texts{
+        display: flex; 
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        margin-top: 0;
+       
+    }
+    .container-about .section-2 .texts .text-one,.section-2 .texts .text-two, .section-2 .texts .text-three {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        justify-content: center;
+        align-items: center;
+        margin-left: 0%;
+    }
+    .container-about .section-2 .texts p{
+        margin-top: 0%;
+        margin-left: 10%;
+        margin-right: 10%;
+        font-family: 'Alegreya', serif;
+        font-weight: 100;
+        font-size: 2.1vh;
+    }
+    .container-about .section-2 .texts h1{
+        margin-top: 10%;
+        margin-left: 10%;
+        margin-right: 10%;
+        line-height: 1.5;
+        letter-spacing: 3px;
+        font-family: "brandon-grotesque", sans-serif;
+        font-weight: 500;
+        font-size: 2.6vh;
+    }
+    .container-about .section-2 a{
+        text-align: center;
+        text-decoration: none;
+        width: 100%;
+    }
+    .container-about .section-2 button{
+        position: relative;
+        height: 5.5vh;
+        width: 75%;
+        color:rgba(255, 248, 242);
+        background-color:black;
+        border: none;
+        font-size: 1.7vh;
+        font-family: 'Freight Sans Pro Medium', sans-serif;
+        font-weight: 500;
+        letter-spacing: 2px;
+        font-style: normal;
+        margin-top: 15%;
+        margin-bottom: 40%;
+    
+    }
+    
+    
+    
+}

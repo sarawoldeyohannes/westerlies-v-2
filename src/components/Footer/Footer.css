@@ -29,17 +29,21 @@
     align-self: stretch;
     display: flex;
     justify-content: center;
-    padding: 0px 0px;
+    padding: 3% 0 0 0;
     position: relative;
     width: 100%;
   }
-  
+  .footer .our-mission-p{
+    display: flex;
+    width: 55%;
+  }
   .footer .text-wrapper {
-    color: #141313;
-    font-family: "Roboto-Regular", Helvetica;
-    font-size: 28px;
-    font-weight: 400;
-    letter-spacing: 0;
+    color: #141313; 
+    font-family: "brandon-grotesque", sans-serif;
+    font-weight: 500;
+    font-size: 2em;
+    font-style: normal;
+    letter-spacing: 2px;
     line-height: normal;
     position: relative;
     white-space: nowrap;
@@ -48,13 +52,12 @@
   
   .footer .westerlies-is-on-a {
     color: #141313;
-    font-family: "Roboto-Regular", Helvetica;
-    font-size: 18px;
-    font-weight: 400;
-    letter-spacing: 0;
+    font-family: "Alegreya", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 1.2em;
+    margin: 0;
     line-height: normal;
-    margin-bottom: -0.42px;
-    margin-top: -2.29px;
     position: relative;
     text-align: center;
     width: fit-content;
@@ -82,8 +85,7 @@
   }
   
   .footer .more-about-us {
-    font-weight: 400;
-    letter-spacing: 0;
+   
     line-height: normal;
     margin-top: -1px;
     position: relative;
@@ -95,10 +97,10 @@
   
   .footer .span {
     color: #ffffff;
-    font-family: "Roboto-Regular", Helvetica;
-    font-size: 18px;
+    font-family: 'Freight Sans Pro Medium', sans-serif;
+    font-size: 1em;
     font-weight: 400;
-    letter-spacing: 0;
+    letter-spacing: 1px;
     text-decoration: none;
     text-transform: uppercase;
 
@@ -145,10 +147,11 @@
   
   .footer .text-wrapper-2 {
     color: #000000;
-    font-family: "Roboto-Regular", Helvetica;
-    font-size: 18px;
-    font-weight: 400;
-    letter-spacing: 0;
+    font-family: 'Freight Sans Pro Medium', sans-serif;
+    font-size: 1em;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
     line-height: normal;
     margin-top: -1px;
     position: relative;
@@ -202,10 +205,10 @@
   
   .footer .text-wrapper-5 {
     color: #141313;
-    font-family: "Roboto-Regular", Helvetica;
-    font-size: 18px;
-    font-weight: 400;
-    letter-spacing: 0;
+    font-family: 'Freight Sans Pro Medium', sans-serif;
+    font-size: 1em;
+    font-weight: 500;
+    letter-spacing: 0px;
     line-height: normal;
     position: relative;
     white-space: nowrap;

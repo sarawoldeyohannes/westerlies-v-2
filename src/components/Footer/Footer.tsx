@@ -17,10 +17,9 @@ const Footer = forwardRef<HTMLDivElement, FooterPropsWithRef>(
           <div className="our-mission">
             <div className="text-wrapper">OUR MISSION</div>
           </div>
-          <div className="our-mission">
+          <div className="our-mission-p">
             <p className="westerlies-is-on-a">
-              westerlies is on a mission to connect you with local businesses
-              <br />
+              Westerlies is on a mission to connect you with local businesses
               who sell goods that make the world a more beautiful, thoughtful
               place.
             </p>
@@ -39,7 +38,7 @@ const Footer = forwardRef<HTMLDivElement, FooterPropsWithRef>(
           <div className="footer-section-2">
             <div className="connect-with-us-section">
               <div className="connect-with-us">
-                <div className="text-wrapper-2">CONNECT WITH US</div>
+                <div className="text-wrapper-2">Connect with us</div>
               </div>
               <div className="instagram-icon">
                 <FaInstagram />
@@ -47,7 +46,7 @@ const Footer = forwardRef<HTMLDivElement, FooterPropsWithRef>(
             </div>
             <div className="footer-section-email-collection">
               <div className="email-collection-text">
-                <p className="text-wrapper-2">Sign up to explore with us!</p>
+                <p className="text-wrapper-2">Sign up to explore with us</p>
               </div>
               <EmailCollectionInput />
             </div>

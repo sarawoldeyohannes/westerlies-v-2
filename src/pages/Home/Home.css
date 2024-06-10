@@ -5,14 +5,16 @@
 
 .home-container .items-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(225px, 1fr));
     gap: 16px;
 }
 
 .home-container .map-container {
-  width: 100%;
+  width: 106%;
   height: 100vh; /* Full screen height */
-  position: relative;
+  margin-left: -3%;
+  position: static;
+  touch-action: pan-x pan-y;
 }
 
 .home-container .toggle-button {
@@ -26,6 +28,8 @@
   border: none;
   border-radius: 20px;
   cursor: pointer;
-  font-size: 16px;
   z-index: 1000; /* Ensure button is above other elements */
+  font-family: 'Freight Sans Pro Medium', sans-serif;
+  font-size: 1em;
+  font-weight: 400;
 }

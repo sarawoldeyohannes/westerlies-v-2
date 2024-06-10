@@ -44,11 +44,6 @@ export const Head = ({ headerClassName, type }: HeaderProps): JSX.Element => {
               <Link to="/">HOME</Link>
             </div>
           </div>
-          <div className="header-nav-bar-texts">
-            <div className="text-wrapper">
-              <Link to="/shopProfile">SHOP_PAGE_FOR_TEST</Link>
-            </div>
-          </div>
         </div>
 
         <div className="logo">
@@ -62,7 +57,7 @@ export const Head = ({ headerClassName, type }: HeaderProps): JSX.Element => {
           <div className="text-wrapper-2">Find a Shop</div>
         </div>
         <div className="div-wrapper">
-          <div className="text-wrapper-3">|</div>
+          <div className="text-wrapper-2">|</div>
         </div>
         <LocationSearchInput />
       </div>

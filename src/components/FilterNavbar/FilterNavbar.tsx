@@ -20,7 +20,7 @@ const FilterNavbar = () => {
   return (
     <div className="filter-navbar">
       <div className="city-frame">
-        <div className="text-wrapper">New York</div>
+        <div className="text-wrapper">FILTER BY:</div>
       </div>
       <div className="nav-list-frame">
         <div className="nav-lists" onClick={() => handleOpenPopup("PRODUCT")}>
