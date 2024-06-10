@@ -12,7 +12,7 @@
     align-self: stretch;
     display: flex;
     flex: 0 0 auto;
-    gap: 30px;
+    gap: 50px;
     position: relative;
     width: 100%;
     padding: 50px 0;
@@ -45,7 +45,7 @@
     align-items: flex-start;
     display: flex;
     flex-direction: column;
-    gap: 40px;
+    gap: 30px;
     padding: 20px 0px;
     position: relative;
     width: 50%;
@@ -61,11 +61,12 @@
   
   .shop-profile .text-wrapper-8 {
     color: #000000;
-    font-family: "Roboto-Medium", Helvetica;
-    font-size: 28px;
+   font-family: "brandon-grotesque", sans-serif;
     font-weight: 500;
-    letter-spacing: 0;
-    line-height: normal;
+    font-size: 2em;
+    font-style: normal;
+    letter-spacing: 1px;
+    line-height: 1.15;
     margin-top: -1px;
     position: relative;
     white-space: nowrap;
@@ -86,10 +87,9 @@
   .shop-profile .store-description {
     color: #000000;
     flex: 1;
-    font-family: "Roboto-Regular", Helvetica;
-    font-size: 18px;
-    font-weight: 400;
-    letter-spacing: 0;
+    font-family: "Alegreya", serif;
+    font-weight: 100;
+    font-size: 1.1em;
     line-height: normal;
     margin-top: -1px;
     position: relative;
@@ -108,10 +108,10 @@
   
   .shop-profile .text-wrapper-9 {
     color: #000000;
-    font-family: "Roboto-Regular", Helvetica;
-    font-size: 18px;
-    font-weight: 400;
-    letter-spacing: 0;
+    font-family: "brandon-grotesque", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 1.1em;
     line-height: normal;
     position: relative;
     text-align: center;
@@ -135,10 +135,10 @@
   
   .shop-profile .text-wrapper-10 {
     color: #000000;
-    font-family: "Roboto-Regular", Helvetica;
-    font-size: 18px;
-    font-weight: 400;
-    letter-spacing: 0;
+    font-family: "brandon-grotesque", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 1.1em;
     line-height: normal;
     margin-top: -1px;
     position: relative;
