@@ -27,13 +27,13 @@
     top: 0;
   }
   
-  .pagination {
+  .search-container .pagination {
     display: flex;
     justify-content: center;
     margin-top: 20px;
   }
   
-  .pagination button {
+  .search-container .pagination button {
     margin: 20px 5px;
     padding: 10px 20px;
     border: none;
@@ -42,8 +42,10 @@
     border-radius: 5px;
   }
   
-  .pagination button.active {
+  .search-container .pagination button.active {
     background-color: black;
     color: white;
   }
-  
+  .search-container .view-toggle {
+    display: none; /* Hidden by default for desktop */
+  }

@@ -93,7 +93,7 @@
     position: relative;
   }
   
-  .head .text-wrapper-2 {
+  .head .text-wrapper-2, .text-wrapper-3 {
     color: #000000;
     font-family: "brandon-grotesque", sans-serif;
     font-weight: 500;

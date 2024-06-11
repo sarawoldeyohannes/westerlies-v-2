@@ -1,0 +1,54 @@
+@media screen and (max-width: 768px) {
+    .search-container {
+        padding: 0 4%;
+      }
+      
+      .search-container .map-and-items {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        
+      }
+      .search-container .items-pagination{
+        display: none;
+    }
+    .search-container .items-pagination-mobile{
+        display: flex;
+        flex-direction: column;
+      }
+      .search-container .items-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 16px;
+        padding: 0 4%;
+        width: 92%;
+      }
+      
+      .search-container .map-container {
+        display: none;
+      }
+      .search-container .map-mobile {
+        width: 108%;
+        height: 100vh; /* Full screen height */
+        margin-left: -4%;
+        position: static;
+        touch-action: pan-x pan-y;
+      }
+      .search-container .view-toggle {
+        display: flex;
+        position: fixed;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        padding: 10px 20px;
+        background-color: black;
+        color: white;
+        border: none;
+        border-radius: 20px;
+        cursor: pointer;
+        z-index: 1000; /* Ensure button is above other elements */
+        font-family: 'Freight Sans Pro Medium', sans-serif;
+        font-size: 1em;
+        font-weight: 400;
+      }
+    }

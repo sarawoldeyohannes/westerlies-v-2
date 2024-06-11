@@ -10,6 +10,7 @@
     padding: 10px 10px;
     position: relative;
     border:lightgray 0.01px solid;
+    width: fit-content;
   }
   
   .email-collection .email-collection-input {
@@ -75,4 +76,33 @@
     position: relative;
     white-space: nowrap;
     width: fit-content;
+  }
+  @media (max-width: 768px) {
+    .email-collection {
+      align-items: center;
+      background-color: #ffffff;
+      border-radius: 60.78px;
+      display: inline-flex;
+      flex: 0 0 auto;
+      gap: 10px;
+      overflow: hidden;
+      padding: 5px 5px;
+      position: relative;
+      border:lightgray 0.01px solid;
+      width: fit-content;
+    }
+     
+  .email-collection .email-collection-input {
+    width: fit-content;
+    margin: 0;
+    padding: 0;
+  }
+  .email-collection .div-wrapper {
+    width: fit-content;
+    gap: 0px;
+    padding: 10px 10px;
+  }
+  .email-collection .sign-up-btn {
+    width: fit-content;
+  }
   }

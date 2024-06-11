@@ -15,11 +15,11 @@
         display: flex;
         flex: 0 0 auto;
         flex-direction: column;
-        gap: 30px;
+        gap: 20px;
         justify-content: center;
         position: relative;
         width: 100%;
-        padding: 10px 0;
+        padding: 4% 0;
       }
       .footer .footer-section-disabled{
         display: none;
@@ -34,31 +34,17 @@
         position: relative;
         width: 100%;
       }
-      
+      .footer .our-mission-p{
+        display: flex;
+        width: 90%;
+      }
       .footer .text-wrapper {
-        color: #141313;
-        font-family: "Roboto-Regular", Helvetica;
-        font-size: 28px;
-        font-weight: 400;
-        letter-spacing: 0;
-        line-height: normal;
-        position: relative;
-        white-space: nowrap;
-        width: fit-content;
+        font-size: 1.8em;
       }
       
       .footer .westerlies-is-on-a {
-        color: #141313;
-        font-family: "Roboto-Regular", Helvetica;
-        font-size: 18px;
-        font-weight: 400;
-        letter-spacing: 0;
-        line-height: normal;
-        margin-bottom: -0.42px;
-        margin-top: -2.29px;
-        position: relative;
-        text-align: center;
-        width: fit-content;
+        
+        font-size: 1.1em;
       }
       
       .footer .about-us-button {
@@ -95,18 +81,12 @@
       }
       
       .footer .span {
-        color: #ffffff;
-        font-family: "Roboto-Regular", Helvetica;
-        font-size: 18px;
-        font-weight: 400;
-        letter-spacing: 0;
-        text-decoration: none;
-        text-transform: uppercase;
+        font-size: 1em;
     
       }
       
       .footer .footer-section-2-wrapper {
-        align-items: flex-start;
+        align-items: center;
         align-self: stretch;
         background-color: #ebeaea;
         border-bottom-style: solid;
@@ -116,7 +96,7 @@
         flex-direction: column;
         gap: 18.7px;
         justify-content: center;
-        padding: 20px 0px;
+        padding: 4% 0;
         position: relative;
         width: 100%;
       }
@@ -127,10 +107,11 @@
         display: flex;
         flex-direction: column;
         flex: 0 0 auto;
-        justify-content: space-between;
-        padding: 0 3%;
+        justify-content: center;
+        padding: 0 4%;
         position: relative;
-        
+        width: 92%;
+        gap: 10px;
       }
       .footer .connect-with-us-section{
         display: inline-flex;
@@ -146,18 +127,7 @@
       }
       
       .footer .text-wrapper-2 {
-        color: #000000;
-        font-family: "Roboto-Regular", Helvetica;
-        font-size: 18px;
-        font-weight: 400;
-        letter-spacing: 0;
-        line-height: normal;
-        margin-top: -1px;
-        position: relative;
-        text-align: center;
-        white-space: nowrap;
-        width: fit-content;
-        margin-bottom: 0;
+        font-size: 1em;
       }
       
       .footer .instagram-icon {
@@ -171,8 +141,10 @@
       .footer .footer-section-email-collection{
         display: flex;
         flex-direction: column;
+        align-items: center;
         align-self: stretch;
         gap: 10px;
+        width: 100%;
       }
       .footer .email-collection-text {
         align-items: center;
@@ -191,7 +163,7 @@
         justify-content: center;
         position: relative;
         width: 100%;
-        padding: 20px 0;
+        padding: 4% 0;
       }
       
       .footer .footer-section-3 {
@@ -199,20 +171,12 @@
         align-self: stretch;
         display: flex;
         flex-direction: column;
-        justify-content: space-between;
-        padding: 0px 3%;
+        gap: 10px;
+        padding: 0px 4%;
         position: relative;
       }
       
       .footer .text-wrapper-5 {
-        color: #141313;
-        font-family: "Roboto-Regular", Helvetica;
-        font-size: 18px;
-        font-weight: 400;
-        letter-spacing: 0;
-        line-height: normal;
-        position: relative;
-        white-space: nowrap;
-        width: fit-content;
+        font-size: 1em;
       }
 }

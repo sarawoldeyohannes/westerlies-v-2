@@ -107,4 +107,22 @@
     padding: 10px 20px;
     position: relative;
   }
-  
+/* Styles for mobile view */
+@media (max-width: 768px) {
+  .sign-up-pop-up .frame {
+    position: relative;
+    background: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow */
+    padding: 10px;
+    border-radius: 10px;
+    z-index: 1001;
+    width: fit-content;
+    max-width: 300px;
+    max-height: 70vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    overflow: scroll;
+  }
+}

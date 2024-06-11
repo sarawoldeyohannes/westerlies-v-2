@@ -6,6 +6,7 @@ import MapComponent from "../../components/Map/MapComponent";
 import { searchitems } from "./controller.search";
 import Card from "../../components/Card/Card";
 import "./Search.css";
+import "./mobile.search.css";
 
 const ITEMS_PER_PAGE = 5;
 const Search = () => {
@@ -44,14 +45,23 @@ const Search = () => {
     startIndex + ITEMS_PER_PAGE
   );
   const totalPages = Math.ceil(searchitems.length / ITEMS_PER_PAGE);
+  const [isMapView, setIsMapView] = useState(false);
 
+  const toggleView = () => {
+    setIsMapView(!isMapView);
+  };
   return (
     <>
       <Head headerClassName="head-instance" />
       <div className="search-container">
         <FilterNavbar />
+
         <div className="map-and-items">
-          <div className="items-pagination">
+          <div
+            className={`${
+              isMapView ? "items-pagination" : "items-pagination-mobile"
+            }`}
+          >
             <div className="items-container">
               {selectedItems.map((item) => (
                 <Card key={item.id} {...item} />
@@ -70,12 +80,15 @@ const Search = () => {
             </div>
           </div>
 
-          <div
-            className={`map-container ${isFooterVisible ? "map-hidden" : ""}`}
-          >
+          <div className={`${isMapView ? "map-mobile" : "map-container"}`}>
             <MapComponent />
           </div>
         </div>
+        {!isFooterVisible && (
+          <button className="view-toggle" onClick={toggleView}>
+            {isMapView ? "Show Items" : "Show Map"}
+          </button>
+        )}
       </div>
       <Footer ref={footerRef} type="Search" />
     </>

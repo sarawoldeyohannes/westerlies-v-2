@@ -4,6 +4,7 @@ import Footer from "../../components/Footer/Footer";
 import Card from "../../components/Card/Card";
 import { items } from "./controller.home";
 import "./Home.css";
+import "./mobile.home.css";
 import MapComponent from "../../components/Map/MapComponent";
 import FilterNavbar from "../../components/FilterNavbar/FilterNavbar";
 import SignUpPopUp from "../../components/SignUpPopUp/SignUpPopUp";
