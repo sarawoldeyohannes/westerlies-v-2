@@ -118,7 +118,6 @@
   font-family: "Roboto-Regular", Helvetica;
   font-size: 18px;
   font-weight: 400;
-  letter-spacing: 0;
   line-height: normal;
   position: relative;
   white-space: nowrap;
@@ -127,4 +126,6 @@
 }
 .filter-popup-container .text-wrapper-3{
   letter-spacing: 1px;
+  color: #ffff;
+
 }
