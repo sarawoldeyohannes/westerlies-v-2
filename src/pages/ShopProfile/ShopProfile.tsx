@@ -3,6 +3,7 @@ import Footer from "../../components/Footer/Footer";
 import { Head } from "../../components/Header/Header";
 import img from "../../assets/mockimg.png";
 import "./ShopProfile.css";
+import "./mobile.shopProfile.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faFacebookF,
