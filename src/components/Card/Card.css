@@ -24,7 +24,7 @@
     font-family: "brandon-grotesque", sans-serif;
     font-weight: 500;
     font-style: normal;
-    font-size: 1.4em;
+    font-size: 1.3em;
     color: black;
     line-height: 1.5;
     margin: 0;
@@ -35,10 +35,18 @@
     font-family: 'Freight Sans Pro Medium', sans-serif;
     font-weight: 500;
     font-style: normal;
-    font-size: 0.95em;
+    font-size: 0.85em;
     color: gray;
     line-height: 1.5;
     letter-spacing: 1px;
     margin: 0;
     text-transform: uppercase;
+  }
+  @media (max-width: 768px) {
+    .card-description {
+      font-size: 0.78em;
+    }
+    .card-title {
+      font-size: 1.3em;
+    }
   }

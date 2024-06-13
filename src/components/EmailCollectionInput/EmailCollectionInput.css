@@ -37,9 +37,10 @@
     line-height: normal;
     margin-top: -0.86px;
     position: relative;
-    text-align: center;
+    text-align: left;
     white-space: nowrap;
     width: fit-content;
+    padding: 0px 5px;
 
   }
   
@@ -93,9 +94,10 @@
     }
      
   .email-collection .email-collection-input {
+    text-align: left;
     width: fit-content;
     margin: 0;
-    padding: 0;
+    padding: 0px 5px;
   }
   .email-collection .div-wrapper {
     width: fit-content;
