@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./FilterPopUp.css";
+import "./mobile.filterPopUp.css";
 import { IoIosCloseCircleOutline } from "react-icons/io";
 import {
   FilterItem,

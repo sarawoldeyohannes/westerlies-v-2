@@ -1,0 +1,65 @@
+/* Styles for mobile view */
+@media (max-width: 768px) {
+   
+      .filter-popup-container .text-wrapper-7{
+        
+        font-size: 22px;
+      }
+      .filter-popup-container .text-wrapper {
+        cursor: pointer;
+        font-size: 24px;
+      }
+      
+      .filter-popup-container .filter-items-container {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+        padding: 20px;
+        max-height: 30vh;
+        overflow-y: scroll;
+      }
+      
+      .filter-popup-container .filter-item {
+        
+        font-size: 18px;
+      }      
+      
+      .filter-popup-container .frame-5 {
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin-top: auto;
+        width: 100%;
+        gap: 10px;
+        padding: 5px;
+      }
+      
+      .filter-popup-container .frame-6,
+      .filter-popup-container .frame-7 {
+        cursor: pointer;
+        align-items: center;
+        border-radius: 60.78px;
+        display: inline-flex;
+        flex: 0 0 auto;
+        gap: 9.35px;
+        padding: 10px 20px;
+        position: relative;
+        width: fit-content;
+      }
+      .filter-popup-container .frame-6{
+        background-color: #ffff;
+        border:lightgray 0.01px solid;
+      
+      }
+      .filter-popup-container .frame-7{
+        background-color: black;
+        color: #ffff;
+      }
+      
+      .filter-popup-container .text-wrapper-2,
+      .filter-popup-container .text-wrapper-3 {
+        font-size: 18px;
+      }
+      
+}

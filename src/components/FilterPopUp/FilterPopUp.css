@@ -43,7 +43,7 @@
 }
 .filter-popup-container .text-wrapper-7{
   color: black;
-  font-family: "Roboto-Regular", Helvetica;
+  font-family: 'Freight Sans Pro Medium', sans-serif;
   font-size: 22px;
   font-weight: 400;
   letter-spacing: 0;
@@ -71,7 +71,7 @@
   display: flex;
   align-items: center;
   color: black;
-  font-family: "Roboto-Regular", Helvetica;
+  font-family: 'Freight Sans Pro Medium', sans-serif;
   font-size: 18px;
   font-weight: 400;
   letter-spacing: 0;
@@ -115,7 +115,7 @@
 .filter-popup-container .text-wrapper-2,
 .filter-popup-container .text-wrapper-3 {
   font-size: 18px;
-  font-family: "Roboto-Regular", Helvetica;
+  font-family: 'Freight Sans Pro Medium', sans-serif;
   font-size: 18px;
   font-weight: 400;
   line-height: normal;

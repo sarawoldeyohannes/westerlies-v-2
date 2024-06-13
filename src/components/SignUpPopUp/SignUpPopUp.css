@@ -20,7 +20,7 @@
   
   .sign-up-pop-up .frame {
     position: relative;
-    background: white;
+    background: #3779A6;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow */
     padding: 20px;
     border-radius: 10px;
@@ -35,7 +35,7 @@
   }
   
   .sign-up-pop-up .close {
-    color: #000000;
+    color: #ffffff;
     font-size: 24px;
     line-height: normal;
     margin-top: -1px;
@@ -57,7 +57,7 @@
   }
   
   .sign-up-pop-up .text-wrapper {
-    color: #000000;
+    color: #ffffff;
     font-family: 'Freight Sans Pro Medium', sans-serif;
     font-size: 1.2em;
     font-weight: 500;
@@ -111,7 +111,6 @@
 @media (max-width: 768px) {
   .sign-up-pop-up .frame {
     position: relative;
-    background: white;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow */
     padding: 10px;
     border-radius: 10px;
