@@ -57,6 +57,11 @@ const AdminHome = () => {
     <>
       <AdminHeader />
       <div className="Admin-container">
+        <div className="add-wrapper">
+          <button type="button" className="btn btn-primary">
+            Add Store
+          </button>
+        </div>
         <DataTable
           title="Store Management"
           columns={columns}

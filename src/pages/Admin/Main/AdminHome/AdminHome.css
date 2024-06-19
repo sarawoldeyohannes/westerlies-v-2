@@ -12,3 +12,8 @@
     gap: 10px;
 
 }
+.Admin-container .add-wrapper{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}

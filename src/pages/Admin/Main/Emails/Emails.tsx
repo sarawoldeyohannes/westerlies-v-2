@@ -47,6 +47,11 @@ const Emails = () => {
     <>
       <AdminHeader />
       <div className="Admin-container">
+        <div className="add-wrapper">
+          <button type="button" className="btn btn-primary">
+            Add Email
+          </button>
+        </div>
         <DataTable
           title="Email Management"
           columns={columns}

@@ -6,6 +6,7 @@ import AdminHome from "./pages/Admin/Main/AdminHome/AdminHome";
 import "./App.css";
 import ShopProfile from "./pages/ShopProfile/ShopProfile";
 import Emails from "./pages/Admin/Main/Emails/Emails";
+import Add from "./pages/Admin/Main/Add/Add";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route path="shopProfile" element={<ShopProfile />} />
           <Route path="AdminHome" element={<AdminHome />} />
           <Route path="emails" element={<Emails />} />
+          <Route path="Add" element={<Add />} />
         </Routes>
       </Router>
     </>
