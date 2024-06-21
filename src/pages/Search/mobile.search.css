@@ -9,19 +9,17 @@
         gap: 20px;
         
       }
-      .search-container .items-pagination{
-        display: none;
-    }
-    .search-container .items-pagination-mobile{
+    .search-container .items-pagination{
         display: flex;
         flex-direction: column;
+        width: 100%;
       }
       .search-container .items-container {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
         gap: 16px;
         padding: 0 4%;
-        width: 92%;
+        width: 100%;
       }
       
       .search-container .map-container {

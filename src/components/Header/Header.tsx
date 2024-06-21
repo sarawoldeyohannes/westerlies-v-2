@@ -53,12 +53,12 @@ export const Head = ({ headerClassName, type }: HeaderProps): JSX.Element => {
         </div>
       </div>
       <div className={type == "About" ? "search-disabled" : "search"}>
-        <div className="div-wrapper">
+        {/* <div className="div-wrapper">
           <div className="text-wrapper-2">Find a Shop</div>
         </div>
         <div className="div-wrapper">
           <div className="text-wrapper-3">|</div>
-        </div>
+        </div> */}
         <LocationSearchInput />
       </div>
     </div>

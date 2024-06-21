@@ -57,11 +57,7 @@ const Search = () => {
         <FilterNavbar />
 
         <div className="map-and-items">
-          <div
-            className={`${
-              isMapView ? "items-pagination" : "items-pagination-mobile"
-            }`}
-          >
+          <div className="items-pagination">
             <div className="items-container">
               {selectedItems.map((item) => (
                 <Card key={item.id} {...item} />

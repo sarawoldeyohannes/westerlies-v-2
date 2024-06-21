@@ -57,14 +57,13 @@
     background-color: #fff;
   }
    .head .search {
-    align-items: flex-start;
+    align-items: center;
     display: flex;
     flex-direction: column;
     flex: 0 0 auto;
     gap: 15px;
     position: relative;
-    padding-left:3%;
-    width: 97%;
+    
   }
   
   .head .div-wrapper {
@@ -89,5 +88,14 @@
   }
   .head  .text-wrapper-3 {
     display: none;
+  }
+  .head .search-input{
+  }
+  .head .search-button{
+
+  }
+  .head .filter{
+    display: none;
+
   }
 }
