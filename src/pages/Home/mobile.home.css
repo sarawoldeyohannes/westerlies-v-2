@@ -11,14 +11,16 @@
       }
       .home-container .splash{
         display: flex;
-        flex-direction: column;
+        flex-direction: column-reverse;
         width: 100%;
-        padding: 3% 0;
+        padding: 3% 4%;
       }
       .splash .splash-text-container{
         width: 100%;
         display: flex;
         align-items: center;
+        position: relative;
+        top: -40px;
       }
       .splash .s-container{
         display: flex;
@@ -31,8 +33,7 @@
         padding: 25px;
         gap: 20px;
         background-color: #ffff;
-        position: relative;
-        top: -30%;
+       
         left: 0;
       }
       .splash .splash-image-container{
