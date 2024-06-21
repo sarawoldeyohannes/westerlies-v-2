@@ -8,6 +8,7 @@ import "./mobile.home.css";
 import MapComponent from "../../components/Map/MapComponent";
 import FilterNavbar from "../../components/FilterNavbar/FilterNavbar";
 import SignUpPopUp from "../../components/SignUpPopUp/SignUpPopUp";
+import splash from "../../assets/homePage.jpg";
 const Home = () => {
   const [showMap, setShowMap] = useState(false);
   const [isFooterVisible, setIsFooterVisible] = useState(false);
@@ -46,6 +47,28 @@ const Home = () => {
       <Head headerClassName="head-instance" />
       <div className="home-container">
         <FilterNavbar />
+        <div className="splash">
+          <div className="splash-text-container">
+            <div className="s-container">
+              <div className="text-wrapper">
+                Find and Support Independent Shops + Makers
+              </div>
+              <div className="text-wrapper2">
+                Discover local made around the corner or across the world
+              </div>
+              <div className="splash-input">
+                <input
+                  className="Location-input"
+                  type="text"
+                  placeholder="Type a location"
+                />
+              </div>
+            </div>
+          </div>
+          <div className="splash-image-container">
+            <img src={splash} />
+          </div>
+        </div>
         {showSignUp && <SignUpPopUp onClose={handleCloseSignUp} />}
         {showMap ? (
           <div className="map-container">

@@ -52,7 +52,7 @@
     display: flex;
     justify-content: center; /* Center content horizontally */
     align-items: center; /* Center content vertically */
-    background-color: #000000;
+    background-color: #7f7f7f;
     padding: 0; /* Remove padding to ensure a perfect circle */
     border-radius: 50%;
     width: 40px; /* Set the width */
