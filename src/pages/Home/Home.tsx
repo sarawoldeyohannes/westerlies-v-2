@@ -44,7 +44,7 @@ const Home = () => {
   };
   return (
     <>
-      <Head headerClassName="head-instance" />
+      <Head headerClassName="head-instance" type="About" />
       <div className="home-container">
         <FilterNavbar />
         <div className="splash">
@@ -54,13 +54,14 @@ const Home = () => {
                 Find and Support Independent Shops + Makers
               </div>
               <div className="text-wrapper2">
-                Discover local made around the corner or across the world
+                Discover locallly owned shops and makers around the corner or
+                across the world
               </div>
               <div className="splash-input">
                 <input
                   className="Location-input"
                   type="text"
-                  placeholder="Type a location"
+                  placeholder="Type a location or product"
                 />
               </div>
             </div>

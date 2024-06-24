@@ -18,6 +18,7 @@
 }
 
 .home-container .toggle-button {
+  display: none;
   position: fixed;
   bottom: 20px;
   left: 50%;
@@ -40,7 +41,7 @@
   padding: 3% 0;
 }
 .splash .splash-text-container{
-  width: 40%;
+  width: 50%;
   display: flex;
   align-items: center;
 }
@@ -52,11 +53,11 @@
   border:lightgray 0.01px solid;
   box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
   height: fit-content;
-  padding: 25px;
+  padding: 15%;
   gap: 20px;
   background-color: #ffff;
   position: relative;
-  left: 30%;
+  left: 15%;
 }
 .splash .splash-image-container{
   width: 60%;
@@ -90,9 +91,9 @@
   border:lightgray 0.01px solid;
   box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
   padding: 10px;
-  font-family: 'Freight Sans Pro Medium', sans-serif;
+  font-family: 'Alegreya', serif;
+  font-weight: 100;
   font-size: 1em;
-  font-weight: 500;
-  letter-spacing: 1px;
-  line-height: normal;
+  letter-spacing:1px;
+  font-style: normal;
 }

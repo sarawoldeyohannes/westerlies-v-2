@@ -1,6 +1,6 @@
 import "./Header.css";
 import "./mobile.header.css";
-import logo from "../../assets/westerliesLogo.png";
+import logo from "../../assets/westerliesLogoblue.png";
 import LocationSearchInput from "../LocationSearchInput/LocationSearchInput";
 import { HeaderProps } from "./controller.header";
 import { Link } from "react-router-dom";

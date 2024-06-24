@@ -46,7 +46,7 @@
   
   .email-collection .div-wrapper {
     align-items: center;
-    background-color: #000000;
+    background-color: rgb(127, 127, 127);
     border-radius: 60.78px;
     display: inline-flex;
     flex: 0 0 auto;
