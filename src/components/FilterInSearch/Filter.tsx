@@ -1,8 +1,10 @@
 import "./Filter.css";
 import "./mobile.filter.css";
+import "./controller.Filter";
 import { useState } from "react";
 import FilterPopUp from "../FilterPopUp/FilterPopUp";
-const Filter = () => {
+import { FilterProps } from "./controller.Filter";
+const Filter = ({ type }: FilterProps) => {
   const [showPopup, setShowPopup] = useState(false);
   const [filterType, setFilterType] = useState("");
 
@@ -20,7 +22,10 @@ const Filter = () => {
         <div className="text-wrapper">FILTER BY:</div>
       </div>
       <div className="nav-list-frame">
-        <div className="nav-lists" onClick={() => handleOpenPopup("PRODUCT")}>
+        <div
+          className={type == "Product" ? "nav-listsx" : "nav-lists"}
+          onClick={() => handleOpenPopup("PRODUCT")}
+        >
           <div className="text-wrapper-2">product</div>
         </div>
         <div

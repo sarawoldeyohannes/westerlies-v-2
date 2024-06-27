@@ -44,20 +44,22 @@
   width: 50%;
   display: flex;
   align-items: center;
+  position: relative;
 }
 .splash .s-container{
   display: flex;
+  align-self: center;
+  justify-content: center;
   flex-direction: column;
-  width: 100%;
+  width: 110%;
+  height: 95%;
   border-radius: 30px;
   border:lightgray 0.01px solid;
   box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
-  height: fit-content;
   padding: 15%;
   gap: 20px;
   background-color: #ffff;
-  position: relative;
-  left: 15%;
+  position: absolute; /* Changed from relative to absolute */
 }
 .splash .splash-image-container{
   width: 60%;

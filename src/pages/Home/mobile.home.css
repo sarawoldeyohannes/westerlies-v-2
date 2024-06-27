@@ -33,6 +33,7 @@
         padding: 25px;
         gap: 20px;
         background-color: #ffff;
+        position: relative; /* Changed from relative to absolute */
        
         left: 0;
       }

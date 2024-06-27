@@ -1,0 +1,43 @@
+.FreeSearch{
+    display: flex;
+    
+}
+.FreeSearch .FreeSearch-input{
+    display: flex;
+    width: fit-content;
+    border-radius: 30px;
+    border:lightgray 0.01px solid;
+    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+    padding: 10px;
+    gap: 20px;
+  }
+  .FreeSearch .FreeSearch-input input{
+    display: flex;
+    font-family: 'Alegreya', serif;
+    font-weight: 100;
+    font-size: 1em;
+    letter-spacing:1px;
+    font-style: normal;
+    width: 100%;
+
+  }
+  .FreeSearch .FreeSearch-input input::placeholder {
+    font-family: 'Alegreya', serif;
+    font-weight: 100;
+    font-size: 0.9em;
+    letter-spacing:0.5px;
+    font-style: normal;
+    width: 100%;
+  }
+  .FreeSearch .Freesearch-button{
+    display: flex;
+    justify-content: center; /* Center content horizontally */
+    align-items: center; /* Center content vertically */
+    background-color: #7f7f7f;
+    padding: 0; /* Remove padding to ensure a perfect circle */
+    border-radius: 50%;
+    width: 50px; /* Set the width */
+    height: 40px; /* Set the height to be equal to the width */
+    font-size: 28px;
+    color: #ffffff; /* Optional: add color to make the text visible */
+  }

@@ -1,11 +1,11 @@
 import "./Header.css";
 import "./mobile.header.css";
 import logo from "../../assets/westerliesLogoblue.png";
-import LocationSearchInput from "../LocationSearchInput/LocationSearchInput";
 import { HeaderProps } from "./controller.header";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import Menu from "../Menu/Menu";
+import HeaderSearch from "../HeaderSearch/HeaderSearch";
 
 export const Head = ({ headerClassName, type }: HeaderProps): JSX.Element => {
   const [isOpen, setIsOpen] = useState(false);
@@ -59,7 +59,7 @@ export const Head = ({ headerClassName, type }: HeaderProps): JSX.Element => {
         <div className="div-wrapper">
           <div className="text-wrapper-3">|</div>
         </div> */}
-        <LocationSearchInput />
+        <HeaderSearch />
       </div>
     </div>
   );

@@ -1,0 +1,4 @@
+input:focus {
+    outline: none; /* Removes the default outline */
+    box-shadow: none; /* Removes any default box-shadow */
+  }
