@@ -28,7 +28,7 @@
     flex: 0 0 auto;
     gap: 20px;
     position: relative;
-    width: 42%;
+    width: 45%;
   }
   
   .head .header-nav-bar-texts {
@@ -59,11 +59,13 @@
   }
   
   .head .logo {
-    display: inline-flex;
+    display: flex;
     flex: 0 0 auto;
     flex-direction: column;
     gap: 10px;
     position: relative;
+    
+    width: fit-content;
   }
   
   .head .westerlieslogo {
@@ -78,7 +80,6 @@
     align-items: center;
     display: inline-flex;
     flex: 0 0 auto;
-    gap: 15px;
     position: relative;
     padding-left:3%;
     width: 97%;

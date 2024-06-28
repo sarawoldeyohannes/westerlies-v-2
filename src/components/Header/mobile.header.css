@@ -3,7 +3,7 @@
 /* Styles for mobile view */
 @media (max-width: 768px) {
   .head {
-    align-items: flex-start;
+    align-items: center;
     border-bottom-style: solid;
     border-bottom-width: 0.8px;
     border-color: #aaaaaa;
@@ -15,10 +15,9 @@
   }
   
   .head .header {
-    align-items: center;
-    align-self: stretch;
     display: flex;
-    flex: 0 0 auto;
+    justify-content: space-between; /* Distribute space between hamburger and logo */
+    align-items: center;
     padding-left:3%;
     position: relative;
     width: 97%;
@@ -30,15 +29,17 @@
     order: 1;
     margin: 10px 0;
     justify-content: flex-start;
-    width: 27%;
+    width: fit-content;
   }
   .head .logo {
-    display: inline-flex;
-    flex: 0 0 auto;
+    display: flex;
+    flex: 1;
     flex-direction: column;
     gap: 10px;
     position: relative;
     order: 2;
+    justify-content: center;
+    align-items: center;
   }
   
   .head .westerlieslogo {
