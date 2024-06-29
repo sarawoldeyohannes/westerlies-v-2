@@ -20,14 +20,14 @@ const Add: React.FC = () => {
     name: "storeLinks",
   });
 
-  // For storeOpeningDays
+  // For StoreOpeningDaysAndLocation
   const {
     fields: storeOpeningDaysFields,
     append: appendStoreOpeningDay,
     remove: removeStoreOpeningDay,
   } = useFieldArray({
     control,
-    name: "storeOpeningDays",
+    name: "StoreOpeningDaysAndLocation",
   });
 
   // For products
@@ -48,6 +48,16 @@ const Add: React.FC = () => {
   } = useFieldArray({
     control,
     name: "instagramPhotos",
+  });
+
+  // For storeTags
+  const {
+    fields: storeTagFields,
+    append: appendStoreTag,
+    remove: removeStoreTag,
+  } = useFieldArray({
+    control,
+    name: "storeTags",
   });
 
   const onSubmit: SubmitHandler<StoreData> = (data) => {
@@ -120,101 +130,109 @@ const Add: React.FC = () => {
           </button>
         </div>
 
-        {/* Dynamic Store Opening Days */}
+        {/* Dynamic Store Opening Days and Location */}
         <div>
-          <h3>Store Opening Days</h3>
+          <h3>Store Opening Days and Location</h3>
           {storeOpeningDaysFields.map(
             (storeOpeningDay, storeOpeningDayIndex) => (
               <div key={storeOpeningDay.id}>
                 <label
-                  htmlFor={`storeOpeningDays.${storeOpeningDayIndex}.fineLocations.address`}
+                  htmlFor={`StoreOpeningDaysAndLocation.${storeOpeningDayIndex}.fineLocation.address`}
                 >
                   Fine Location Address
                 </label>
                 <input
-                  id={`storeOpeningDays.${storeOpeningDayIndex}.fineLocations.address`}
+                  id={`StoreOpeningDaysAndLocation.${storeOpeningDayIndex}.fineLocation.address`}
                   {...register(
-                    `storeOpeningDays.${storeOpeningDayIndex}.fineLocations.address`,
+                    `StoreOpeningDaysAndLocation.${storeOpeningDayIndex}.fineLocation.address`,
                     { required: true }
                   )}
                 />
-                {errors.storeOpeningDays?.[storeOpeningDayIndex]?.fineLocations
-                  ?.address && <span>This field is required</span>}
+                {errors.StoreOpeningDaysAndLocation?.[storeOpeningDayIndex]
+                  ?.fineLocation?.address && (
+                  <span>This field is required</span>
+                )}
 
                 <label
-                  htmlFor={`storeOpeningDays.${storeOpeningDayIndex}.fineLocations.longtiude`}
+                  htmlFor={`StoreOpeningDaysAndLocation.${storeOpeningDayIndex}.fineLocation.longtiude`}
                 >
                   Longitude
                 </label>
                 <input
-                  id={`storeOpeningDays.${storeOpeningDayIndex}.fineLocations.longtiude`}
+                  id={`StoreOpeningDaysAndLocation.${storeOpeningDayIndex}.fineLocation.longtiude`}
                   {...register(
-                    `storeOpeningDays.${storeOpeningDayIndex}.fineLocations.longtiude`,
+                    `StoreOpeningDaysAndLocation.${storeOpeningDayIndex}.fineLocation.longtiude`,
                     { required: true }
                   )}
                 />
-                {errors.storeOpeningDays?.[storeOpeningDayIndex]?.fineLocations
-                  ?.longtiude && <span>This field is required</span>}
+                {errors.StoreOpeningDaysAndLocation?.[storeOpeningDayIndex]
+                  ?.fineLocation?.longtiude && (
+                  <span>This field is required</span>
+                )}
 
                 <label
-                  htmlFor={`storeOpeningDays.${storeOpeningDayIndex}.fineLocations.lattitude`}
+                  htmlFor={`StoreOpeningDaysAndLocation.${storeOpeningDayIndex}.fineLocation.lattitude`}
                 >
                   Latitude
                 </label>
                 <input
-                  id={`storeOpeningDays.${storeOpeningDayIndex}.fineLocations.lattitude`}
+                  id={`StoreOpeningDaysAndLocation.${storeOpeningDayIndex}.fineLocation.lattitude`}
                   {...register(
-                    `storeOpeningDays.${storeOpeningDayIndex}.fineLocations.lattitude`,
+                    `StoreOpeningDaysAndLocation.${storeOpeningDayIndex}.fineLocation.lattitude`,
                     { required: true }
                   )}
                 />
-                {errors.storeOpeningDays?.[storeOpeningDayIndex]?.fineLocations
-                  ?.lattitude && <span>This field is required</span>}
+                {errors.StoreOpeningDaysAndLocation?.[storeOpeningDayIndex]
+                  ?.fineLocation?.lattitude && (
+                  <span>This field is required</span>
+                )}
 
                 <label
-                  htmlFor={`storeOpeningDays.${storeOpeningDayIndex}.fineLocations.city`}
+                  htmlFor={`StoreOpeningDaysAndLocation.${storeOpeningDayIndex}.fineLocation.city`}
                 >
                   City
                 </label>
                 <input
-                  id={`storeOpeningDays.${storeOpeningDayIndex}.fineLocations.city`}
+                  id={`StoreOpeningDaysAndLocation.${storeOpeningDayIndex}.fineLocation.city`}
                   {...register(
-                    `storeOpeningDays.${storeOpeningDayIndex}.fineLocations.city`,
+                    `StoreOpeningDaysAndLocation.${storeOpeningDayIndex}.fineLocation.city`,
                     { required: true }
                   )}
                 />
-                {errors.storeOpeningDays?.[storeOpeningDayIndex]?.fineLocations
-                  ?.city && <span>This field is required</span>}
+                {errors.StoreOpeningDaysAndLocation?.[storeOpeningDayIndex]
+                  ?.fineLocation?.city && <span>This field is required</span>}
 
                 <label
-                  htmlFor={`storeOpeningDays.${storeOpeningDayIndex}.fineLocations.phone_number`}
+                  htmlFor={`StoreOpeningDaysAndLocation.${storeOpeningDayIndex}.fineLocation.phone_number`}
                 >
                   Phone Number
                 </label>
                 <input
-                  id={`storeOpeningDays.${storeOpeningDayIndex}.fineLocations.phone_number`}
+                  id={`StoreOpeningDaysAndLocation.${storeOpeningDayIndex}.fineLocation.phone_number`}
                   {...register(
-                    `storeOpeningDays.${storeOpeningDayIndex}.fineLocations.phone_number`,
+                    `StoreOpeningDaysAndLocation.${storeOpeningDayIndex}.fineLocation.phone_number`,
                     { required: true }
                   )}
                 />
-                {errors.storeOpeningDays?.[storeOpeningDayIndex]?.fineLocations
-                  ?.phone_number && <span>This field is required</span>}
+                {errors.StoreOpeningDaysAndLocation?.[storeOpeningDayIndex]
+                  ?.fineLocation?.phone_number && (
+                  <span>This field is required</span>
+                )}
 
                 <label
-                  htmlFor={`storeOpeningDays.${storeOpeningDayIndex}.fineLocations.email`}
+                  htmlFor={`StoreOpeningDaysAndLocation.${storeOpeningDayIndex}.fineLocation.email`}
                 >
                   Email
                 </label>
                 <input
-                  id={`storeOpeningDays.${storeOpeningDayIndex}.fineLocations.email`}
+                  id={`StoreOpeningDaysAndLocation.${storeOpeningDayIndex}.fineLocation.email`}
                   {...register(
-                    `storeOpeningDays.${storeOpeningDayIndex}.fineLocations.email`,
+                    `StoreOpeningDaysAndLocation.${storeOpeningDayIndex}.fineLocation.email`,
                     { required: true }
                   )}
                 />
-                {errors.storeOpeningDays?.[storeOpeningDayIndex]?.fineLocations
-                  ?.email && <span>This field is required</span>}
+                {errors.StoreOpeningDaysAndLocation?.[storeOpeningDayIndex]
+                  ?.fineLocation?.email && <span>This field is required</span>}
 
                 <div>
                   <h4>Days</h4>
@@ -239,7 +257,7 @@ const Add: React.FC = () => {
             type="button"
             onClick={() =>
               appendStoreOpeningDay({
-                fineLocations: {
+                fineLocation: {
                   address: "",
                   longtiude: "",
                   lattitude: "",
@@ -247,7 +265,7 @@ const Add: React.FC = () => {
                   phone_number: "",
                   email: "",
                 },
-                days: [{ openTime: "", closeTime: "", day: { name: "" } }],
+                days: [{ openTime: "", closeTime: "", dayId: 1 }],
               })
             }
           >
@@ -323,6 +341,57 @@ const Add: React.FC = () => {
           </button>
         </div>
 
+        {/* Dynamic Store Tags */}
+        <div>
+          <h3>Store Tags</h3>
+          {storeTagFields.map((field, index) => (
+            <div key={field.id}>
+              <label htmlFor={`storeTags.${index}.storeTagId`}>
+                Store Tag ID
+              </label>
+              <input
+                id={`storeTags.${index}.storeTagId`}
+                {...register(`storeTags.${index}.storeTagId`, {
+                  required: true,
+                })}
+              />
+              {errors.storeTags?.[index]?.storeTagId && (
+                <span>This field is required</span>
+              )}
+
+              <label htmlFor={`storeTags.${index}.storeId`}>Store ID</label>
+              <input
+                id={`storeTags.${index}.storeId`}
+                {...register(`storeTags.${index}.storeId`, { required: true })}
+              />
+              {errors.storeTags?.[index]?.storeId && (
+                <span>This field is required</span>
+              )}
+
+              <label htmlFor={`storeTags.${index}.tagId`}>Tag ID</label>
+              <input
+                id={`storeTags.${index}.tagId`}
+                {...register(`storeTags.${index}.tagId`, { required: true })}
+              />
+              {errors.storeTags?.[index]?.tagId && (
+                <span>This field is required</span>
+              )}
+
+              <button type="button" onClick={() => removeStoreTag(index)}>
+                Remove
+              </button>
+            </div>
+          ))}
+          <button
+            type="button"
+            onClick={() =>
+              appendStoreTag({ storeTagId: 0, storeId: 0, tagId: 1 })
+            }
+          >
+            Add Store Tag
+          </button>
+        </div>
+
         <button type="submit">Submit</button>
       </form>
     </div>
@@ -336,74 +405,72 @@ const NestedDays: React.FC<{
   register: any;
   errors: any;
 }> = ({ control, storeOpeningDayIndex, register, errors }) => {
-  const {
-    fields: dayFields,
-    append: appendDay,
-    remove: removeDay,
-  } = useFieldArray({
+  const { fields, append, remove } = useFieldArray({
     control,
-    name: `storeOpeningDays.${storeOpeningDayIndex}.days`,
+    name: `StoreOpeningDaysAndLocation.${storeOpeningDayIndex}.days`,
   });
 
   return (
     <div>
-      {dayFields.map((field, index) => (
+      {fields.map((field, index) => (
         <div key={field.id}>
           <label
-            htmlFor={`storeOpeningDays.${storeOpeningDayIndex}.days.${index}.openTime`}
+            htmlFor={`StoreOpeningDaysAndLocation.${storeOpeningDayIndex}.days.${index}.openTime`}
           >
             Open Time
           </label>
           <input
-            id={`storeOpeningDays.${storeOpeningDayIndex}.days.${index}.openTime`}
+            id={`StoreOpeningDaysAndLocation.${storeOpeningDayIndex}.days.${index}.openTime`}
             {...register(
-              `storeOpeningDays.${storeOpeningDayIndex}.days.${index}.openTime`,
+              `StoreOpeningDaysAndLocation.${storeOpeningDayIndex}.days.${index}.openTime`,
               { required: true }
             )}
           />
-          {errors.storeOpeningDays?.[storeOpeningDayIndex]?.days?.[index]
-            ?.openTime && <span>This field is required</span>}
+          {errors.StoreOpeningDaysAndLocation?.[storeOpeningDayIndex]?.days?.[
+            index
+          ]?.openTime && <span>This field is required</span>}
 
           <label
-            htmlFor={`storeOpeningDays.${storeOpeningDayIndex}.days.${index}.closeTime`}
+            htmlFor={`StoreOpeningDaysAndLocation.${storeOpeningDayIndex}.days.${index}.closeTime`}
           >
             Close Time
           </label>
           <input
-            id={`storeOpeningDays.${storeOpeningDayIndex}.days.${index}.closeTime`}
+            id={`StoreOpeningDaysAndLocation.${storeOpeningDayIndex}.days.${index}.closeTime`}
             {...register(
-              `storeOpeningDays.${storeOpeningDayIndex}.days.${index}.closeTime`,
+              `StoreOpeningDaysAndLocation.${storeOpeningDayIndex}.days.${index}.closeTime`,
               { required: true }
             )}
           />
-          {errors.storeOpeningDays?.[storeOpeningDayIndex]?.days?.[index]
-            ?.closeTime && <span>This field is required</span>}
+          {errors.StoreOpeningDaysAndLocation?.[storeOpeningDayIndex]?.days?.[
+            index
+          ]?.closeTime && <span>This field is required</span>}
 
           <label
-            htmlFor={`storeOpeningDays.${storeOpeningDayIndex}.days.${index}.day.name`}
+            htmlFor={`StoreOpeningDaysAndLocation.${storeOpeningDayIndex}.days.${index}.dayId`}
           >
-            Day Name
+            Day ID
           </label>
           <input
-            id={`storeOpeningDays.${storeOpeningDayIndex}.days.${index}.day.name`}
+            id={`StoreOpeningDaysAndLocation.${storeOpeningDayIndex}.days.${index}.dayId`}
+            type="number"
             {...register(
-              `storeOpeningDays.${storeOpeningDayIndex}.days.${index}.day.name`,
+              `StoreOpeningDaysAndLocation.${storeOpeningDayIndex}.days.${index}.dayId`,
               { required: true }
             )}
           />
-          {errors.storeOpeningDays?.[storeOpeningDayIndex]?.days?.[index]?.day
-            ?.name && <span>This field is required</span>}
+          {errors.StoreOpeningDaysAndLocation?.[storeOpeningDayIndex]?.days?.[
+            index
+          ]?.dayId && <span>This field is required</span>}
 
-          <button type="button" onClick={() => removeDay(index)}>
+          <button type="button" onClick={() => remove(index)}>
             Remove Day
           </button>
         </div>
       ))}
       <button
         type="button"
-        onClick={() =>
-          appendDay({ openTime: "", closeTime: "", day: { name: "" } })
-        }
+        onClick={() => append({ openTime: "", closeTime: "", dayId: 1 })}
       >
         Add Day
       </button>
