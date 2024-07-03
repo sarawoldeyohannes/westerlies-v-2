@@ -22,7 +22,7 @@
     position: relative;
     background: #202D3F;;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow */
-    padding: 25px;
+    padding: 25px 25px 40px 25px;
     border-radius: 10px;
     z-index: 1001;
     max-width: fit-content;

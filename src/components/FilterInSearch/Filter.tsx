@@ -26,7 +26,7 @@ const Filter = ({ type }: FilterProps) => {
           className={type == "Product" ? "nav-listsx" : "nav-lists"}
           onClick={() => handleOpenPopup("PRODUCT")}
         >
-          <div className="text-wrapper-2">product</div>
+          <div className="text-wrapper-2">{type == "Product"}product</div>
         </div>
         <div
           className="nav-lists"

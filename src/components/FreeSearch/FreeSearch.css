@@ -8,7 +8,7 @@
     border-radius: 30px;
     border:lightgray 0.01px solid;
     box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
-    padding: 10px;
+    padding: 10px 35px;
     gap: 20px;
   }
   .FreeSearch .FreeSearch-input input{
@@ -22,9 +22,9 @@
 
   }
   .FreeSearch .FreeSearch-input input::placeholder {
-    font-family: 'Alegreya', serif;
-    font-weight: 100;
-    font-size: 0.9em;
+    font-family: 'Freight Sans Pro Medium', sans-serif;
+    font-weight: 500;
+    font-size: 0.90em;
     letter-spacing:0.5px;
     font-style: normal;
     width: 100%;

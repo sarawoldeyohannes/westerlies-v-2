@@ -1,19 +1,17 @@
-import "../LocationSearchInput/LocationSearchInput.css";
+import "./LocationSearchInput.css";
 import { CiSearch } from "react-icons/ci";
-import Filter from "../FilterInSearch/Filter";
-const ProductSearchInput = () => {
+const LocationSearchInputOnly = () => {
   return (
     <div className="Location-suggestion">
       <div className="search-input">
-        <div className="text-input">Product</div>
+        <div className="text-input">City</div>
 
         <input
           className="Location-input"
           type="text"
-          placeholder="Type a product"
+          placeholder="Type a location"
         />
       </div>
-      <Filter type="Product" />
       <div className="search-button">
         <CiSearch />
       </div>
@@ -21,4 +19,4 @@ const ProductSearchInput = () => {
   );
 };
 
-export default ProductSearchInput;
+export default LocationSearchInputOnly;

@@ -41,7 +41,7 @@
   padding: 3% 0;
 }
 .splash .splash-text-container{
-  width: 50%;
+  width: 40%;
   display: flex;
   align-items: center;
   position: relative;
@@ -52,11 +52,11 @@
   justify-content: center;
   flex-direction: column;
   width: 110%;
-  height: 95%;
+  height: 77%;
   border-radius: 30px;
   border:lightgray 0.01px solid;
   box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
-  padding: 15%;
+  padding: 50px;
   gap: 20px;
   background-color: #ffff;
   position: absolute; /* Changed from relative to absolute */
@@ -73,14 +73,14 @@
   font-family: "brandon-grotesque", sans-serif;
   font-style: normal;
   font-weight: 600;
-  font-size: 1.5em;
+  font-size: 1.8em;
   letter-spacing:1px;
   line-height: 1.25;
 }
 .splash .text-wrapper2{
   font-family: 'Alegreya', serif;
   font-weight: 100;
-  font-size: 1em;
+  font-size: 1.2em;
   letter-spacing:1px;
   font-style: normal;
 }
