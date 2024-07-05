@@ -11,6 +11,11 @@
     border:lightgray 0.01px solid;
     box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
 }
+.head .search-input{
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
 .head .Location-input {
     display: inline-flex;   
     justify-content: center;
@@ -23,6 +28,28 @@
     letter-spacing: 0;
     line-height: normal;
     border: none;
+  }
+  .head .Location-input-only {
+    display: inline-flex;   
+    justify-content: center;
+    padding: 0;
+    position: relative;
+    color: #000000;
+    font-family: 'Freight Sans Pro Medium', sans-serif;
+    font-size: 0.9em;
+    font-weight: 500;
+    letter-spacing: 0;
+    line-height: normal;
+    border: none;
+    width: 110px;
+  }
+  .head .Location-input-only::placeholder{
+    color: #000000;
+    font-family: 'Freight Sans Pro Medium', sans-serif;
+    font-size: 1em;
+    font-weight: 500;
+    letter-spacing: 0.2px;
+    line-height: normal;
   }
   .head .text-input{
     color: #000000;
