@@ -9,6 +9,7 @@ import MapComponent from "../../components/Map/MapComponent";
 import FilterNavbar from "../../components/FilterNavbar/FilterNavbar";
 import SignUpPopUp from "../../components/SignUpPopUp/SignUpPopUp";
 import splash from "../../assets/homePage.jpg";
+import HeaderSearch from "../../components/HeaderSearch/HeaderSearch";
 const Home = () => {
   const [showMap, setShowMap] = useState(false);
   const [isFooterVisible, setIsFooterVisible] = useState(false);
@@ -54,15 +55,11 @@ const Home = () => {
                 Find and Support Independent Shops + Makers
               </div>
               <div className="text-wrapper2">
-                Discover locallly owned shops and makers around the corner or
+                Discover locally owned shops and makers around the corner or
                 across the world
               </div>
               <div className="splash-input">
-                <input
-                  className="Location-input"
-                  type="text"
-                  placeholder="Type a location or product"
-                />
+                <HeaderSearch />
               </div>
             </div>
           </div>

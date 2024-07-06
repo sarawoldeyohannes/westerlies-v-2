@@ -6,7 +6,7 @@ const LocationSearchInputOnly = () => {
         <input
           className="Location-input-only"
           type="text"
-          placeholder="Type a location"
+          placeholder="Search a city"
         />
       </div>
     </div>

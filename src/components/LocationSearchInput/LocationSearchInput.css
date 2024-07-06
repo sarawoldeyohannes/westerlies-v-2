@@ -5,7 +5,7 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    padding: 0px 20px;
+    padding: 0px 5px 0px 15px;
     background-color: #ffffff;
     border-radius: 50px;
     border:lightgray 0.01px solid;
@@ -52,7 +52,7 @@
     line-height: normal;
   }
   .head .text-input{
-    color: #000000;
+    color: #7f7f7f;
     font-family: 'Freight Sans Pro Medium', sans-serif;
     font-size: 0.9em;
     font-weight: 600;
@@ -82,8 +82,8 @@
     background-color: #7f7f7f;
     padding: 0; /* Remove padding to ensure a perfect circle */
     border-radius: 50%;
-    width: 40px; /* Set the width */
-    height: 40px; /* Set the height to be equal to the width */
+    width: 50px; /* Set the width */
+    height: 50px; /* Set the height to be equal to the width */
     font-size: 28px;
     color: #ffffff; /* Optional: add color to make the text visible */
   }

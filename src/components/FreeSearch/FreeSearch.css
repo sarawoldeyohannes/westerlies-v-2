@@ -1,10 +1,9 @@
 .FreeSearch{
     display: flex;
-    
 }
 .FreeSearch .FreeSearch-input{
     display: flex;
-    width: fit-content;
+    width: 400px;
     border-radius: 30px;
     border:lightgray 0.01px solid;
     box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
@@ -28,6 +27,8 @@
     letter-spacing:0.5px;
     font-style: normal;
     width: 100%;
+    text-align: center;
+    color: #7f7f7f;
   }
   .FreeSearch .Freesearch-button{
     display: flex;
@@ -40,4 +41,17 @@
     height: 40px; /* Set the height to be equal to the width */
     font-size: 28px;
     color: #ffffff; /* Optional: add color to make the text visible */
+  }
+  @media (max-width: 768px) {
+    .FreeSearch .FreeSearch-input{
+      display: flex;
+      width: 300px;
+    padding: 10px 15px;
+    gap: 5px;
+
+    }
+    .FreeSearch .FreeSearch-input input{
+      font-size: 0.90em;
+    }
+    
   }

@@ -35,8 +35,8 @@ const About = () => {
               </p>
               <p>
                 Please reach out to us learn more, share a favorite store, or
-                for anything else at{" "}
-                <div className="email">hellowesterlies@gmail.com</div>
+                for anything else at &nbsp;
+                <strong>hellowesterlies@gmail.com</strong>
               </p>
             </div>
           </div>

@@ -57,9 +57,10 @@
   border:lightgray 0.01px solid;
   box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
   padding: 50px;
-  gap: 20px;
+  gap: 10px;
   background-color: #ffff;
   position: absolute; /* Changed from relative to absolute */
+  left: 25%;
 }
 .splash .splash-image-container{
   width: 60%;
@@ -78,7 +79,7 @@
   line-height: 1.25;
 }
 .splash .text-wrapper2{
-  font-family: 'Alegreya', serif;
+  font-family: "brandon-grotesque", sans-serif;
   font-weight: 100;
   font-size: 1.2em;
   letter-spacing:1px;
