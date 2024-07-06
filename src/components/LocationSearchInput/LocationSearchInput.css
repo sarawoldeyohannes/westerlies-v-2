@@ -1,4 +1,4 @@
-.head .Location-suggestion{
+ .Location-suggestion{
     display: flex;
     gap: 5px;
     flex: 0 0 auto;
@@ -11,12 +11,12 @@
     border:lightgray 0.01px solid;
     box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
 }
-.head .search-input{
+.Location-suggestion .search-input{
   display: flex;
   flex-direction: column;
   gap: 8px;
 }
-.head .Location-input {
+.Location-suggestion .Location-input {
     display: inline-flex;   
     justify-content: center;
     padding: 0;
@@ -29,7 +29,7 @@
     line-height: normal;
     border: none;
   }
-  .head .Location-input-only {
+  .Location-suggestion .Location-input-only {
     display: inline-flex;   
     justify-content: center;
     padding: 0;
@@ -43,7 +43,7 @@
     border: none;
     width: 110px;
   }
-  .head .Location-input-only::placeholder{
+  .Location-suggestion .Location-input-only::placeholder{
     color: #000000;
     font-family: 'Freight Sans Pro Medium', sans-serif;
     font-size: 1em;
@@ -51,7 +51,7 @@
     letter-spacing: 0.2px;
     line-height: normal;
   }
-  .head .text-input{
+  .Location-suggestion .text-input{
     color: #7f7f7f;
     font-family: 'Freight Sans Pro Medium', sans-serif;
     font-size: 0.9em;
@@ -63,7 +63,7 @@
     white-space: nowrap;
     text-transform: uppercase;
   }
-  .head .Location-input::placeholder{
+  .Location-suggestion .Location-input::placeholder{
     color: #000000;
     font-family: 'Freight Sans Pro Medium', sans-serif;
     font-size: 0.9em;
@@ -75,7 +75,7 @@
     white-space: nowrap;
     width: fit-content;
   } 
-  .head .search-button{
+  .Location-suggestion .search-button{
     display: flex;
     justify-content: center; /* Center content horizontally */
     align-items: center; /* Center content vertically */
@@ -89,7 +89,7 @@
   }
   @media (max-width: 768px) {
     
-  .head .Location-suggestion{
+  .Location-suggestion .Location-suggestion{
     padding: 10px;
 }
   }

@@ -5,6 +5,7 @@ import Card from "../../components/Card/Card";
 import { items } from "./controller.home";
 import "./Home.css";
 import "./mobile.home.css";
+import "../../components/LocationSearchInput/LocationSearchInput.css";
 import MapComponent from "../../components/Map/MapComponent";
 import FilterNavbar from "../../components/FilterNavbar/FilterNavbar";
 import SignUpPopUp from "../../components/SignUpPopUp/SignUpPopUp";
@@ -51,10 +52,10 @@ const Home = () => {
         <div className="splash">
           <div className="splash-text-container">
             <div className="s-container">
-              <div className="text-wrapper">
+              <div className="splash-text-wrapper">
                 Find and Support Independent Shops + Makers
               </div>
-              <div className="text-wrapper2">
+              <div className="splash-text-wrapper2">
                 Discover locally owned shops and makers around the corner or
                 across the world
               </div>

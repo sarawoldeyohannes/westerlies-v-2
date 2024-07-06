@@ -70,7 +70,7 @@
   height: 100%;
   
 }
-.splash .text-wrapper{
+.splash .splash-text-wrapper{
   font-family: "brandon-grotesque", sans-serif;
   font-style: normal;
   font-weight: 600;
@@ -78,13 +78,10 @@
   letter-spacing:1px;
   line-height: 1.25;
 }
-.splash .text-wrapper2{
+.splash .splash-text-wrapper2{
   font-family: "brandon-grotesque", sans-serif;
   font-weight: 100;
   font-size: 1.2em;
   letter-spacing:1px;
   font-style: normal;
-}
-.splash .splash-input{
-  width: 100%;
 }
