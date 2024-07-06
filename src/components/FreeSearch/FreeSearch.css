@@ -7,8 +7,8 @@
     border-radius: 30px;
     border:lightgray 0.01px solid;
     box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
-    padding: 10px 35px;
-    gap: 20px;
+    padding: 5px 5px 5px 15px;
+    gap: 5px;
   }
   .FreeSearch .FreeSearch-input input{
     display: flex;
@@ -18,7 +18,7 @@
     letter-spacing:1px;
     font-style: normal;
     width: 100%;
-
+    border: none;
   }
   .FreeSearch .FreeSearch-input input::placeholder {
     font-family: 'Freight Sans Pro Medium', sans-serif;
@@ -37,8 +37,8 @@
     background-color: #7f7f7f;
     padding: 0; /* Remove padding to ensure a perfect circle */
     border-radius: 50%;
-    width: 50px; /* Set the width */
-    height: 40px; /* Set the height to be equal to the width */
+    width: 57px; /* Set the width */
+    height: 50px; /* Set the height to be equal to the width */
     font-size: 28px;
     color: #ffffff; /* Optional: add color to make the text visible */
   }
@@ -46,12 +46,16 @@
     .FreeSearch .FreeSearch-input{
       display: flex;
       width: 300px;
-    padding: 10px 15px;
-    gap: 5px;
-
+      gap: 5px;
+      padding: 5px 5px 5px 5px;
+ 
     }
     .FreeSearch .FreeSearch-input input{
-      font-size: 0.90em;
+      font-size: 0.75em;
+    }
+    .FreeSearch .Freesearch-button{
+      width: 47px; /* Set the width */
+      height: 40px;
     }
     
   }

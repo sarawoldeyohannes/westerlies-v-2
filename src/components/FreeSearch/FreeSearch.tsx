@@ -1,5 +1,5 @@
 import "./FreeSearch.css";
-// import { CiSearch } from "react-icons/ci";
+import { CiSearch } from "react-icons/ci";
 
 const FreeSearch = () => {
   return (
@@ -11,9 +11,9 @@ const FreeSearch = () => {
           type="text"
           placeholder="Click on Location or Product to start searching"
         />
-        {/* <div className="Freesearch-button">
+        <div className="Freesearch-button">
           <CiSearch />
-        </div> */}
+        </div>
       </div>
     </div>
   );

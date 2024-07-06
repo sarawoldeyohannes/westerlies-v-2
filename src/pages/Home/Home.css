@@ -51,12 +51,12 @@
   align-self: center;
   justify-content: center;
   flex-direction: column;
-  width: 110%;
+  width: 113%;
   height: 77%;
   border-radius: 30px;
   border:lightgray 0.01px solid;
   box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
-  padding: 50px;
+  padding: 0px 50px;
   gap: 10px;
   background-color: #ffff;
   position: absolute; /* Changed from relative to absolute */
@@ -87,16 +87,4 @@
 }
 .splash .splash-input{
   width: 100%;
-}
-.splash .splash-input input{
-  width: 100%;
-  border-radius: 10px;
-  border:lightgray 0.01px solid;
-  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
-  padding: 10px;
-  font-family: 'Alegreya', serif;
-  font-weight: 100;
-  font-size: 1em;
-  letter-spacing:1px;
-  font-style: normal;
 }

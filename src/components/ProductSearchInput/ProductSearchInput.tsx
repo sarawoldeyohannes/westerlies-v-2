@@ -10,7 +10,7 @@ const ProductSearchInput = () => {
         <input
           className="Location-input"
           type="text"
-          placeholder="Type a product"
+          placeholder="Search a product"
         />
       </div>
       <Filter type="Product" />
