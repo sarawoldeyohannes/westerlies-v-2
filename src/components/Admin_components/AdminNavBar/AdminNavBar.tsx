@@ -4,7 +4,7 @@ import { LiaStoreSolid } from "react-icons/lia";
 import { HiOutlineDocumentReport } from "react-icons/hi";
 import { PiArticleNyTimes } from "react-icons/pi";
 import { ImBlog } from "react-icons/im";
-import img from "../../../assets/westerliesLogo.png";
+import img from "../../../assets/westerliesLogoblue.png";
 import "./AdminNavBar.css";
 const AdminNavBar = () => {
   return (

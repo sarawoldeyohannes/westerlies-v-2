@@ -1,3 +1,5 @@
+import axios from "axios";
+import { url } from "../../../../util/constant";
 export interface StoreData {
     storeId?: string;
     name:                        string;
@@ -73,7 +75,50 @@ export interface StoreTag {
     storeId:    number;
     tagId:      number;
 }
-
+export interface Tag {
+    tagId:          number;
+    tagTypeId:      null;
+    tagName:        string;
+    tagDescription: null;
+}
+export interface Link {
+    linkTypeId: number;
+    linkTypeName: string;
+}
+export interface Days{
+    dayId: number;
+    dayName: string;
+}
+  // Function to fetch tags from the API using axios
+  export const fetchTags = async (): Promise<Tag[]> => {
+    try {
+      const response = await axios.get(`${url}/tag`);
+      return response.data;
+    } catch (error) {
+      console.error('Fetch error:', error);
+      return [];
+    }
+  };
+    // Function to fetch Links from the API using axios
+    export const fetchLinks = async (): Promise<Link[]> => {
+        try {
+          const response = await axios.get(`${url}/link/link_types`);
+          return response.data;
+        } catch (error) {
+          console.error('Fetch error:', error);
+          return [];
+        }
+      };
+  // Function to fetch Days from the API using axios
+  export const fetchDays = async (): Promise<Days[]> => {
+    try {
+      const response = await axios.get(`${url}/day`);
+      return response.data;
+    } catch (error) {
+      console.error('Fetch error:', error);
+      return [];
+    }
+  };
 // export async function addStore(data: StoreData) {
 //     try {
 //       const response = await axios.post(url + "api/store/addStore", data, {
