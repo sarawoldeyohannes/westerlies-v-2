@@ -10,7 +10,7 @@ import MapComponent from "../../components/Map/MapComponent";
 import FilterNavbar from "../../components/FilterNavbar/FilterNavbar";
 import SignUpPopUp from "../../components/SignUpPopUp/SignUpPopUp";
 import splash from "../../assets/homePage.jpg";
-import HeaderSearch from "../../components/HeaderSearch/HeaderSearch";
+import LocationSearchInputOnly from "../../components/LocationSearchInput/LocationSearchInputOnly";
 const Home = () => {
   const [showMap, setShowMap] = useState(false);
   const [isFooterVisible, setIsFooterVisible] = useState(false);
@@ -60,7 +60,7 @@ const Home = () => {
                 across the world
               </div>
               <div className="splash-input">
-                <HeaderSearch />
+                <LocationSearchInputOnly />
               </div>
             </div>
           </div>

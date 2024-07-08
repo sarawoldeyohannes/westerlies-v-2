@@ -62,6 +62,21 @@
   position: absolute; /* Changed from relative to absolute */
   left: 25%;
 }
+.splash .splash-input{	
+  width: 100%;	 
+}	
+.splash .splash-input input{	
+  width: 100%;	
+  border-radius: 10px;	
+  border:lightgray 0.01px solid;	
+  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);	
+  padding: 10px;	
+  font-family: 'Alegreya', serif;	
+  font-weight: 100;	
+  font-size: 1em;	
+  letter-spacing:1px;	
+  font-style: normal;	
+}
 .splash .splash-image-container{
   width: 60%;
 }
