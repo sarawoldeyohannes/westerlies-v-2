@@ -9,7 +9,7 @@ const FreeSearch = () => {
         <input
           className="Location-input"
           type="text"
-          placeholder="Type a location or product"
+          placeholder="Click on Location or Product to start searching"
         />
         <div className="Freesearch-button">
           <CiSearch />

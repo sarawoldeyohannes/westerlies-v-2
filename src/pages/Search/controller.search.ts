@@ -30,3 +30,9 @@ export const searchitems = [
     let response = await axios.get(`${url}/store/long/${searchTerm.lng}/lat/${searchTerm.lat}`);
     return response.data;
   }
+
+
+  export async function getStores_around_city(cityId: string) {
+    let response = await axios.get(`${url}/store/getStoreByCity/${cityId}`);
+    return response.data;
+  }

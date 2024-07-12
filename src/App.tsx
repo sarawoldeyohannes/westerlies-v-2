@@ -7,7 +7,7 @@ import "./App.css";
 import ShopProfile from "./pages/ShopProfile/ShopProfile";
 import Emails from "./pages/Admin/Main/Emails/Emails";
 import Add from "./pages/Admin/Main/Add/Add";
-
+import "bootstrap/dist/css/bootstrap.min.css";
 function App() {
   return (
     <>

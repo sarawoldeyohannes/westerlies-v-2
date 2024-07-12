@@ -17,3 +17,7 @@
     align-items: center;
     justify-content: flex-end;
 }
+.Admin-container .add-wrapper button{
+    background-color:#202D3F;
+
+}

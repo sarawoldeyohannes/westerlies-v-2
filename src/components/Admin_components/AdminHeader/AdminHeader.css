@@ -1,7 +1,7 @@
 .Admin-Header-wrapper{    
     display: flex;
     justify-content: end;
-    background-color: black;
+    background-color:#202D3F;
     border-top-right-radius: 20px;
     position: relative;
     left: 20%;

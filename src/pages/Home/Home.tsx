@@ -5,6 +5,7 @@ import Card from "../../components/Card/Card";
 //import { items } from "./controller.home";
 import "./Home.css";
 import "./mobile.home.css";
+import "../../components/LocationSearchInput/LocationSearchInput.css";
 import MapComponent from "../../components/Map/MapComponent";
 import FilterNavbar from "../../components/FilterNavbar/FilterNavbar";
 import SignUpPopUp from "../../components/SignUpPopUp/SignUpPopUp";
@@ -14,6 +15,7 @@ import { RiUserLocationFill } from "react-icons/ri";
 import { FaLocationArrow } from "react-icons/fa";
 import { FaLocationDot } from "react-icons/fa6";
 import { useNavigate, useNavigation } from "react-router-dom";
+import LocationSearchInputOnly from "../../components/LocationSearchInput/LocationSearchInputOnly";
 const Home = () => {
   const [showMap, setShowMap] = useState(false);
   const [isFooterVisible, setIsFooterVisible] = useState(false);
@@ -69,11 +71,11 @@ const Home = () => {
         <div className="splash">
           <div className="splash-text-container">
             <div className="s-container">
-              <div className="text-wrapper">
+              <div className="splash-text-wrapper">
                 Find and Support Independent Shops + Makers
               </div>
-              <div className="text-wrapper2">
-                Discover locallly owned shops and makers around the corner or
+              <div className="splash-text-wrapper2">
+                Discover locally owned shops and makers around the corner or
                 across the world
               </div>
               <div className="splash-input">
@@ -93,7 +95,7 @@ const Home = () => {
                   }}
                   className="Location-input"
                   type="text"
-                  placeholder="Type a location or product"
+                  placeholder="Search a city"
                 />
                 {locationList.length > 0 &&
                 <div className="selectLocation">
@@ -112,6 +114,7 @@ const Home = () => {
                   }
                 </div>
                 }
+                {/* <LocationSearchInputOnly /> */}
               </div>
             </div>
           </div>

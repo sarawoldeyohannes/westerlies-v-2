@@ -3,7 +3,7 @@ import { Head } from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
 import FilterNavbar from "../../components/FilterNavbar/FilterNavbar";
 import MapComponent, { Location } from "../../components/Map/MapComponent";
-import { searchitems } from "./controller.search";
+import { getStores_around_city } from "./controller.search";
 import Card from "../../components/Card/Card";
 import "./Search.css";
 import "./mobile.search.css";
@@ -24,7 +24,9 @@ const Search = () => {
   useEffect(()=>{
     async function getCityDetailSearchPage(placeId: string){
       let cityDetail = await getCityDetail(placeId) as Location;
+      let store_list = await getStores_around_city(placeId);
       console.log("City Detail",cityDetail);
+      setSearchItems(store_list);
       setCityDetail(cityDetail);
     }
     const params = new URLSearchParams(window.location.search);

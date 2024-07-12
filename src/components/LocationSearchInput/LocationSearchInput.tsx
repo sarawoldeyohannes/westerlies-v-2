@@ -10,7 +10,7 @@ const LocationSearchInput = () => {
         <input
           className="Location-input"
           type="text"
-          placeholder="Type a location"
+          placeholder="Search a city"
         />
       </div>
       <Filter />

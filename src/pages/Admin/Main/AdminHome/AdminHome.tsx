@@ -71,8 +71,8 @@ const AdminHome = () => {
       name: "Manage",
       cell: (row: StoreInfo) => (
         <div className="button-container">
-          <FaEdit color="blue" onClick={() => handleEdit(row)} />
-          <IoEyeSharp color="green" onClick={() => handleView(row)} />
+          <FaEdit color="#202D3F" onClick={() => handleEdit(row)} />
+          <IoEyeSharp color="#202D3F" onClick={() => handleView(row)} />
           <RiDeleteBin6Line color="red" onClick={() => handleDelete(row)} />
         </div>
       ),
@@ -99,7 +99,11 @@ const AdminHome = () => {
           </button>
         </div>
         {loading ? (
-          <div>Loading...</div>
+          <div className="d-flex justify-content-center">
+            <div className="spinner-border" role="status">
+              <span className="visually-hidden">Loading...</span>
+            </div>
+          </div>
         ) : error ? (
           <div>{error}</div>
         ) : (

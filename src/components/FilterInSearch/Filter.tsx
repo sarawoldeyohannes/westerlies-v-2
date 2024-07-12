@@ -4,6 +4,7 @@ import "./controller.Filter";
 import { useState } from "react";
 import FilterPopUp from "../FilterPopUp/FilterPopUp";
 import { FilterProps } from "./controller.Filter";
+import LocationSearchInputOnly from "../LocationSearchInput/LocationSearchInputOnly";
 const Filter = ({ type }: FilterProps) => {
   const [showPopup, setShowPopup] = useState(false);
   const [filterType, setFilterType] = useState("");
@@ -22,12 +23,16 @@ const Filter = ({ type }: FilterProps) => {
         <div className="text-wrapper">FILTER BY:</div>
       </div>
       <div className="nav-list-frame">
-        <div
-          className={type == "Product" ? "nav-listsx" : "nav-lists"}
-          onClick={() => handleOpenPopup("PRODUCT")}
-        >
-          <div className="text-wrapper-2">product</div>
-        </div>
+        {type == "Product" ? (
+          <div className="nav-lists search-input">
+            {" "}
+            <LocationSearchInputOnly />
+          </div>
+        ) : (
+          <div className="nav-lists" onClick={() => handleOpenPopup("PRODUCT")}>
+            <div className="text-wrapper-2">product</div>
+          </div>
+        )}
         <div
           className="nav-lists"
           onClick={() => handleOpenPopup("SOCIAL IMPACT")}

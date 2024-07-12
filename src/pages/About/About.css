@@ -31,17 +31,20 @@
     font-family: "brandon-grotesque", sans-serif;
     font-style: normal;
     font-weight: 500;
-    font-size: 37px;
+    font-size: 1.8em;
     line-height: 1.15;
 }
 .container-about .section-1 .text-section h3{
     letter-spacing: 2px;
     font-family: "brandon-grotesque", sans-serif;
     font-weight: 500;
-    font-size: 2.2vh;
+    font-size: 1.0em;
     margin-bottom: 5%;
     margin-top: 5%;
     line-height: 1.15;
+}
+.container-about .description .email{
+    font-weight: 900;
 }
 .container-about .description1{
     width: 80%;
@@ -49,7 +52,7 @@
 
 .container-about .section-1 .text-section .description{
     color: #202D3F;
-    font-size: 2.1vh;
+    font-size: 1em;
     font-weight: 500;
     font-style: normal;
     font-family:  'Alegreya', sans-serif;
@@ -106,7 +109,7 @@ margin-top: -0.5%;
     margin-top: 3%;
     font-family: 'Alegreya', serif;
     font-weight: 100;
-    font-size: 2.1vh;
+    font-size: 1em;
 }
 .container-about .section-2 .texts h1{
     line-height: 1.5;

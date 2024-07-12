@@ -20,6 +20,7 @@
     padding-left:3%;
     position: relative;
     width: 97%;
+    justify-content: space-between;
   }
   
   .head .header-nav-bar {
@@ -28,7 +29,7 @@
     flex: 0 0 auto;
     gap: 20px;
     position: relative;
-    width: 45%;
+    width: 41%;
   }
   
   .head .header-nav-bar-texts {

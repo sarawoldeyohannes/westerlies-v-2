@@ -44,6 +44,9 @@
     padding: 10px 35px 0px 0px;
     border-right: 1px solid rgba(32, 46, 64, .8);
   }
+  .filter .nav-lists.search-input{
+    padding: 10px 0px 0px 0px;
+  }
   .nav-lists.offer-class {
    border: none;
 }
@@ -58,7 +61,4 @@
     white-space: nowrap;
     width: fit-content;
     text-transform: capitalize;
-  }
-  .filter .nav-listsx{
-    display: none;
   }

@@ -5,12 +5,12 @@ const ProductSearchInput = () => {
   return (
     <div className="Location-suggestion">
       <div className="search-input">
-        <div className="text-input">City</div>
+        <div className="text-input">Product</div>
 
         <input
           className="Location-input"
           type="text"
-          placeholder="Type a product"
+          placeholder="Search a product"
         />
       </div>
       <Filter type="Product" />
