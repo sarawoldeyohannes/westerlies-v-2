@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm, useFieldArray, SubmitHandler } from "react-hook-form";
 import {
   Days,
@@ -10,14 +10,15 @@ import {
   Tag,
 } from "./controller.add";
 import LocationPicker from "../../../../components/Admin_components/LocationPicker/LocationPicker";
-import { Container, Row, Col, Button, Nav } from "react-bootstrap";
+import { Container, Button, Nav } from "react-bootstrap";
 import AdminHeader from "../../../../components/Admin_components/AdminHeader/AdminHeader";
 import "./Add.css";
+import { LoadScript } from "@react-google-maps/api";
 const Add: React.FC = () => {
-  const [isActive, setIsActive] = useState<string>("store-info"); // State to track active section
+  const [, setIsActive] = useState<string>("store-info"); // State to track active section
   // Refs for scrolling to sections (if needed)
-  const storeInfoRef = useRef<HTMLDivElement>(null);
-  const storeAddressRef = useRef<HTMLDivElement>(null);
+  // const storeInfoRef = useRef<HTMLDivElement>(null);
+  // const storeAddressRef = useRef<HTMLDivElement>(null);
   // Add refs for other sections as needed
 
   const {
@@ -420,162 +421,173 @@ const Add: React.FC = () => {
             {/* Dynamic Store Opening Days and Location */}
             <div className="mb-3">
               <h3>Store Opening Days and Location</h3>
-              {storeOpeningDaysFields.map(
-                (storeOpeningDay, storeOpeningDayIndex) => (
-                  <div key={storeOpeningDay.id}>
-                    <label
-                      className="form-label"
-                      htmlFor={`StoreOpeningDaysAndLocation.${storeOpeningDayIndex}.fineLocation.address`}
-                    >
-                      Fine Location Address
-                    </label>
-                    <input
-                      className="form-control"
-                      id={`StoreOpeningDaysAndLocation.${storeOpeningDayIndex}.fineLocation.address`}
-                      {...register(
-                        `StoreOpeningDaysAndLocation.${storeOpeningDayIndex}.fineLocation.address`,
-                        { required: true }
-                      )}
-                    />
-                    {errors.StoreOpeningDaysAndLocation?.[storeOpeningDayIndex]
-                      ?.fineLocation?.address && (
-                      <span className="text-danger">
-                        This field is required
-                      </span>
-                    )}
-
-                    <label
-                      className="form-label"
-                      htmlFor={`StoreOpeningDaysAndLocation.${storeOpeningDayIndex}.fineLocation.longtiude`}
-                    >
-                      Longitude
-                    </label>
-                    <input
-                      className="form-control"
-                      id={`StoreOpeningDaysAndLocation.${storeOpeningDayIndex}.fineLocation.longtiude`}
-                      {...register(
-                        `StoreOpeningDaysAndLocation.${storeOpeningDayIndex}.fineLocation.longtiude`,
-                        { required: true }
-                      )}
-                    />
-                    {errors.StoreOpeningDaysAndLocation?.[storeOpeningDayIndex]
-                      ?.fineLocation?.longtiude && (
-                      <span className="text-danger">
-                        This field is required
-                      </span>
-                    )}
-
-                    <label
-                      className="form-label"
-                      htmlFor={`StoreOpeningDaysAndLocation.${storeOpeningDayIndex}.fineLocation.lattitude`}
-                    >
-                      Latitude
-                    </label>
-                    <input
-                      className="form-control"
-                      id={`StoreOpeningDaysAndLocation.${storeOpeningDayIndex}.fineLocation.lattitude`}
-                      {...register(
-                        `StoreOpeningDaysAndLocation.${storeOpeningDayIndex}.fineLocation.lattitude`,
-                        { required: true }
-                      )}
-                    />
-                    {errors.StoreOpeningDaysAndLocation?.[storeOpeningDayIndex]
-                      ?.fineLocation?.lattitude && (
-                      <span className="text-danger">
-                        This field is required
-                      </span>
-                    )}
-
-                    <label
-                      className="form-label"
-                      htmlFor={`StoreOpeningDaysAndLocation.${storeOpeningDayIndex}.fineLocation.city`}
-                    >
-                      City
-                    </label>
-                    <input
-                      className="form-control"
-                      id={`StoreOpeningDaysAndLocation.${storeOpeningDayIndex}.fineLocation.city`}
-                      {...register(
-                        `StoreOpeningDaysAndLocation.${storeOpeningDayIndex}.fineLocation.city`,
-                        { required: true }
-                      )}
-                    />
-                    {errors.StoreOpeningDaysAndLocation?.[storeOpeningDayIndex]
-                      ?.fineLocation?.city && (
-                      <span className="text-danger">
-                        This field is required
-                      </span>
-                    )}
-
-                    <label
-                      className="form-label"
-                      htmlFor={`StoreOpeningDaysAndLocation.${storeOpeningDayIndex}.fineLocation.phone_number`}
-                    >
-                      Phone Number
-                    </label>
-                    <input
-                      className="form-control"
-                      id={`StoreOpeningDaysAndLocation.${storeOpeningDayIndex}.fineLocation.phone_number`}
-                      {...register(
-                        `StoreOpeningDaysAndLocation.${storeOpeningDayIndex}.fineLocation.phone_number`,
-                        { required: true }
-                      )}
-                    />
-                    {errors.StoreOpeningDaysAndLocation?.[storeOpeningDayIndex]
-                      ?.fineLocation?.phone_number && (
-                      <span className="text-danger">
-                        This field is required
-                      </span>
-                    )}
-
-                    <label
-                      className="form-label"
-                      htmlFor={`StoreOpeningDaysAndLocation.${storeOpeningDayIndex}.fineLocation.email`}
-                    >
-                      Email
-                    </label>
-                    <input
-                      className="form-control"
-                      id={`StoreOpeningDaysAndLocation.${storeOpeningDayIndex}.fineLocation.email`}
-                      {...register(
-                        `StoreOpeningDaysAndLocation.${storeOpeningDayIndex}.fineLocation.email`,
-                        { required: true }
-                      )}
-                    />
-                    {errors.StoreOpeningDaysAndLocation?.[storeOpeningDayIndex]
-                      ?.fineLocation?.email && (
-                      <span className="text-danger">
-                        This field is required
-                      </span>
-                    )}
-                    <LocationPicker
-                      onLocationSelect={(location) =>
-                        handleLocationSelect(location, storeOpeningDayIndex)
-                      }
-                    />
-                    <div className="mb-3">
-                      <h4>Days</h4>
-                      <NestedDays
-                        control={control}
-                        storeOpeningDayIndex={storeOpeningDayIndex}
-                        register={register}
-                        errors={errors}
-                        days={days}
+              <LoadScript
+                googleMapsApiKey="AIzaSyBXKcXjKnsuqS48iQOuXc-ruvr0vV8iCLs"
+                libraries={["places"]}
+              >
+                {storeOpeningDaysFields.map(
+                  (storeOpeningDay, storeOpeningDayIndex) => (
+                    <div key={storeOpeningDay.id}>
+                      <label
+                        className="form-label"
+                        htmlFor={`StoreOpeningDaysAndLocation.${storeOpeningDayIndex}.fineLocation.address`}
+                      >
+                        Fine Location Address
+                      </label>
+                      <input
+                        className="form-control"
+                        id={`StoreOpeningDaysAndLocation.${storeOpeningDayIndex}.fineLocation.address`}
+                        {...register(
+                          `StoreOpeningDaysAndLocation.${storeOpeningDayIndex}.fineLocation.address`,
+                          { required: true }
+                        )}
                       />
-                    </div>
+                      {errors.StoreOpeningDaysAndLocation?.[
+                        storeOpeningDayIndex
+                      ]?.fineLocation?.address && (
+                        <span className="text-danger">
+                          This field is required
+                        </span>
+                      )}
 
-                    <Button
-                      variant="danger"
-                      type="button"
-                      onClick={() =>
-                        removeStoreOpeningDay(storeOpeningDayIndex)
-                      }
-                    >
-                      Remove Store Opening Day
-                    </Button>
-                  </div>
-                )
-              )}
+                      <label
+                        className="form-label"
+                        htmlFor={`StoreOpeningDaysAndLocation.${storeOpeningDayIndex}.fineLocation.longtiude`}
+                      >
+                        Longitude
+                      </label>
+                      <input
+                        className="form-control"
+                        id={`StoreOpeningDaysAndLocation.${storeOpeningDayIndex}.fineLocation.longtiude`}
+                        {...register(
+                          `StoreOpeningDaysAndLocation.${storeOpeningDayIndex}.fineLocation.longtiude`,
+                          { required: true }
+                        )}
+                      />
+                      {errors.StoreOpeningDaysAndLocation?.[
+                        storeOpeningDayIndex
+                      ]?.fineLocation?.longtiude && (
+                        <span className="text-danger">
+                          This field is required
+                        </span>
+                      )}
+
+                      <label
+                        className="form-label"
+                        htmlFor={`StoreOpeningDaysAndLocation.${storeOpeningDayIndex}.fineLocation.lattitude`}
+                      >
+                        Latitude
+                      </label>
+                      <input
+                        className="form-control"
+                        id={`StoreOpeningDaysAndLocation.${storeOpeningDayIndex}.fineLocation.lattitude`}
+                        {...register(
+                          `StoreOpeningDaysAndLocation.${storeOpeningDayIndex}.fineLocation.lattitude`,
+                          { required: true }
+                        )}
+                      />
+                      {errors.StoreOpeningDaysAndLocation?.[
+                        storeOpeningDayIndex
+                      ]?.fineLocation?.lattitude && (
+                        <span className="text-danger">
+                          This field is required
+                        </span>
+                      )}
+
+                      <label
+                        className="form-label"
+                        htmlFor={`StoreOpeningDaysAndLocation.${storeOpeningDayIndex}.fineLocation.city`}
+                      >
+                        City
+                      </label>
+                      <input
+                        className="form-control"
+                        id={`StoreOpeningDaysAndLocation.${storeOpeningDayIndex}.fineLocation.city`}
+                        {...register(
+                          `StoreOpeningDaysAndLocation.${storeOpeningDayIndex}.fineLocation.city`,
+                          { required: true }
+                        )}
+                      />
+                      {errors.StoreOpeningDaysAndLocation?.[
+                        storeOpeningDayIndex
+                      ]?.fineLocation?.city && (
+                        <span className="text-danger">
+                          This field is required
+                        </span>
+                      )}
+
+                      <label
+                        className="form-label"
+                        htmlFor={`StoreOpeningDaysAndLocation.${storeOpeningDayIndex}.fineLocation.phone_number`}
+                      >
+                        Phone Number
+                      </label>
+                      <input
+                        className="form-control"
+                        id={`StoreOpeningDaysAndLocation.${storeOpeningDayIndex}.fineLocation.phone_number`}
+                        {...register(
+                          `StoreOpeningDaysAndLocation.${storeOpeningDayIndex}.fineLocation.phone_number`,
+                          { required: true }
+                        )}
+                      />
+                      {errors.StoreOpeningDaysAndLocation?.[
+                        storeOpeningDayIndex
+                      ]?.fineLocation?.phone_number && (
+                        <span className="text-danger">
+                          This field is required
+                        </span>
+                      )}
+
+                      <label
+                        className="form-label"
+                        htmlFor={`StoreOpeningDaysAndLocation.${storeOpeningDayIndex}.fineLocation.email`}
+                      >
+                        Email
+                      </label>
+                      <input
+                        className="form-control"
+                        id={`StoreOpeningDaysAndLocation.${storeOpeningDayIndex}.fineLocation.email`}
+                        {...register(
+                          `StoreOpeningDaysAndLocation.${storeOpeningDayIndex}.fineLocation.email`,
+                          { required: true }
+                        )}
+                      />
+                      {errors.StoreOpeningDaysAndLocation?.[
+                        storeOpeningDayIndex
+                      ]?.fineLocation?.email && (
+                        <span className="text-danger">
+                          This field is required
+                        </span>
+                      )}
+                      <LocationPicker
+                        onLocationSelect={(location) =>
+                          handleLocationSelect(location, storeOpeningDayIndex)
+                        }
+                      />
+                      <div className="mb-3">
+                        <h4>Days</h4>
+                        <NestedDays
+                          control={control}
+                          storeOpeningDayIndex={storeOpeningDayIndex}
+                          register={register}
+                          errors={errors}
+                          days={days}
+                        />
+                      </div>
+
+                      <Button
+                        variant="danger"
+                        type="button"
+                        onClick={() =>
+                          removeStoreOpeningDay(storeOpeningDayIndex)
+                        }
+                      >
+                        Remove Store Opening Day
+                      </Button>
+                    </div>
+                  )
+                )}
+              </LoadScript>
               <Button
                 type="button"
                 onClick={() =>

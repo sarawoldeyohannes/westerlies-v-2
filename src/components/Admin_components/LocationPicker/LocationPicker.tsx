@@ -1,5 +1,5 @@
-import React from "react";
-import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
+import React, { useState } from "react";
+import { GoogleMap, Marker } from "@react-google-maps/api";
 import SearchBox from "../SearchBox/SearchBox ";
 
 const containerStyle = {
@@ -15,17 +15,21 @@ const center = {
 const LocationPicker: React.FC<{
   onLocationSelect: (location: any) => void;
 }> = ({ onLocationSelect }) => {
-  const [markerPosition, setMarkerPosition] = React.useState(center);
+  const [markerPosition, setMarkerPosition] = useState(center);
+  const [mapCenter, setMapCenter] = useState(center);
+  const [zoom, setZoom] = useState(10); // Add zoom state
 
   const handleMapClick = (event: google.maps.MapMouseEvent) => {
     if (event.latLng) {
       const lat = event.latLng.lat();
       const lng = event.latLng.lng();
-      setMarkerPosition({ lat, lng });
+      const newPosition = { lat, lng };
+      setMarkerPosition(newPosition);
+      setMapCenter(newPosition);
+      setZoom(15); // Zoom in when a place is clicked on the map
 
-      // Geocoding to get the address
       const geocoder = new google.maps.Geocoder();
-      geocoder.geocode({ location: { lat, lng } }, (results, status) => {
+      geocoder.geocode({ location: newPosition }, (results, status) => {
         if (status === "OK" && results) {
           onLocationSelect({
             lat,
@@ -42,7 +46,10 @@ const LocationPicker: React.FC<{
       const lat = place.geometry.location?.lat();
       const lng = place.geometry.location?.lng();
       if (lat && lng) {
-        setMarkerPosition({ lat, lng });
+        const newPosition = { lat, lng };
+        setMarkerPosition(newPosition);
+        setMapCenter(newPosition);
+        setZoom(15); // Zoom in when a place is selected from the search box
         onLocationSelect({
           lat,
           lng,
@@ -53,20 +60,17 @@ const LocationPicker: React.FC<{
   };
 
   return (
-    <LoadScript
-      googleMapsApiKey="AIzaSyBXKcXjKnsuqS48iQOuXc-ruvr0vV8iCLs"
-      libraries={["places"]}
-    >
+    <>
       <SearchBox onPlaceChanged={handlePlaceChanged} />
       <GoogleMap
         mapContainerStyle={containerStyle}
-        center={markerPosition}
-        zoom={10}
+        center={mapCenter}
+        zoom={zoom}
         onClick={handleMapClick}
       >
         <Marker position={markerPosition} />
       </GoogleMap>
-    </LoadScript>
+    </>
   );
 };
 
