@@ -1,5 +1,5 @@
 export interface CardProps {
-    title: string;
+    name: string;
     description: string;
-    imageUrl: string;
+    storePicture: string;
   }

@@ -12,10 +12,16 @@ const center = {
   lng: -38.523,
 };
 
-const MapComponent: React.FC = () => {
+export interface Location {
+  lat: number;
+  lng: number;
+
+}
+
+const MapComponent: React.FC<Location> = (location) => {
   return (
     <LoadScript googleMapsApiKey="AIzaSyBXKcXjKnsuqS48iQOuXc-ruvr0vV8iCLs">
-      <GoogleMap mapContainerStyle={containerStyle} center={center} zoom={10}>
+      <GoogleMap mapContainerStyle={containerStyle} center={location} zoom={10}>
         {/* Child components, such as markers, info windows, etc. */}
         <></>
       </GoogleMap>

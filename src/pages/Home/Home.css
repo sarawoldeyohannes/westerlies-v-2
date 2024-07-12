@@ -99,3 +99,35 @@
   letter-spacing:1px;
   font-style: normal;
 }
+
+.selectLocation{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 3% 0;
+  max-height: 300px;
+  overflow-y: scroll;
+}
+
+.location-item{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  padding: 10px;
+  background: white;
+  color:black;
+  border-radius: 5px;
+  border: 0.4px solid lightgray;
+  margin-top:3px;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.location-item:hover{
+  background: lightgray;
+  cursor: pointer;
+}
+
+.selectLocation::-webkit-scrollbar {
+  display: none;
+}

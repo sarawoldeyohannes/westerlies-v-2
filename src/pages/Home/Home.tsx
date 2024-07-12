@@ -2,24 +2,43 @@ import { useState, useEffect, useRef } from "react";
 import { Head } from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
 import Card from "../../components/Card/Card";
-import { items } from "./controller.home";
+//import { items } from "./controller.home";
 import "./Home.css";
 import "./mobile.home.css";
 import MapComponent from "../../components/Map/MapComponent";
 import FilterNavbar from "../../components/FilterNavbar/FilterNavbar";
 import SignUpPopUp from "../../components/SignUpPopUp/SignUpPopUp";
 import splash from "../../assets/homePage.jpg";
+import { SearchLocation, getCityDetail, getItems, searchitems } from "./controller.home";
+import { RiUserLocationFill } from "react-icons/ri";
+import { FaLocationArrow } from "react-icons/fa";
+import { FaLocationDot } from "react-icons/fa6";
+import { useNavigate, useNavigation } from "react-router-dom";
 const Home = () => {
   const [showMap, setShowMap] = useState(false);
   const [isFooterVisible, setIsFooterVisible] = useState(false);
   const footerRef = useRef(null);
   const [showSignUp, setShowSignUp] = useState(true);
+  const [items, setItems] = useState<any[]>([]);
+  const [locationList, setLocationList] = useState<any[]>([]);
+  const navigation = useNavigate();
 
   const handleToggle = () => {
     setShowMap(!showMap);
   };
 
+
   useEffect(() => {
+    async function getItemsState(){
+      let itemsList= await getItems() as any;
+      setItems(itemsList);
+    }
+    getItemsState();
+  }, []);
+
+
+  useEffect(() => {
+   
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -59,10 +78,40 @@ const Home = () => {
               </div>
               <div className="splash-input">
                 <input
+
+                  onChange={async(e) => {
+                     let locationExists = await SearchLocation(e.target.value);
+
+                     if(locationExists.length > 0){
+                      setLocationList(locationExists)
+                     }else{
+                      setLocationList([])
+                      let searchedItemList = await searchitems(e.target.value);
+                      setItems(searchedItemList);
+                     }
+                    
+                  }}
                   className="Location-input"
                   type="text"
                   placeholder="Type a location or product"
                 />
+                {locationList.length > 0 &&
+                <div className="selectLocation">
+                  { locationList.map((location) => (
+                    <div 
+                      onClick={async()=>{
+                        let placeId = location.place_id;
+                        
+                        // navigate to /search?cityId=cityDetail.id
+                        navigation("/search/?cityId="+placeId);
+                      }}
+                    className="location-item">
+                      <FaLocationDot style={{margin: 10}} />
+                      {location.description}</div>
+                  ))
+                  }
+                </div>
+                }
               </div>
             </div>
           </div>
@@ -77,7 +126,7 @@ const Home = () => {
           </div>
         ) : (
           <div className="items-container">
-            {items.map((item) => (
+            {  items?.map((item:any) => (
               <Card key={item.id} {...item} />
             ))}
           </div>
