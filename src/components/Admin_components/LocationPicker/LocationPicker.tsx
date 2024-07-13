@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { GoogleMap, Marker } from "@react-google-maps/api";
+import { GoogleMap } from "@react-google-maps/api";
 import SearchBox from "../SearchBox/SearchBox ";
 
 const containerStyle = {
@@ -15,7 +15,6 @@ const center = {
 const LocationPicker: React.FC<{
   onLocationSelect: (location: any) => void;
 }> = ({ onLocationSelect }) => {
-  const [markerPosition, setMarkerPosition] = useState(center);
   const [mapCenter, setMapCenter] = useState(center);
   const [zoom, setZoom] = useState(10); // Add zoom state
 
@@ -24,7 +23,6 @@ const LocationPicker: React.FC<{
       const lat = event.latLng.lat();
       const lng = event.latLng.lng();
       const newPosition = { lat, lng };
-      setMarkerPosition(newPosition);
       setMapCenter(newPosition);
       setZoom(15); // Zoom in when a place is clicked on the map
 
@@ -47,7 +45,6 @@ const LocationPicker: React.FC<{
       const lng = place.geometry.location?.lng();
       if (lat && lng) {
         const newPosition = { lat, lng };
-        setMarkerPosition(newPosition);
         setMapCenter(newPosition);
         setZoom(15); // Zoom in when a place is selected from the search box
         onLocationSelect({
@@ -67,9 +64,7 @@ const LocationPicker: React.FC<{
         center={mapCenter}
         zoom={zoom}
         onClick={handleMapClick}
-      >
-        <Marker position={markerPosition} />
-      </GoogleMap>
+      ></GoogleMap>
     </>
   );
 };
