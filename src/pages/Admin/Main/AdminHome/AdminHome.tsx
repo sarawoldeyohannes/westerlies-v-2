@@ -7,19 +7,30 @@ import { IoEyeSharp } from "react-icons/io5";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { getMappedStoreData, StoreInfo } from "./controller.adminHome.ts";
+import { fetchData, freeSearch } from "./controller.adminHome.ts";
+
+import { StoreData } from "../Add/controller.add.ts";
+import { CiSearch } from "react-icons/ci";
 
 const AdminHome = () => {
-  const [storeData, setStoreData] = useState<StoreInfo[]>([]);
+  const [storeData, setStoreData] = useState<StoreData[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [searchText, setSearchText] = useState("");
+  const [filteredData, setFilteredData] = useState<StoreData[]>([]);
+
+  const [errorMessage, setErrorMessage] = useState<string>("");
+  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchText(e.target.value);
+  };
   useEffect(() => {
     const loadStoreData = async () => {
       try {
         console.log("Fetching store data...");
-        const data = await getMappedStoreData();
+        const data = await fetchData();
         console.log("Store data fetched successfully:", data);
         setStoreData(data);
+        setFilteredData(data); // Set filteredData to the fetched data
         setError(null); // Reset error state if data is fetched successfully
       } catch (error) {
         console.error("Error fetching store data:", error);
@@ -31,6 +42,26 @@ const AdminHome = () => {
 
     loadStoreData();
   }, []);
+  const performSearch = async () => {
+    if (searchText.trim() !== "") {
+      try {
+        const response = await freeSearch(searchText);
+        console.log("Search results:", response);
+        setFilteredData(response);
+        if (response.length === 0) {
+          setErrorMessage("No records found.");
+        }
+      } catch (error) {
+        setErrorMessage(`Error fetching search data:`);
+        setTimeout(() => {
+          setErrorMessage("");
+        }, 5000);
+      }
+    } else {
+      // If the search input is empty, display all stores
+      setFilteredData(storeData);
+    }
+  };
   const handleEdit = (row: any) => {
     console.log("Edit", row);
     // Add your edit logic here
@@ -49,42 +80,39 @@ const AdminHome = () => {
   const columns = [
     {
       name: "id",
-      selector: (row: StoreInfo) => row.id,
-      sortable: true,
+      selector: (row: StoreData): string => row.storeId || "", // Provide a default value
     },
     {
       name: "Store Name",
-      selector: (row: StoreInfo) => row.storeName,
-      sortable: true,
+      selector: (row: StoreData): string => row.name || "", // Provide a default value
     },
     {
       name: "City",
-      selector: (row: StoreInfo) => row.city || "N/A",
-      sortable: true,
-    },
-    {
-      name: "Country",
-      selector: (row: StoreInfo) => row.country || "N/A", // Replace this with actual logic if you have it
-      sortable: true,
+      selector: (row: StoreData): string => {
+        const firstAddress =
+          row.StoreOpeningDaysAndLocation && row.StoreOpeningDaysAndLocation[0];
+        return firstAddress && firstAddress.fineLocation
+          ? firstAddress.fineLocation.city
+          : ""; // Provide a default value
+      },
     },
     {
       name: "Manage",
-      cell: (row: StoreInfo) => (
+      cell: (row: StoreData) => (
         <div className="button-container">
           <FaEdit color="#202D3F" onClick={() => handleEdit(row)} />
           <IoEyeSharp color="#202D3F" onClick={() => handleView(row)} />
           <RiDeleteBin6Line color="red" onClick={() => handleDelete(row)} />
         </div>
       ),
-      ignoreRowClick: true,
-      allowOverflow: true,
-      button: true,
     },
   ];
+
   const navigate = useNavigate();
   const handleAddStoreClick = () => {
     navigate("/add");
   };
+
   return (
     <>
       <AdminHeader />
@@ -98,6 +126,19 @@ const AdminHome = () => {
             Add Store
           </button>
         </div>
+        <div className="search-box">
+          <input
+            type="text"
+            placeholder="Search..."
+            value={searchText}
+            onChange={handleSearch}
+          />{" "}
+          <div className="search-button">
+            <CiSearch onClick={performSearch} />
+          </div>
+        </div>
+
+        {errorMessage && <span className="text-danger">{errorMessage}</span>}
         {loading ? (
           <div className="d-flex justify-content-center">
             <div className="spinner-border" role="status">
@@ -110,7 +151,7 @@ const AdminHome = () => {
           <DataTable
             title="Store Management"
             columns={columns}
-            data={storeData}
+            data={filteredData} // Display filtered data
             pagination
             highlightOnHover
             responsive

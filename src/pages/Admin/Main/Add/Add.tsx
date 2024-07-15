@@ -20,6 +20,7 @@ const Add: React.FC = () => {
     handleSubmit,
     control,
     setValue,
+    trigger,
     formState: { errors },
   } = useForm<StoreData>();
 
@@ -102,6 +103,10 @@ const Add: React.FC = () => {
       `StoreOpeningDaysAndLocation.${index}.fineLocation.longtiude`,
       location.lng
     );
+    setValue(
+      `StoreOpeningDaysAndLocation.${index}.fineLocation.city`,
+      location.city
+    );
   };
   const onSubmit: SubmitHandler<StoreData> = (data) => {
     const jsonString = JSON.stringify(data, null, 2);
@@ -116,7 +121,12 @@ const Add: React.FC = () => {
   };
   const [currentStep, setCurrentStep] = useState(0);
   const steps = ["Store Info", "Address"];
-  //
+  const handleNext = async () => {
+    const isValid = await trigger();
+    if (isValid) {
+      setCurrentStep((prevStep) => prevStep + 1);
+    }
+  };
   return (
     <>
       <AdminHeader />
@@ -161,15 +171,139 @@ const Add: React.FC = () => {
                 </Col>
                 <Col>
                   <div className="mb-3">
-                    <label className="form-label" htmlFor="about">
-                      About
+                    <label className="form-label" htmlFor="storePicture">
+                      Picture
                     </label>
                     <input
                       className="form-control"
+                      id="storePicture"
+                      {...register("storePicture", { required: true })}
+                    />
+                    {errors.storePicture && (
+                      <span className="text-danger">
+                        This field is required
+                      </span>
+                    )}
+                  </div>
+                </Col>
+              </Row>
+              <Row>
+                <Col>
+                  <div className="input-group">
+                    <span className="input-group-text">About</span>
+                    <textarea
+                      className="form-control"
                       id="about"
+                      aria-label="About"
                       {...register("about", { required: true })}
                     />
                     {errors.about && (
+                      <span className="text-danger">
+                        This field is required
+                      </span>
+                    )}
+                  </div>
+                </Col>
+                <Col>
+                  <div className="input-group">
+                    <span className="input-group-text">Description</span>
+                    <textarea
+                      className="form-control"
+                      id="description"
+                      aria-label="description"
+                      {...register("description", { required: true })}
+                    />
+                    {errors.description && (
+                      <span className="text-danger">
+                        This field is required
+                      </span>
+                    )}
+                  </div>
+                </Col>
+              </Row>
+              <Row>
+                <Col>
+                  <div className="mb-3">
+                    <label className="form-label" htmlFor="googleReiviewUrl">
+                      Google Reiview Url
+                    </label>
+                    <input
+                      className="form-control"
+                      id="googleReiviewUrl"
+                      {...register("googleReiviewUrl")}
+                    />
+                    {errors.googleReiviewUrl && (
+                      <span className="text-danger">
+                        This field is required
+                      </span>
+                    )}
+                  </div>
+                </Col>
+                <Col>
+                  <div className="mb-3">
+                    <label className="form-label" htmlFor="yelpReviewUrl">
+                      Yelp Review Url
+                    </label>
+                    <input
+                      className="form-control"
+                      id="yelpReviewUrl"
+                      {...register("yelpReviewUrl")}
+                    />
+                    {errors.yelpReviewUrl && (
+                      <span className="text-danger">
+                        This field is required
+                      </span>
+                    )}
+                  </div>
+                </Col>
+              </Row>
+              <Row>
+                <Col>
+                  <label className="form-label" htmlFor="primaryTag">
+                    Primary Tag
+                  </label>
+                  <select
+                    className="form-select"
+                    id="primaryTag"
+                    {...register("primaryTag", {
+                      required: true,
+                    })}
+                  >
+                    {tags.map((tag) => (
+                      <option key={tag.tagId} value={tag.tagId}>
+                        {tag.tagName}
+                      </option>
+                    ))}
+                  </select>
+                  {errors.primaryTag && (
+                    <span className="text-danger">This field is required</span>
+                  )}
+                </Col>
+                <Col className="check-box">
+                  <div className="form-check">
+                    <input
+                      className="form-check-input"
+                      type="checkbox"
+                      id="hasClasses"
+                      {...register("hasClasses")}
+                    />
+                    <label className="form-check-label" htmlFor="hasClasses">
+                      Has Class
+                    </label>
+                  </div>
+                </Col>
+              </Row>
+              <Row>
+                <Col>
+                  <div className="input-group">
+                    <span className="input-group-text">More Info</span>
+                    <textarea
+                      className="form-control"
+                      id="moreInfo"
+                      aria-label="moreInfo"
+                      {...register("moreInfo")}
+                    />
+                    {errors.moreInfo && (
                       <span className="text-danger">
                         This field is required
                       </span>
@@ -462,6 +596,13 @@ const Add: React.FC = () => {
                 >
                   Add Store Tag
                 </Button>
+              </div>
+              <div className="next-button">
+                <Col className="form-button">
+                  <Button type="button" onClick={handleNext}>
+                    Next
+                  </Button>
+                </Col>
               </div>
             </>
           )}

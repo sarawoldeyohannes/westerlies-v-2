@@ -21,3 +21,34 @@
     background-color:#202D3F;
 
 }
+  
+.Admin-container .search-box  {
+    display: flex;
+    gap: 5px;
+    flex: 0 0 auto;
+    align-items: center;
+    background-color: #ffffff;
+    border-radius: 50px;
+    border:lightgray 0.01px solid;
+    padding: 0px 0px 0px 15px;
+    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.1);
+    color: #000000;
+    font-family: 'Freight Sans Pro Medium', sans-serif;
+    font-size: 1em;
+    font-weight: 500;
+    letter-spacing: 0;
+    line-height: normal;
+	width: fit-content;
+  }
+  .Admin-container .search-button{
+    display: flex;
+    justify-content: center; /* Center content horizontally */
+    align-items: center; /* Center content vertically */
+    background-color: #202D3F;
+    padding: 0; /* Remove padding to ensure a perfect circle */
+    border-radius: 50%;
+    width: 50px; /* Set the width */
+    height: 50px; /* Set the height to be equal to the width */
+    font-size: 28px;
+    color: #ffffff; /* Optional: add color to make the text visible */
+  }
