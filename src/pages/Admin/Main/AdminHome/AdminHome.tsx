@@ -49,6 +49,7 @@ const AdminHome = () => {
         const response = await freeSearch(searchText);
         console.log("Search results:", response);
         setFilteredData(response);
+        setLoading(false);
         if (response.length === 0) {
           setTimeout(() => {
             setErrorMessage("No records found.");
