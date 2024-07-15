@@ -7,7 +7,7 @@ import { IoEyeSharp } from "react-icons/io5";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { fetchData, freeSearch } from "./controller.adminHome.ts";
+import { deleteStore, fetchData, freeSearch } from "./controller.adminHome.ts";
 
 import { StoreData } from "../Add/controller.add.ts";
 import { CiSearch } from "react-icons/ci";
@@ -18,7 +18,7 @@ const AdminHome = () => {
   const [error, setError] = useState<string | null>(null);
   const [searchText, setSearchText] = useState("");
   const [filteredData, setFilteredData] = useState<StoreData[]>([]);
-
+  const [successMessage, setSuccessMessage] = useState<string>("");
   const [errorMessage, setErrorMessage] = useState<string>("");
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchText(e.target.value);
@@ -43,13 +43,16 @@ const AdminHome = () => {
     loadStoreData();
   }, []);
   const performSearch = async () => {
+    setLoading(true);
     if (searchText.trim() !== "") {
       try {
         const response = await freeSearch(searchText);
         console.log("Search results:", response);
         setFilteredData(response);
         if (response.length === 0) {
-          setErrorMessage("No records found.");
+          setTimeout(() => {
+            setErrorMessage("No records found.");
+          }, 5000);
         }
       } catch (error) {
         setErrorMessage(`Error fetching search data:`);
@@ -60,6 +63,7 @@ const AdminHome = () => {
     } else {
       // If the search input is empty, display all stores
       setFilteredData(storeData);
+      setLoading(false);
     }
   };
   const handleEdit = (row: any) => {
@@ -67,9 +71,34 @@ const AdminHome = () => {
     // Add your edit logic here
   };
 
-  const handleDelete = (row: any) => {
-    console.log("Delete", row);
-    // Add your delete logic here
+  const handleDelete = async (row: StoreData) => {
+    const confirmed = window.confirm(
+      `Are you sure you want to delete the store: ${row.name}?`
+    );
+    if (confirmed) {
+      setLoading(true);
+      try {
+        await deleteStore(row.storeId!); // Make sure storeId is defined
+        // Remove the deleted store from the state
+        setStoreData((prevData) =>
+          prevData.filter((store) => store.storeId !== row.storeId)
+        );
+        setFilteredData((prevData) =>
+          prevData.filter((store) => store.storeId !== row.storeId)
+        );
+        console.log(`Store ${row.name} deleted successfully`);
+        setTimeout(() => {
+          setSuccessMessage(`Store ${row.name} deleted successfully`);
+        }, 5000);
+      } catch (error) {
+        console.error("Error deleting store:", error);
+        setTimeout(() => {
+          setErrorMessage("Failed to delete the store.");
+        }, 5000);
+      } finally {
+        setLoading(false);
+      }
+    }
   };
 
   const handleView = (row: any) => {
@@ -137,7 +166,11 @@ const AdminHome = () => {
             <CiSearch onClick={performSearch} />
           </div>
         </div>
-
+        {successMessage && (
+          <div className="alert alert-success" role="alert">
+            {successMessage}
+          </div>
+        )}
         {errorMessage && <span className="text-danger">{errorMessage}</span>}
         {loading ? (
           <div className="d-flex justify-content-center">

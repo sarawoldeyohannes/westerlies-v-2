@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useForm, useFieldArray, SubmitHandler } from "react-hook-form";
 import {
+  addStore,
   Days,
   fetchDays,
   fetchLinks,
@@ -14,7 +15,11 @@ import { Container, Button, Nav, Row, Col } from "react-bootstrap";
 import AdminHeader from "../../../../components/Admin_components/AdminHeader/AdminHeader";
 import "./Add.css";
 import { LoadScript } from "@react-google-maps/api";
+import { useNavigate } from "react-router-dom";
 const Add: React.FC = () => {
+  const [successMessage, setSuccessMessage] = useState<string>("");
+  const [errorMessage, setErrorMessage] = useState<string>("");
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -108,7 +113,43 @@ const Add: React.FC = () => {
       location.city
     );
   };
-  const onSubmit: SubmitHandler<StoreData> = (data) => {
+  const onSubmit: SubmitHandler<StoreData> = async (data) => {
+    // Set default values for any missing fields
+    const completeData = {
+      ...data,
+      storeId: data.storeId || "",
+      learnWithUs: data.learnWithUs || "",
+      meetUs: data.meetUs || "",
+      classInfo: data.classInfo || "",
+      createdAt: data.createdAt || new Date(),
+      updatedAt: data.updatedAt || new Date(),
+      bazaarDetails: data.bazaarDetails || [],
+      instagramPhotos: data.instagramPhotos || [],
+      products: data.products || [],
+      primaryTag: data.primaryTag || 0,
+      shopOwner2: data.shopOwner2 || { username: "", email: "" },
+      storeLinks: data.storeLinks || [],
+      StoreOpeningDaysAndLocation: data.StoreOpeningDaysAndLocation || [],
+      storeTags: data.storeTags || [],
+    };
+
+    try {
+      console.log("Submitting data:", completeData);
+      const response = await addStore(completeData);
+      console.log("Store added successfully:", response);
+      setTimeout(() => {
+        setSuccessMessage("Store added successfully");
+      }, 5000);
+      // Navigate to adminHome after 5 seconds
+      setTimeout(() => {
+        navigate("/adminHome");
+      }, 5000);
+    } catch (error) {
+      console.error("Error adding store:", error);
+      setTimeout(() => {
+        setErrorMessage(`Error adding store:${error}`);
+      }, 5000);
+    }
     const jsonString = JSON.stringify(data, null, 2);
     const blob = new Blob([jsonString], { type: "application/json" });
     const url = URL.createObjectURL(blob);
@@ -131,6 +172,12 @@ const Add: React.FC = () => {
     <>
       <AdminHeader />
       <Container className="add-container">
+        {successMessage && (
+          <div className="alert alert-success" role="alert">
+            {successMessage}
+          </div>
+        )}
+        {errorMessage && <span className="text-danger">{errorMessage}</span>}
         <h1>Add Store</h1>
         <Nav variant="tabs" defaultActiveKey="#store-info">
           {steps.map((step, index) => (

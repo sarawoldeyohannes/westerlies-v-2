@@ -119,29 +119,30 @@ export interface Days{
       return [];
     }
   };
-// export async function addStore(data: StoreData) {
-//     try {
-//       const response = await axios.post(url + "api/store/addStore", data, {
-//         headers: {
-          
-//           "Content-Type": "application/json",
-//         },
-//       });
-  
-//      // console.log(response.data);
-//       return response.data;
-//     } catch (error) {
-//       if (Response) {
-//         console.error(
-//           "Server responded with non-2xx status",
-//           (error as any).response.data
-//         );
-//       } else if (Request) {
-//         console.error("No response received from server");
-//       } else {
-//         console.error("Error setting up the request", (error as Error).message);
-//       }
-  
-//       throw error;
-//     }
-//   }
+  export async function addStore(data: StoreData) {
+    try {
+      console.log('Sending data to API:', data); // Log data being sent
+      const response = await axios.post(url + "/store/", data, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      console.log('API response:', response.data); // Log API response
+      return response.data;
+    } catch (error: unknown) {
+      if (axios.isAxiosError(error)) {
+        // AxiosError type error
+        if (error.response) {
+          console.error("Server responded with non-2xx status", error.response.data);
+        } else if (error.request) {
+          console.error("No response received from server", error.request);
+        } else {
+          console.error("Error setting up the request", error.message);
+        }
+      } else {
+        // Non-AxiosError type error
+        console.error("Unexpected error", error);
+      }
+      throw error;
+    }
+  }
