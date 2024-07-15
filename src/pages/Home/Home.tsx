@@ -16,6 +16,7 @@ import { FaLocationArrow } from "react-icons/fa";
 import { FaLocationDot } from "react-icons/fa6";
 import { useNavigate, useNavigation } from "react-router-dom";
 import LocationSearchInputOnly from "../../components/LocationSearchInput/LocationSearchInputOnly";
+import LocationSearchAutoComplete from "../../components/LocationSearchAutoComplete/LocationSearchAutoComplete";
 const Home = () => {
   const [showMap, setShowMap] = useState(false);
   const [isFooterVisible, setIsFooterVisible] = useState(false);
@@ -65,7 +66,7 @@ const Home = () => {
   };
   return (
     <>
-      <Head headerClassName="head-instance" type="About" />
+      <Head headerClassName="head-instance" type="About" searchResult={setItems} />
       <div className="home-container">
         <FilterNavbar />
         <div className="splash">
@@ -78,44 +79,10 @@ const Home = () => {
                 Discover locally owned shops and makers around the corner or
                 across the world
               </div>
-              <div className="splash-input">
-                <input
-
-                  onChange={async(e) => {
-                     let locationExists = await SearchLocation(e.target.value);
-
-                     if(locationExists.length > 0){
-                      setLocationList(locationExists)
-                     }else{
-                      setLocationList([])
-                      let searchedItemList = await searchitems(e.target.value);
-                      setItems(searchedItemList);
-                     }
-                    
-                  }}
-                  className="Location-input"
-                  type="text"
-                  placeholder="Search a city"
-                />
-                {locationList.length > 0 &&
-                <div className="selectLocation">
-                  { locationList.map((location) => (
-                    <div 
-                      onClick={async()=>{
-                        let placeId = location.place_id;
-                        
-                        // navigate to /search?cityId=cityDetail.id
-                        navigation("/search/?cityId="+placeId);
-                      }}
-                    className="location-item">
-                      <FaLocationDot style={{margin: 10}} />
-                      {location.description}</div>
-                  ))
-                  }
-                </div>
-                }
-                {/* <LocationSearchInputOnly /> */}
-              </div>
+              <LocationSearchAutoComplete locationSelected={(placeId:string)=>{
+                navigation("/search/?cityId="+placeId);
+              }} />
+            
             </div>
           </div>
           <div className="splash-image-container">
@@ -125,8 +92,8 @@ const Home = () => {
         {showSignUp && <SignUpPopUp onClose={handleCloseSignUp} />}
         {showMap ? (
           <div className="map-container">
-            <MapComponent />
-          </div>
+            <MapComponent lat={0} lng={0} />
+          </div>  
         ) : (
           <div className="items-container">
             {  items?.map((item:any) => (

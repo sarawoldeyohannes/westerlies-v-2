@@ -108,6 +108,10 @@
   padding: 3% 0;
   max-height: 300px;
   overflow-y: scroll;
+  border: 1px solid lightgray;
+  border-radius: 5px;
+  background: rgba(255, 255, 255, 0.911);
+
 }
 
 .location-item{
@@ -115,10 +119,10 @@
   flex-direction: row;
   width: 100%;
   padding: 10px;
-  background: white;
+  /* background: white; */
   color:black;
   border-radius: 5px;
-  border: 0.4px solid lightgray;
+  /* border: 0.4px solid lightgray; */
   margin-top:3px;
   justify-content: flex-start;
   align-items: center;

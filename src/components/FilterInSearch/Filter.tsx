@@ -5,7 +5,7 @@ import { useState } from "react";
 import FilterPopUp from "../FilterPopUp/FilterPopUp";
 import { FilterProps } from "./controller.Filter";
 import LocationSearchInputOnly from "../LocationSearchInput/LocationSearchInputOnly";
-const Filter = ({ type }: FilterProps) => {
+const Filter = ({ type,tags }: FilterProps) => {
   const [showPopup, setShowPopup] = useState(false);
   const [filterType, setFilterType] = useState("");
 
@@ -47,7 +47,7 @@ const Filter = ({ type }: FilterProps) => {
         </div>
       </div>
       {showPopup && (
-        <FilterPopUp onClose={handleClosePopup} filterType={filterType} />
+        <FilterPopUp onClose={handleClosePopup} filterType={filterType}  tags={tags} />
       )}
     </div>
   );

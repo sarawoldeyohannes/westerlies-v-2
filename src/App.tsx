@@ -11,13 +11,14 @@ import "bootstrap/dist/css/bootstrap.min.css";
 function App() {
   return (
     <>
-      <Router basename="/westerlies-v-2">
+      <Router>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="about" element={<About />} />
           <Route path="search" element={<Search />} />
           <Route path="search/:cityId" element={<Search />} />
           <Route path="shopProfile" element={<ShopProfile />} />
+          <Route path="shopProfile/:storeId" element={<ShopProfile />} />
           <Route path="AdminHome" element={<AdminHome />} />
           <Route path="emails" element={<Emails />} />
           <Route path="Add" element={<Add />} />

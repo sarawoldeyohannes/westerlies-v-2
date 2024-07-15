@@ -16,30 +16,55 @@ import {
 import { faGlobe } from "@fortawesome/free-solid-svg-icons";
 import { faInstagram } from "@fortawesome/free-brands-svg-icons";
 import MapComponent from "../../components/Map/MapComponent";
-import { insta, items } from "./controller.shopProfile";
+import { getNearbayStores, getStoreBY_id, insta, items } from "./controller.shopProfile";
+import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
 const ShopProfile = () => {
+  const params = useParams();
+  const [storeDetailInfo,setStoreDetailInfo] = useState<any>();
+  const [nearByStoreList,setNearByStoreList] = useState<any[]>([]);
+  useEffect(()=>{
+    
+  async function getStoreDetail(storeId: string){
+  
+    let storeDetail = await getStoreBY_id(storeId) ;
+    let nearByStore = await getNearbayStores(parseInt(storeId));
+    setStoreDetailInfo(storeDetail[0]);
+    setNearByStoreList(nearByStore);
+    console.log("Store Detail",storeDetail);
+  }
+
+  let storeId = params.storeId as string;
+  getStoreDetail(storeId);
+  
+  },[]);
+
+  if(storeDetailInfo === undefined){
+    return(
+      <>
+      </>
+    );
+  }else{
   return (
     <>
-      <Head headerClassName={undefined} />
+      <Head headerClassName={undefined} searchResult={function (searchedItemList: any): void {
+        throw new Error("Function not implemented.");
+      } } />
       <div className="shop-profile">
         <div className="section1">
           <div className="section1-part1">
-            <img className="images-2" alt="Images" src={img} />
+            <img className="images-2" alt="Images" src={storeDetailInfo.storePicture?.replace("http://", "https://").replace("api.westerlies.io", "apibeta.westerlies.com")} />
           </div>
           <div className="section-part-2">
             <div className="frame-7">
-              <div className="text-wrapper-8">Pistachios</div>
+              <div className="text-wrapper-8">{storeDetailInfo.name}</div>
             </div>
             <div className="store-description-wrapper">
               <p className="store-description">
-                Hundreds of years ago ships set sail in search of fortune,
-                adventure, and discovery. Using winds like the Westerlies,
-                sailors crossed the world, trading&nbsp;&nbsp;not only goods,
-                but also ideas, beliefs, languages, and so much more. In doing
-                so, they changed the world. We hope this site, named for these
-                winds, will do the same.
+              {storeDetailInfo.description}
               </p>
             </div>
+            {storeDetailInfo?.storeLinks.length > 0  &&
             <div className="frame-8">
               <div className="text-wrapper-9">SOCIAL</div>
               <div className="frame-9-links">
@@ -69,14 +94,16 @@ const ShopProfile = () => {
                 </a>
               </div>
             </div>
-            <div className="frame-8">
+
+            }
+            {/* <div className="frame-8">
               <div className="text-wrapper-10">JOIN IN</div>
               <div className="frame-9-links">
                 <div className="text-wrapper-10">
                   https://www.pistachiosonline.com/pages/events
                 </div>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
         <div className="section-2">
@@ -135,7 +162,7 @@ const ShopProfile = () => {
             </div>
           </div>
           <div className="map-wrapper">
-            <MapComponent />
+            <MapComponent lat={0} lng={0} />
           </div>
         </div>
         <div className="frame-14">
@@ -143,8 +170,8 @@ const ShopProfile = () => {
             <div className="text-wrapper-8">GALLERY</div>
           </div>
           <div className="frame-15">
-            {insta.map((item) => (
-              <Card title={""} description={""} key={item.id} {...item} />
+            {storeDetailInfo.instagramPhotos.map((item:any) => (
+              <Card  name={""} storePicture={""} storeId={0} description={""} key={item.id} {...item} />
             ))}
           </div>
         </div>
@@ -167,8 +194,8 @@ const ShopProfile = () => {
             <p className="text-wrapper-8">Others Stores You May Love</p>
           </div>
           <div className="frame-15">
-            {items.map((item) => (
-              <Card key={item.id} {...item} />
+            {nearByStoreList.map((item:any) => (
+              <Card name={item.name} storePicture={""} storeId={0} key={item.id} {...item} />
             ))}
           </div>
         </div>
@@ -177,6 +204,7 @@ const ShopProfile = () => {
       <Footer />
     </>
   );
+}
 };
 
 export default ShopProfile;

@@ -1,25 +1,21 @@
-import "./LocationSearchInput.css";
-import { CiSearch } from "react-icons/ci";
-import Filter from "../FilterInSearch/Filter";
-import LocationSearchAutoComplete from "../LocationSearchAutoComplete/LocationSearchAutoComplete";
-import { SearchLocation, searchitems } from "../../pages/Home/controller.home";
 import { useState } from "react";
+import { SearchLocation, searchitems } from "../../pages/Home/controller.home";
 import { FaLocationDot } from "react-icons/fa6";
 
-interface LocationSearchInputProps {
-  setLocationList: (locationList: any[]) => void;
-  tags: any[];
+
+interface LocationSearchAutoCompleteProps{
+    locationSelected: any;
 }
 
-const LocationSearchInput = ({setLocationList,tags}:LocationSearchInputProps) => {
 
-  const [items, setItems] = useState<any[]>([]);
-  
-  return (
-    <div className="Location-suggestion">
-      <div className="search-input">
-        <div className="text-input">City</div>
-        
+function LocationSearchAutoComplete({locationSelected}: LocationSearchAutoCompleteProps){
+
+    const [locationList, setLocationList] = useState<any[]>([]);
+    const [items, setItems] = useState<any[]>([]);
+ 
+
+    return(
+        <div className="splash-input">
         <input
 
           onChange={async(e) => {
@@ -38,13 +34,13 @@ const LocationSearchInput = ({setLocationList,tags}:LocationSearchInputProps) =>
           type="text"
           placeholder="Search a city"
         />
-        {/* {locationList.length > 0 &&
+        {locationList.length > 0 &&
         <div className="selectLocation">
           { locationList.map((location) => (
             <div 
               onClick={async()=>{
                 let placeId = location.place_id;
-               // locationSelected(location.place_id);
+                locationSelected(location.place_id);
                 // navigate to /search?cityId=cityDetail.id
                 // navigation("/search/?cityId="+placeId);
               }}
@@ -54,15 +50,10 @@ const LocationSearchInput = ({setLocationList,tags}:LocationSearchInputProps) =>
           ))
           }
         </div>
-        } */}
-     
+        }
+        {/* <LocationSearchInputOnly /> */}
       </div>
-      <Filter tags={tags} />
-      <div className="search-button">
-        <CiSearch />
-      </div>
-    </div>
-  );
-};
+    )
+}
 
-export default LocationSearchInput;
+export default LocationSearchAutoComplete;

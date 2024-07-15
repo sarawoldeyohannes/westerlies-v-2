@@ -9,7 +9,7 @@ import "./Search.css";
 import "./mobile.search.css";
 import { getCityDetail } from "../Home/controller.home";
 
-const ITEMS_PER_PAGE = 5;
+const ITEMS_PER_PAGE = 8;
 const Search = () => {
   const [isFooterVisible, setIsFooterVisible] = useState(false);
   const footerRef = useRef<HTMLDivElement | null>(null);
@@ -69,7 +69,7 @@ const Search = () => {
   };
   return (
     <>
-      <Head headerClassName="head-instance" />
+      <Head headerClassName="head-instance" searchResult={setSearchItems} />
       <div className="search-container">
         <FilterNavbar />
 

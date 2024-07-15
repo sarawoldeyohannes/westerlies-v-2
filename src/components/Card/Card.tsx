@@ -14,7 +14,7 @@ const Card: React.FC<CardProps> = ({ name, description, storePicture , storeId }
 
     }} className="card-container">
       <Link to="/shopProfile">
-        <img className="card-image" src={storePicture.replace("http://", "https://")
+        <img className="card-image" src={storePicture?.replace("http://", "https://")
                   .replace("api.westerlies.io", "apibeta.westerlies.com")
               } alt={name} />
       </Link>

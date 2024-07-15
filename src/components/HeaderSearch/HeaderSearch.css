@@ -4,6 +4,7 @@
   align-items: center;
   width: 100%;
   gap: 5px;
+  overflow: visible;
 }
 .head-search .buttons{
     display: flex;
@@ -35,5 +36,6 @@
 }
 .head-search .inputs{
     display: flex;
-
+    flex-direction: column;
+    position: relative;
 }
