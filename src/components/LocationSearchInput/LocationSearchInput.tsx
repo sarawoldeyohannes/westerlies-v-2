@@ -9,9 +9,11 @@ import { FaLocationDot } from "react-icons/fa6";
 interface LocationSearchInputProps {
   setLocationList: (locationList: any[]) => void;
   tags: any[];
+  selectedLocation: string;
+  setSelectedLocation: (selectedLocation: string) => void;
 }
 
-const LocationSearchInput = ({setLocationList,tags}:LocationSearchInputProps) => {
+const LocationSearchInput = ({setLocationList,tags,selectedLocation,setSelectedLocation}:LocationSearchInputProps) => {
 
   const [items, setItems] = useState<any[]>([]);
   
@@ -21,8 +23,8 @@ const LocationSearchInput = ({setLocationList,tags}:LocationSearchInputProps) =>
         <div className="text-input">City</div>
         
         <input
-
           onChange={async(e) => {
+              setSelectedLocation(e.target.value);
              let locationExists = await SearchLocation(e.target.value);
 
              if(locationExists.length > 0){
@@ -36,6 +38,7 @@ const LocationSearchInput = ({setLocationList,tags}:LocationSearchInputProps) =>
           }}
           className="Location-input"
           type="text"
+          value = {selectedLocation}
           placeholder="Search a city"
         />
         {/* {locationList.length > 0 &&
@@ -57,7 +60,7 @@ const LocationSearchInput = ({setLocationList,tags}:LocationSearchInputProps) =>
         } */}
      
       </div>
-      <Filter tags={tags} />
+      <Filter tags={tags} selectedLocation={selectedLocation} setSelectedLocation={setSelectedLocation} setLocationList={setLocationList} />
       <div className="search-button">
         <CiSearch />
       </div>

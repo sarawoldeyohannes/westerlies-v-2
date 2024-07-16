@@ -11,3 +11,14 @@ export async function getTagsApi(): Promise<any[]>{
         
     })
 }
+
+export async function searchStores_Combined(body: any): Promise<any[]>{
+    return new Promise((resolve,reject) =>{
+        axios.post(`${url}/store/combined_search/`,body).then((response: any) => {
+            resolve(response.data);
+        }).catch((err: any) =>{
+            reject(err);
+        })
+        
+    })
+}

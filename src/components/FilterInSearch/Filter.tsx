@@ -5,7 +5,8 @@ import { useState } from "react";
 import FilterPopUp from "../FilterPopUp/FilterPopUp";
 import { FilterProps } from "./controller.Filter";
 import LocationSearchInputOnly from "../LocationSearchInput/LocationSearchInputOnly";
-const Filter = ({ type,tags }: FilterProps) => {
+import { SearchLocation } from "../../pages/Home/controller.home";
+const Filter = ({ type,tags,selectedLocation, setSelectedLocation,setLocationList }: FilterProps) => {
   const [showPopup, setShowPopup] = useState(false);
   const [filterType, setFilterType] = useState("");
 
@@ -26,7 +27,26 @@ const Filter = ({ type,tags }: FilterProps) => {
         {type == "Product" ? (
           <div className="nav-lists search-input">
             {" "}
-            <LocationSearchInputOnly />
+            
+        <input
+
+            onChange={async(e:any) => {
+         
+              setSelectedLocation(e.target.value);
+              let locationExists = await SearchLocation(e.target.value);
+              if(locationExists.length > 0){
+                setLocationList(locationExists)
+              }else{
+                setLocationList([])
+              
+              }
+              
+            }}
+            className="Location-input"
+            type="text"
+            value = {selectedLocation}
+            placeholder="Search a city"
+            />
           </div>
         ) : (
           <div className="nav-lists" onClick={() => handleOpenPopup("PRODUCT")}>

@@ -79,6 +79,13 @@ const Search = () => {
               {selectedItems.map((item) => (
                 <Card name={"test"} storePicture={"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSyo4kPjPIxHwfpRwck9He7a7eHuJ3_1Tzhyg&s"} key={item.id} {...item} />
               ))}
+
+              {selectedItems.length == 0 &&
+                <div style={{width:'100%',height:500,display: 'flex',flexDirection:'column',justifyContent:'center',alignItems:'center'}}>
+                    <h1>Not Found</h1>
+                    
+                  </div>
+              }
             </div>
             <div className="pagination">
               {Array.from({ length: totalPages }, (_, index) => (
