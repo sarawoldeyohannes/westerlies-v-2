@@ -135,22 +135,26 @@ const Add: React.FC = () => {
 
     try {
       console.log("Submitting data:", completeData);
-      const response = await addStore(completeData);
-      console.log("Store added successfully:", response);
+      //const response = await addStore(completeData);
+      console.log("Store added successfully:");
+      setSuccessMessage("Store added successfully");
+
       setTimeout(() => {
-        setSuccessMessage("Store added successfully");
-      }, 5000);
+        setSuccessMessage("");
+      }, 4000);
       // Navigate to adminHome after 5 seconds
       setTimeout(() => {
         navigate("/adminHome");
       }, 5000);
     } catch (error) {
       console.error("Error adding store:", error);
+      setErrorMessage(`Error adding store:${error}`);
+
       setTimeout(() => {
-        setErrorMessage(`Error adding store:${error}`);
-      }, 5000);
+        setErrorMessage(``);
+      }, 4000);
     }
-    const jsonString = JSON.stringify(data, null, 2);
+    const jsonString = JSON.stringify(completeData, null, 2);
     const blob = new Blob([jsonString], { type: "application/json" });
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");

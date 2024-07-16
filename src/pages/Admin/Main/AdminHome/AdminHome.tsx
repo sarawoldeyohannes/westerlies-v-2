@@ -51,8 +51,9 @@ const AdminHome = () => {
         setFilteredData(response);
         setLoading(false);
         if (response.length === 0) {
+          setErrorMessage("No records found.");
           setTimeout(() => {
-            setErrorMessage("No records found.");
+            setErrorMessage("");
           }, 5000);
         }
       } catch (error) {
@@ -88,13 +89,15 @@ const AdminHome = () => {
           prevData.filter((store) => store.storeId !== row.storeId)
         );
         console.log(`Store ${row.name} deleted successfully`);
+        setSuccessMessage(`Store ${row.name} deleted successfully`);
         setTimeout(() => {
-          setSuccessMessage(`Store ${row.name} deleted successfully`);
+          setSuccessMessage("");
         }, 5000);
       } catch (error) {
         console.error("Error deleting store:", error);
+        setErrorMessage("Failed to delete the store.");
         setTimeout(() => {
-          setErrorMessage("Failed to delete the store.");
+          setErrorMessage("");
         }, 5000);
       } finally {
         setLoading(false);
