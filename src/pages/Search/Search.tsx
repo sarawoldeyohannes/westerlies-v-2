@@ -102,7 +102,7 @@ const Search = () => {
 
           <div className={`${isMapView ? "map-mobile" : "map-container"}`}>
           {cityDetail &&
-            <MapComponent lat={cityDetail?.lat || 0} lng={cityDetail?.lng || 0}  />
+            <MapComponent lat={cityDetail?.lat || 0} lng={cityDetail?.lng || 0} to_be_marked={selectedItems}  />
           }
             </div>
         </div>

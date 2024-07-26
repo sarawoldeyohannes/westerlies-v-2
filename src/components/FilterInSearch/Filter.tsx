@@ -9,7 +9,7 @@ import { SearchLocation } from "../../pages/Home/controller.home";
 const Filter = ({ type,tags,selectedLocation, setSelectedLocation,setLocationList }: FilterProps) => {
   const [showPopup, setShowPopup] = useState(false);
   const [filterType, setFilterType] = useState("");
-
+  
   const handleOpenPopup = (type: string) => {
     setShowPopup(true);
     setFilterType(type);

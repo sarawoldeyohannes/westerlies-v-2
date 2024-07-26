@@ -23,6 +23,16 @@ const ShopProfile = () => {
   const params = useParams();
   const [storeDetailInfo,setStoreDetailInfo] = useState<any>();
   const [nearByStoreList,setNearByStoreList] = useState<any[]>([]);
+  const [dayId,setDayId] = useState<any>({
+    "1": "MONDAY",
+    "2": "TUESDAY",
+    "3": "WEDNESDAY",
+    "4": "THURSDAY",
+    "5": "FRIDAY",
+    "6": "SATURDAY",
+    "7": "SUNDAY"
+  });
+
   useEffect(()=>{
     
   async function getStoreDetail(storeId: string){
@@ -30,6 +40,8 @@ const ShopProfile = () => {
     let storeDetail = await getStoreBY_id(storeId) ;
     let nearByStore = await getNearbayStores(parseInt(storeId));
     setStoreDetailInfo(storeDetail[0]);
+    // limit nearby stores to 3
+    nearByStore = nearByStore.slice(0,3);
     setNearByStoreList(nearByStore);
     console.log("Store Detail",storeDetail);
   }
@@ -53,7 +65,7 @@ const ShopProfile = () => {
       <div className="shop-profile">
         <div className="section1">
           <div className="section1-part1">
-            <img className="images-2" alt="Images" src={storeDetailInfo.storePicture?.replace("http://", "https://").replace("api.westerlies.io", "apibeta.westerlies.com")} />
+            <img className="images-2" alt="Images" src={storeDetailInfo.storePicture?.replace("http://", "https://").replace("api.westerlies.io", "apibeta.westerlies.com").replace("/api/","/images/")} />
           </div>
           <div className="section-part-2">
             <div className="frame-7">
@@ -68,19 +80,67 @@ const ShopProfile = () => {
             <div className="frame-8">
               <div className="text-wrapper-9">SOCIAL</div>
               <div className="frame-9-links">
-                <a className="icon-links" target="_blank" href="www.google.com">
-                  <FontAwesomeIcon icon={faGlobe} />
-                </a>
-                <a className="icon-links" target="_blank" href="www.google.com">
-                  <FontAwesomeIcon icon={faFacebookF} />
-                </a>
-                <a className="icon-links" target="_blank" href="www.google.com">
-                  <FontAwesomeIcon icon={faInstagram} />
-                </a>
-                <a className="icon-links" target="_blank" href="www.google.com">
-                  <FontAwesomeIcon icon={faYelp} />
-                </a>
-                <a className="icon-links" target="_blank" href="www.google.com">
+
+              {
+                storeDetailInfo.storeLinks.map((item:any) => {
+              
+                  if(item.linkType == 17){
+                    return (
+                      <a className="icon-links" target="_blank" href={item.link}>
+                      <FontAwesomeIcon icon={faGlobe} />
+                    </a>
+                    )
+                  }else if(item.linkType == 8){
+                    return (
+                      <a className="icon-links" target="_blank" href={item.link}>
+                      <FontAwesomeIcon icon={faFacebookF} />
+                    </a>
+                    )
+                  }else if(item.linkType == 1){
+                    return (
+                      <a className="icon-links" target="_blank" href={item.link}>
+                      <FontAwesomeIcon icon={faInstagram} />
+                    </a>
+                    )
+                  }else if(item.linkType == 15){
+                    return (
+                      <a className="icon-links" target="_blank" href={item.link}>
+                      <FontAwesomeIcon icon={faYelp} />
+                    </a>
+                    )
+                  }else if(item.linkType == 14){
+                    return (
+                      <a className="icon-links" target="_blank" href={item.link}>
+                      <FontAwesomeIcon icon={faXTwitter} />
+                    </a>
+                    )
+                  }else if(item.linkType == 9){
+                    return (
+                      <a className="icon-links" target="_blank" href={item.link}>
+                      <FontAwesomeIcon icon={faPinterest} />
+                    </a>
+                    )
+                  }else if(item.linkType == 10){
+                    return (
+                      <a className="icon-links" target="_blank" href={item.link}>
+                      <FontAwesomeIcon icon={faWhatsapp} />
+                    </a>
+                    )
+                  }else if(item.linkType == 16){
+                    return (
+                      <a className="icon-links" target="_blank" href={item.link}>
+                      <FontAwesomeIcon icon={faTiktok} />
+                    </a>
+                    )
+                  }
+                
+            })
+
+              }
+
+
+              
+                {/* <a className="icon-links" target="_blank" href="www.google.com">
                   <FontAwesomeIcon icon={faXTwitter} />
                 </a>
                 <a className="icon-links" target="_blank" href="www.google.com">
@@ -91,7 +151,7 @@ const ShopProfile = () => {
                 </a>
                 <a className="icon-links" target="_blank" href="www.google.com">
                   <FontAwesomeIcon icon={faTiktok} />
-                </a>
+                </a> */}
               </div>
             </div>
 
@@ -106,66 +166,61 @@ const ShopProfile = () => {
             </div> */}
           </div>
         </div>
-        <div className="section-2">
-          <div className="frame-10">
-            <div className="frame-stop-by">
-              <div className="text-wrapper-8">STOP BY</div>
+        {
+        
+        storeDetailInfo.StoreOpeningDaysAndLocation.map((StoreOpeningDaysAndLocation: any)=>{
 
-              <div className="frame-11">
-                <div className="frame-12">
-                  <div className="frame-days">
-                    <div className="days">MONDAY</div>
-                    <div className="time">10:00PM</div>
+          return (
+            <div className="section-2">
+            <div className="frame-10">
+              <div className="frame-stop-by">
+                <div className="text-wrapper-8">STOP BY</div>
+  
+                <div className="frame-11">
+                  <div className="frame-12">
+                    {
+                      StoreOpeningDaysAndLocation.fineLocation.storeOpeningDays.map((item:any) => (
+                        <div className="frame-days">
+                          <div className="days">{dayId[item.dayId]}</div>
+                          <div className="time">{item.openTime }</div>
+                        </div>
+                      ))
+                    }
                   </div>
-                  <div className="frame-days">
-                    <div className="days">TUESDAY</div>
-                    <div className="time">10:00PM</div>
-                  </div>
-                  <div className="frame-days">
-                    <div className="days">WEDNESDAY</div>
-                    <div className="time">10:00PM</div>
-                  </div>
-                  <div className="frame-days">
-                    <div className="days">THURSDAY</div>
-                    <div className="time">10:00PM</div>
-                  </div>
-                  <div className="frame-days">
-                    <div className="days">FRIDAY</div>
-                    <div className="time">10:00PM</div>
-                  </div>
-                  <div className="frame-days">
-                    <div className="days">SATURDAY</div>
-                    <div className="time">10:00PM</div>
-                  </div>
-                  <div className="frame-days">
-                    <div className="days">SUNDAY</div>
-                    <div className="time">10:00PM</div>
-                  </div>
-                </div>
-                <div className="frame-13">
-                  <div className="frame-address">
-                    <div className="address">
-                      Bole Atlas area, opposite Sapphire Hotel
+                  <div className="frame-13">
+                    <div className="frame-address">
+                      <div className="address">
+                      {storeDetailInfo.fineLocations[0].address || "NA"} 
+                      </div>
                     </div>
-                  </div>
-                  <div className="frame-address">
-                    <div className="address">Addis Ababa, Addis Ababa</div>
-                  </div>
-                  <div className="frame-address">
-                    <div className="address">Ethiopia</div>
-                  </div>
-                  <div className="frame-address">
-                    <div className="address">+251 116 686 928</div>
+                    <div className="frame-address">
+                      <div className="address">
+                        {"NA"}
+                        </div>
+                    </div>
+                    <div className="frame-address">
+                      <div className="address">{"NA"}</div>
+                    </div>
+                    <div className="frame-address">
+                      <div className="address">{StoreOpeningDaysAndLocation.fineLocation.phoneNumber}</div>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
+            <div className="map-wrapper">
+             
+              <MapComponent lat={StoreOpeningDaysAndLocation.fineLocation.lattitude} lng={StoreOpeningDaysAndLocation.fineLocation.longtiude}  to_be_marked={[]} />
+            </div>
           </div>
-          <div className="map-wrapper">
-            <MapComponent lat={0} lng={0} />
-          </div>
-        </div>
-        <div className="frame-14">
+          )
+        })
+      
+        }
+       
+
+
+        <div className="frame-14">  
           <div className="frame-9">
             <div className="text-wrapper-8">GALLERY</div>
           </div>
@@ -194,9 +249,14 @@ const ShopProfile = () => {
             <p className="text-wrapper-8">Others Stores You May Love</p>
           </div>
           <div className="frame-15">
-            {nearByStoreList.map((item:any) => (
+            {nearByStoreList.map((item:any,index: number) => { 
+             
+              return(
               <Card name={item.name} storePicture={""} storeId={0} key={item.id} {...item} />
-            ))}
+            )
+          
+          }
+          )}
           </div>
         </div>
       </div>

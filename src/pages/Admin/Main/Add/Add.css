@@ -5,5 +5,35 @@
     display: flex;
     position: relative;
     flex-direction: column;
+    max-width: 80%;
+}
+.add-container .add-form{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.add-container .form-button{
+    display: flex;
+    align-items: flex-end;
     max-width: fit-content;
+    justify-content: center;
+}
+.add-container .row{
+    padding: 20px 0px;
+    width: 100%;
+}
+.add-container .address-button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 0px;
+}
+.add-container .check-box{
+    display: flex;
+    align-items: flex-end;
+}
+.add-container .next-button{
+    display: flex;
+    justify-content: end;
+    align-items: center;
 }

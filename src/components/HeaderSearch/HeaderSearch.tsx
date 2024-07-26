@@ -19,7 +19,8 @@ const HeaderSearch = ({searchResult}: HeaderSearchProps) => {
   const [selectedLocation,setSelectedLocation] = useState("");
   const [selectedLocationId,setSelectedLocationId] = useState("");
   const [freeSearchValue,setFreeSearchValue] = useState("");
-
+  const [selectedTags,setSelectedTags] = useState<any[]>([]);
+  
   useEffect(()=>{
     async function getTags(){
       let tagsList = await getTagsApi();

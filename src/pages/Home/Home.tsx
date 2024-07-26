@@ -30,6 +30,15 @@ const Home = () => {
     setShowMap(!showMap);
   };
 
+  // only show showSignUp on first visit
+  useEffect(() => {
+    if (localStorage.getItem("visited")) {
+      setShowSignUp(false);
+    } else {
+      localStorage.setItem("visited", "true");
+    }
+  }
+  , []);
 
   useEffect(() => {
     async function getItemsState(){
