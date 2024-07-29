@@ -1,3 +1,6 @@
+import axios from "axios";
+import { url } from "../../util/constant";
+
 export const searchitems = [
     { id: 1, title: 'Name1', description: 'Primary Tag', imageUrl: 'https://via.placeholder.com/300' },
     { id: 2, title: 'Name2', description: 'Primary Tag', imageUrl: 'https://via.placeholder.com/300' },
@@ -21,3 +24,15 @@ export const searchitems = [
     { id: 3, title: 'Name20', description: 'Primary Tag', imageUrl: 'https://via.placeholder.com/300' },
     // Add more items as needed
   ];
+
+
+  export async function searchLocation(searchTerm: any) {
+    let response = await axios.get(`${url}/store/long/${searchTerm.lng}/lat/${searchTerm.lat}`);
+    return response.data;
+  }
+
+
+  export async function getStores_around_city(cityId: string) {
+    let response = await axios.get(`${url}/store/getStoreByCity/${cityId}`);
+    return response.data;
+  }

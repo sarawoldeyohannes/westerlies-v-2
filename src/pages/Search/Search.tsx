@@ -2,21 +2,38 @@ import { useEffect, useRef, useState } from "react";
 import { Head } from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
 import FilterNavbar from "../../components/FilterNavbar/FilterNavbar";
-import MapComponent from "../../components/Map/MapComponent";
-import { searchitems } from "./controller.search";
+import MapComponent, { Location } from "../../components/Map/MapComponent";
+import { getStores_around_city } from "./controller.search";
 import Card from "../../components/Card/Card";
 import "./Search.css";
 import "./mobile.search.css";
+import { getCityDetail } from "../Home/controller.home";
 
-const ITEMS_PER_PAGE = 5;
+const ITEMS_PER_PAGE = 8;
 const Search = () => {
   const [isFooterVisible, setIsFooterVisible] = useState(false);
   const footerRef = useRef<HTMLDivElement | null>(null);
   const [currentPage, setCurrentPage] = useState(1);
-
+  const [searchitems,setSearchItems] = useState<any[]>([]);
+  const [cityDetail,setCityDetail] = useState<Location>();
   const handlePageChange = (newPage: number) => {
     setCurrentPage(newPage);
   };
+
+
+  useEffect(()=>{
+    async function getCityDetailSearchPage(placeId: string){
+      let cityDetail = await getCityDetail(placeId) as Location;
+      let store_list = await getStores_around_city(placeId);
+      console.log("City Detail",cityDetail);
+      setSearchItems(store_list);
+      setCityDetail(cityDetail);
+    }
+    const params = new URLSearchParams(window.location.search);
+
+    let cityId: string = params.get("cityId")?.toString() as string;
+    getCityDetailSearchPage(cityId);
+  },[])
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -52,7 +69,7 @@ const Search = () => {
   };
   return (
     <>
-      <Head headerClassName="head-instance" />
+      <Head headerClassName="head-instance" searchResult={setSearchItems} />
       <div className="search-container">
         <FilterNavbar />
 
@@ -60,8 +77,15 @@ const Search = () => {
           <div className="items-pagination">
             <div className="items-container">
               {selectedItems.map((item) => (
-                <Card key={item.id} {...item} />
+                <Card name={"test"} storePicture={"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSyo4kPjPIxHwfpRwck9He7a7eHuJ3_1Tzhyg&s"} key={item.id} {...item} />
               ))}
+
+              {selectedItems.length == 0 &&
+                <div style={{width:'100%',height:500,display: 'flex',flexDirection:'column',justifyContent:'center',alignItems:'center'}}>
+                    <h1>Not Found</h1>
+                    
+                  </div>
+              }
             </div>
             <div className="pagination">
               {Array.from({ length: totalPages }, (_, index) => (
@@ -77,8 +101,10 @@ const Search = () => {
           </div>
 
           <div className={`${isMapView ? "map-mobile" : "map-container"}`}>
-            <MapComponent />
-          </div>
+          {cityDetail &&
+            <MapComponent lat={cityDetail?.lat || 0} lng={cityDetail?.lng || 0} to_be_marked={selectedItems}  />
+          }
+            </div>
         </div>
         {!isFooterVisible && (
           <button className="view-toggle" onClick={toggleView}>

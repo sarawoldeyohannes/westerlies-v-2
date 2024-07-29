@@ -8,7 +8,7 @@ import {
   filterItems,
 } from "./controller.filterPopUp";
 
-const FilterPopUp: React.FC<FilterPopUpProps> = ({ onClose, filterType }) => {
+const FilterPopUp: React.FC<FilterPopUpProps> = ({ onClose, filterType, tags }) => {
   const [items, setItems] = useState<FilterItem[]>(filterItems);
 
   const handleCheckboxChange = (id: number) => {
@@ -37,15 +37,15 @@ const FilterPopUp: React.FC<FilterPopUpProps> = ({ onClose, filterType }) => {
         </div>
         <div className="frame-2">
           <div className="filter-items-container">
-            {items.map((item) => (
+            {tags.map((item) => (
               <div key={item.id} className="filter-item">
                 <input
                   type="checkbox"
-                  id={`item-${item.id}`}
+                  id={`item-${item.tagId}`}
                   checked={item.checked}
-                  onChange={() => handleCheckboxChange(item.id)}
+                  onChange={() => handleCheckboxChange(item.tagId)}
                 />
-                <label htmlFor={`item-${item.id}`}>{item.label}</label>
+                <label htmlFor={`item-${item.tagId}`}>{item.tagName}</label>
               </div>
             ))}
           </div>

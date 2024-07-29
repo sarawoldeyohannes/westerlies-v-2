@@ -13,12 +13,14 @@ import Update from "./pages/Admin/Main/Update/Update";
 function App() {
   return (
     <>
-      <Router basename="/westerlies-v-2">
+      <Router>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="about" element={<About />} />
           <Route path="search" element={<Search />} />
+          <Route path="search/:cityId" element={<Search />} />
           <Route path="shopProfile" element={<ShopProfile />} />
+          <Route path="shopProfile/:storeId" element={<ShopProfile />} />
           <Route path="login" element={<Login />} />
           <Route path="AdminHome" element={<AdminHome />} />
           <Route path="/update/:id" element={<Update />} />

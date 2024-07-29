@@ -4,6 +4,8 @@ import "./SignUpPopUp.css";
 import { SignUpPopUpProps } from "./controller.signUpPopUp";
 
 const SignUpPopUp = ({ onClose }: SignUpPopUpProps): JSX.Element => {
+
+  // only show 
   return (
     <div className="sign-up-pop-up">
       <div className="overlay" onClick={onClose}></div>
