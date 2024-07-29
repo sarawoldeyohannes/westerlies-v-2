@@ -70,7 +70,7 @@ const AdminHome = () => {
   };
   const handleEdit = (row: any) => {
     console.log("Edit", row);
-    // Add your edit logic here
+    navigate(`/update/${row.storeId}`);
   };
 
   const handleDelete = async (row: StoreData) => {

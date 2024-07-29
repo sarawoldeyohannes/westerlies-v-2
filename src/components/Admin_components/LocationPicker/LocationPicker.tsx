@@ -41,7 +41,7 @@ const LocationPicker: React.FC<{
       const lng = event.latLng.lng();
       const newPosition = { lat, lng };
       setMapCenter(newPosition);
-      setZoom(15);
+      setZoom(25);
 
       const geocoder = new google.maps.Geocoder();
       geocoder.geocode({ location: newPosition }, (results, status) => {
@@ -78,7 +78,7 @@ const LocationPicker: React.FC<{
       if (lat && lng) {
         const newPosition = { lat, lng };
         setMapCenter(newPosition);
-        setZoom(15);
+        setZoom(25);
 
         if (place.address_components) {
           const addressComponents = place.address_components;

@@ -9,6 +9,7 @@ import ShopProfile from "./pages/ShopProfile/ShopProfile";
 import Emails from "./pages/Admin/Main/Emails/Emails";
 import Add from "./pages/Admin/Main/Add/Add";
 import "bootstrap/dist/css/bootstrap.min.css";
+import Update from "./pages/Admin/Main/Update/Update";
 function App() {
   return (
     <>
@@ -20,6 +21,7 @@ function App() {
           <Route path="shopProfile" element={<ShopProfile />} />
           <Route path="login" element={<Login />} />
           <Route path="AdminHome" element={<AdminHome />} />
+          <Route path="/update/:id" element={<Update />} />
           <Route path="emails" element={<Emails />} />
           <Route path="Add" element={<Add />} />
         </Routes>
