@@ -31,8 +31,8 @@ export async function UpdateStore(data: StoreData, id:string) {
   export async function fetchStoreById( id:string) {
     try {
       const response = await axios.get(url + `/store/${id}`, );
-      console.log('Fetch by Id response:', response.data); // Log API response
-      return response.data;
+      console.log('Fetch by Id response:', response); // Log API response
+      return response;
     } catch (error: unknown) {
       if (axios.isAxiosError(error)) {
         // AxiosError type error

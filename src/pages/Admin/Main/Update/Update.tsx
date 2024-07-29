@@ -33,21 +33,29 @@ const Update = () => {
     if (id !== undefined) {
       try {
         const response: any = await fetchStoreById(id);
-        setFormValues(response.data); // Set formValues after response is received
+        const fetchedData = Array.isArray(response.data)
+          ? response.data[0]
+          : response.data;
+        setFormValues(fetchedData);
+        console.log("Fetched form values:", response.data);
+        console.log("Fetched form values:", fetchedData);
       } catch (error) {
         console.error("Error finding store:", error);
       }
     }
   };
+
   useEffect(() => {
     fetchData();
   }, [id]);
 
   useEffect(() => {
     if (formValues) {
-      for (const [key, value] of Object.entries(formValues)) {
-        setValue(key as keyof StoreData, value);
-      }
+      console.log("formValues", formValues);
+      // Set form values using react-hook-form's setValue
+      Object.keys(formValues).forEach((key) => {
+        setValue(key as keyof StoreData, formValues[key as keyof StoreData]);
+      });
     }
   }, [formValues, setValue]);
 
@@ -149,7 +157,7 @@ const Update = () => {
       if (id !== undefined) {
         console.log("Submitting data:", completeData);
         const response = await UpdateStore(completeData, id);
-        console.log("Store Updated successfully:");
+        console.log("Store Updated successfully:", response);
       }
     } catch (error) {
       console.error("Error adding store:", error);
