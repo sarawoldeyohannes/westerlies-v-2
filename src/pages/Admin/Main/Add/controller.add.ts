@@ -43,7 +43,7 @@ export interface FineLocation {
     longtiude:    string;
     lattitude:    string;
     city:         string;
-    phone_number: string;
+    phoneNumber: string;
     email:        string;
 }
 
@@ -52,7 +52,7 @@ export interface BazaarDetail {
 }
 
 export interface InstagramPhoto {
-    photoUrl: string;
+  urlLink: string;
 }
 
 export interface Product {

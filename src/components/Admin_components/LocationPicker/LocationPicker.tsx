@@ -1,39 +1,64 @@
-import React, { useState, useEffect } from "react";
-import { GoogleMap } from "@react-google-maps/api";
-import SearchBox from "../SearchBox/SearchBox ";
+import React, { useState, useEffect, useRef } from "react";
+import { GoogleMap, LoadScript } from "@react-google-maps/api";
+import SearchBox from "../SearchBox/SearchBox";
 
 const containerStyle = {
   width: "100%",
   height: "400px",
 };
 
-const center = {
-  lat: -3.745,
-  lng: -38.523,
-};
+// Use string literals directly for libraries
+const libraries: ("places" | "marker")[] = ["places", "marker"];
 
 const LocationPicker: React.FC<{
   onLocationSelect: (location: any) => void;
-}> = ({ onLocationSelect }) => {
-  const [mapCenter, setMapCenter] = useState(center);
-  const [zoom, setZoom] = useState(10);
-  const [map, setMap] = useState<google.maps.Map | null>(null);
-  const [marker, setMarker] =
-    useState<google.maps.marker.AdvancedMarkerElement | null>(null);
+  initialLat?: string;
+  initialLng?: string;
+}> = ({ onLocationSelect, initialLat, initialLng }) => {
+  const [mapCenter, setMapCenter] = useState<{ lat: number; lng: number }>({
+    lat: parseFloat(initialLat || "0"),
+    lng: parseFloat(initialLng || "0"),
+  });
+  const [zoom, setZoom] = useState(20);
+  const mapRef = useRef<google.maps.Map | null>(null);
+  const markerRef = useRef<google.maps.marker.AdvancedMarkerElement | null>(
+    null
+  );
 
   useEffect(() => {
-    if (map && !marker) {
-      const { AdvancedMarkerElement } = google.maps.marker;
-      const newMarker = new AdvancedMarkerElement({
-        map,
-        position: mapCenter,
-        title: "Selected Location",
-      });
-      setMarker(newMarker);
-    } else if (marker) {
-      marker.position = mapCenter;
+    const lat = parseFloat(initialLat || "0");
+    const lng = parseFloat(initialLng || "0");
+
+    if (!isNaN(lat) && !isNaN(lng) && lat !== 0 && lng !== 0) {
+      setMapCenter({ lat, lng });
+      setZoom(20);
+    } else {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          setMapCenter({
+            lat: position.coords.latitude,
+            lng: position.coords.longitude,
+          });
+          setZoom(20);
+        },
+        () => {
+          setMapCenter({ lat: 0, lng: 0 });
+          setZoom(2);
+        }
+      );
     }
-  }, [map, marker, mapCenter]);
+  }, [initialLat, initialLng]);
+
+  useEffect(() => {
+    if (markerRef.current && mapRef.current) {
+      // Update the marker position
+      markerRef.current.position = new google.maps.LatLng(
+        mapCenter.lat,
+        mapCenter.lng
+      );
+      mapRef.current.setCenter(mapCenter);
+    }
+  }, [mapCenter]);
 
   const handleMapClick = (event: google.maps.MapMouseEvent) => {
     if (event.latLng) {
@@ -41,7 +66,7 @@ const LocationPicker: React.FC<{
       const lng = event.latLng.lng();
       const newPosition = { lat, lng };
       setMapCenter(newPosition);
-      setZoom(25);
+      setZoom(20);
 
       const geocoder = new google.maps.Geocoder();
       geocoder.geocode({ location: newPosition }, (results, status) => {
@@ -78,7 +103,7 @@ const LocationPicker: React.FC<{
       if (lat && lng) {
         const newPosition = { lat, lng };
         setMapCenter(newPosition);
-        setZoom(25);
+        setZoom(20);
 
         if (place.address_components) {
           const addressComponents = place.address_components;
@@ -106,18 +131,35 @@ const LocationPicker: React.FC<{
     }
   };
 
+  const onMapLoad = async (map: google.maps.Map) => {
+    mapRef.current = map;
+
+    // Import AdvancedMarkerElement
+    const { AdvancedMarkerElement } = (await google.maps.importLibrary(
+      "marker"
+    )) as google.maps.MarkerLibrary;
+
+    markerRef.current = new AdvancedMarkerElement({
+      map: mapRef.current,
+      position: new google.maps.LatLng(mapCenter.lat, mapCenter.lng),
+    });
+  };
+
   return (
-    <>
+    <LoadScript
+      googleMapsApiKey="AIzaSyBXKcXjKnsuqS48iQOuXc-ruvr0vV8iCLs"
+      libraries={libraries}
+    >
       <SearchBox onPlaceChanged={handlePlaceChanged} />
       <GoogleMap
         mapContainerStyle={containerStyle}
         center={mapCenter}
         zoom={zoom}
-        onLoad={(map) => setMap(map)}
         onClick={handleMapClick}
+        onLoad={onMapLoad}
         options={{ mapId: "2d74113481ef49e9" }}
-      ></GoogleMap>
-    </>
+      />
+    </LoadScript>
   );
 };
 

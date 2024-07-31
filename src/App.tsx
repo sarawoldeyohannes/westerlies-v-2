@@ -23,7 +23,7 @@ function App() {
           <Route path="shopProfile/:storeId" element={<ShopProfile />} />
           <Route path="login" element={<Login />} />
           <Route path="AdminHome" element={<AdminHome />} />
-          <Route path="/update/:id" element={<Update />} />
+          <Route path="update/:id" element={<Update />} />
           <Route path="emails" element={<Emails />} />
           <Route path="Add" element={<Add />} />
         </Routes>

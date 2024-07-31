@@ -5,7 +5,6 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { FaEdit } from "react-icons/fa";
 import { IoEyeSharp } from "react-icons/io5";
 import { RiDeleteBin6Line } from "react-icons/ri";
-import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { deleteStore, fetchData, freeSearch } from "./controller.adminHome.ts";
 
@@ -70,7 +69,7 @@ const AdminHome = () => {
   };
   const handleEdit = (row: any) => {
     console.log("Edit", row);
-    navigate(`/update/${row.storeId}`);
+    window.open("update/" + `${row.storeId}`, "_blank");
   };
 
   const handleDelete = async (row: StoreData) => {
@@ -107,7 +106,7 @@ const AdminHome = () => {
 
   const handleView = (row: any) => {
     console.log("View", row);
-    // Add your view logic here
+    window.open("shopProfile/" + `${row.storeId}`, "_blank");
   };
 
   const columns = [
@@ -141,9 +140,8 @@ const AdminHome = () => {
     },
   ];
 
-  const navigate = useNavigate();
   const handleAddStoreClick = () => {
-    navigate("/add");
+    window.open("/add", "_blank");
   };
 
   return (

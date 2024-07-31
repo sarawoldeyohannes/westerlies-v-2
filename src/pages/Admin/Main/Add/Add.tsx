@@ -14,12 +14,11 @@ import LocationPicker from "../../../../components/Admin_components/LocationPick
 import { Container, Button, Nav, Row, Col } from "react-bootstrap";
 import AdminHeader from "../../../../components/Admin_components/AdminHeader/AdminHeader";
 import "./Add.css";
-import { LoadScript } from "@react-google-maps/api";
 import { useNavigate } from "react-router-dom";
 const Add: React.FC = () => {
   const [successMessage, setSuccessMessage] = useState<string>("");
   const [errorMessage, setErrorMessage] = useState<string>("");
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const {
     register,
@@ -123,10 +122,9 @@ const Add: React.FC = () => {
       StoreOpeningDaysAndLocation: data.StoreOpeningDaysAndLocation || [],
       storeTags: data.storeTags || [],
     };
+    setLoading(true);
 
     try {
-      setLoading(true);
-
       console.log("Submitting data:", completeData);
       const response = await addStore(completeData);
       console.log("Store added successfully:", response);
@@ -146,6 +144,8 @@ const Add: React.FC = () => {
       setTimeout(() => {
         setErrorMessage(``);
       }, 4000);
+    } finally {
+      setLoading(false); // Hide loading spinner after submission is complete
     }
     const jsonString = JSON.stringify(completeData, null, 2);
     const blob = new Blob([jsonString], { type: "application/json" });
@@ -454,18 +454,18 @@ const Add: React.FC = () => {
                         <Col>
                           <label
                             className="form-label"
-                            htmlFor={`instagramPhotos.${index}.photoUrl`}
+                            htmlFor={`instagramPhotos.${index}.urlLink`}
                           >
                             Photo URL
                           </label>
                           <input
                             className="form-control"
-                            id={`instagramPhotos.${index}.photoUrl`}
-                            {...register(`instagramPhotos.${index}.photoUrl`, {
+                            id={`instagramPhotos.${index}.urlLink`}
+                            {...register(`instagramPhotos.${index}.urlLink`, {
                               required: true,
                             })}
                           />
-                          {errors.instagramPhotos?.[index]?.photoUrl && (
+                          {errors.instagramPhotos?.[index]?.urlLink && (
                             <span className="text-danger">
                               This field is required
                             </span>
@@ -485,7 +485,7 @@ const Add: React.FC = () => {
                   ))}
                   <Button
                     type="button"
-                    onClick={() => appendInstagramPhoto({ photoUrl: "" })}
+                    onClick={() => appendInstagramPhoto({ urlLink: "" })}
                   >
                     Add Instagram Photo
                   </Button>
@@ -600,184 +600,180 @@ const Add: React.FC = () => {
                   <Row>
                     <h4>Store Location and Opening days</h4>
                   </Row>
-                  <LoadScript
-                    googleMapsApiKey="AIzaSyBXKcXjKnsuqS48iQOuXc-ruvr0vV8iCLs"
-                    libraries={["places", "marker"]}
-                  >
-                    {storeOpeningDaysFields.map(
-                      (storeOpeningDay, storeOpeningDayIndex) => (
-                        <div key={storeOpeningDay.id}>
-                          <Row>
-                            <Col>
-                              <label
-                                className="form-label"
-                                htmlFor={`StoreOpeningDaysAndLocation.${storeOpeningDayIndex}.fineLocation.address`}
-                              >
-                                Address
-                              </label>
-                              <input
-                                className="form-control"
-                                id={`StoreOpeningDaysAndLocation.${storeOpeningDayIndex}.fineLocation.address`}
-                                {...register(
-                                  `StoreOpeningDaysAndLocation.${storeOpeningDayIndex}.fineLocation.address`,
-                                  { required: true }
-                                )}
-                              />
-                              {errors.StoreOpeningDaysAndLocation?.[
-                                storeOpeningDayIndex
-                              ]?.fineLocation?.address && (
-                                <span className="text-danger">
-                                  This field is required
-                                </span>
-                              )}
 
-                              <label
-                                className="form-label"
-                                htmlFor={`StoreOpeningDaysAndLocation.${storeOpeningDayIndex}.fineLocation.longtiude`}
-                              >
-                                Longitude
-                              </label>
-                              <input
-                                className="form-control"
-                                id={`StoreOpeningDaysAndLocation.${storeOpeningDayIndex}.fineLocation.longtiude`}
-                                {...register(
-                                  `StoreOpeningDaysAndLocation.${storeOpeningDayIndex}.fineLocation.longtiude`,
-                                  { required: true }
-                                )}
-                              />
-                              {errors.StoreOpeningDaysAndLocation?.[
-                                storeOpeningDayIndex
-                              ]?.fineLocation?.longtiude && (
-                                <span className="text-danger">
-                                  This field is required
-                                </span>
-                              )}
-
-                              <label
-                                className="form-label"
-                                htmlFor={`StoreOpeningDaysAndLocation.${storeOpeningDayIndex}.fineLocation.lattitude`}
-                              >
-                                Latitude
-                              </label>
-                              <input
-                                className="form-control"
-                                id={`StoreOpeningDaysAndLocation.${storeOpeningDayIndex}.fineLocation.lattitude`}
-                                {...register(
-                                  `StoreOpeningDaysAndLocation.${storeOpeningDayIndex}.fineLocation.lattitude`,
-                                  { required: true }
-                                )}
-                              />
-                              {errors.StoreOpeningDaysAndLocation?.[
-                                storeOpeningDayIndex
-                              ]?.fineLocation?.lattitude && (
-                                <span className="text-danger">
-                                  This field is required
-                                </span>
-                              )}
-
-                              <label
-                                className="form-label"
-                                htmlFor={`StoreOpeningDaysAndLocation.${storeOpeningDayIndex}.fineLocation.city`}
-                              >
-                                City
-                              </label>
-                              <input
-                                className="form-control"
-                                id={`StoreOpeningDaysAndLocation.${storeOpeningDayIndex}.fineLocation.city`}
-                                {...register(
-                                  `StoreOpeningDaysAndLocation.${storeOpeningDayIndex}.fineLocation.city`,
-                                  { required: true }
-                                )}
-                              />
-                              {errors.StoreOpeningDaysAndLocation?.[
-                                storeOpeningDayIndex
-                              ]?.fineLocation?.city && (
-                                <span className="text-danger">
-                                  This field is required
-                                </span>
-                              )}
-
-                              <label
-                                className="form-label"
-                                htmlFor={`StoreOpeningDaysAndLocation.${storeOpeningDayIndex}.fineLocation.phone_number`}
-                              >
-                                Phone Number
-                              </label>
-                              <input
-                                className="form-control"
-                                id={`StoreOpeningDaysAndLocation.${storeOpeningDayIndex}.fineLocation.phone_number`}
-                                {...register(
-                                  `StoreOpeningDaysAndLocation.${storeOpeningDayIndex}.fineLocation.phone_number`,
-                                  { required: true }
-                                )}
-                              />
-                              {errors.StoreOpeningDaysAndLocation?.[
-                                storeOpeningDayIndex
-                              ]?.fineLocation?.phone_number && (
-                                <span className="text-danger">
-                                  This field is required
-                                </span>
-                              )}
-
-                              <label
-                                className="form-label"
-                                htmlFor={`StoreOpeningDaysAndLocation.${storeOpeningDayIndex}.fineLocation.email`}
-                              >
-                                Email
-                              </label>
-                              <input
-                                className="form-control"
-                                id={`StoreOpeningDaysAndLocation.${storeOpeningDayIndex}.fineLocation.email`}
-                                {...register(
-                                  `StoreOpeningDaysAndLocation.${storeOpeningDayIndex}.fineLocation.email`,
-                                  { required: true }
-                                )}
-                              />
-                              {errors.StoreOpeningDaysAndLocation?.[
-                                storeOpeningDayIndex
-                              ]?.fineLocation?.email && (
-                                <span className="text-danger">
-                                  This field is required
-                                </span>
-                              )}
-                            </Col>
-                            <Col>
-                              <LocationPicker
-                                onLocationSelect={(location) =>
-                                  handleLocationSelect(
-                                    location,
-                                    storeOpeningDayIndex
-                                  )
-                                }
-                              />
-                            </Col>
-                          </Row>
-
-                          <div className="mb-3">
-                            <h4>Days</h4>
-                            <NestedDays
-                              control={control}
-                              storeOpeningDayIndex={storeOpeningDayIndex}
-                              register={register}
-                              errors={errors}
-                              days={days}
-                            />
-                          </div>
-                          <Col className="address-button">
-                            <Button
-                              variant="danger"
-                              type="button"
-                              onClick={() =>
-                                removeStoreOpeningDay(storeOpeningDayIndex)
-                              }
+                  {storeOpeningDaysFields.map(
+                    (storeOpeningDay, storeOpeningDayIndex) => (
+                      <div key={storeOpeningDay.id}>
+                        <Row>
+                          <Col>
+                            <label
+                              className="form-label"
+                              htmlFor={`StoreOpeningDaysAndLocation.${storeOpeningDayIndex}.fineLocation.address`}
                             >
-                              Remove Store Location
-                            </Button>
+                              Address
+                            </label>
+                            <input
+                              className="form-control"
+                              id={`StoreOpeningDaysAndLocation.${storeOpeningDayIndex}.fineLocation.address`}
+                              {...register(
+                                `StoreOpeningDaysAndLocation.${storeOpeningDayIndex}.fineLocation.address`,
+                                { required: true }
+                              )}
+                            />
+                            {errors.StoreOpeningDaysAndLocation?.[
+                              storeOpeningDayIndex
+                            ]?.fineLocation?.address && (
+                              <span className="text-danger">
+                                This field is required
+                              </span>
+                            )}
+
+                            <label
+                              className="form-label"
+                              htmlFor={`StoreOpeningDaysAndLocation.${storeOpeningDayIndex}.fineLocation.longtiude`}
+                            >
+                              Longitude
+                            </label>
+                            <input
+                              className="form-control"
+                              id={`StoreOpeningDaysAndLocation.${storeOpeningDayIndex}.fineLocation.longtiude`}
+                              {...register(
+                                `StoreOpeningDaysAndLocation.${storeOpeningDayIndex}.fineLocation.longtiude`,
+                                { required: true }
+                              )}
+                            />
+                            {errors.StoreOpeningDaysAndLocation?.[
+                              storeOpeningDayIndex
+                            ]?.fineLocation?.longtiude && (
+                              <span className="text-danger">
+                                This field is required
+                              </span>
+                            )}
+
+                            <label
+                              className="form-label"
+                              htmlFor={`StoreOpeningDaysAndLocation.${storeOpeningDayIndex}.fineLocation.lattitude`}
+                            >
+                              Latitude
+                            </label>
+                            <input
+                              className="form-control"
+                              id={`StoreOpeningDaysAndLocation.${storeOpeningDayIndex}.fineLocation.lattitude`}
+                              {...register(
+                                `StoreOpeningDaysAndLocation.${storeOpeningDayIndex}.fineLocation.lattitude`,
+                                { required: true }
+                              )}
+                            />
+                            {errors.StoreOpeningDaysAndLocation?.[
+                              storeOpeningDayIndex
+                            ]?.fineLocation?.lattitude && (
+                              <span className="text-danger">
+                                This field is required
+                              </span>
+                            )}
+
+                            <label
+                              className="form-label"
+                              htmlFor={`StoreOpeningDaysAndLocation.${storeOpeningDayIndex}.fineLocation.city`}
+                            >
+                              City
+                            </label>
+                            <input
+                              className="form-control"
+                              id={`StoreOpeningDaysAndLocation.${storeOpeningDayIndex}.fineLocation.city`}
+                              {...register(
+                                `StoreOpeningDaysAndLocation.${storeOpeningDayIndex}.fineLocation.city`,
+                                { required: true }
+                              )}
+                            />
+                            {errors.StoreOpeningDaysAndLocation?.[
+                              storeOpeningDayIndex
+                            ]?.fineLocation?.city && (
+                              <span className="text-danger">
+                                This field is required
+                              </span>
+                            )}
+
+                            <label
+                              className="form-label"
+                              htmlFor={`StoreOpeningDaysAndLocation.${storeOpeningDayIndex}.fineLocation.phoneNumber`}
+                            >
+                              Phone Number
+                            </label>
+                            <input
+                              className="form-control"
+                              id={`StoreOpeningDaysAndLocation.${storeOpeningDayIndex}.fineLocation.phoneNumber`}
+                              {...register(
+                                `StoreOpeningDaysAndLocation.${storeOpeningDayIndex}.fineLocation.phoneNumber`,
+                                { required: true }
+                              )}
+                            />
+                            {errors.StoreOpeningDaysAndLocation?.[
+                              storeOpeningDayIndex
+                            ]?.fineLocation?.phoneNumber && (
+                              <span className="text-danger">
+                                This field is required
+                              </span>
+                            )}
+
+                            <label
+                              className="form-label"
+                              htmlFor={`StoreOpeningDaysAndLocation.${storeOpeningDayIndex}.fineLocation.email`}
+                            >
+                              Email
+                            </label>
+                            <input
+                              className="form-control"
+                              id={`StoreOpeningDaysAndLocation.${storeOpeningDayIndex}.fineLocation.email`}
+                              {...register(
+                                `StoreOpeningDaysAndLocation.${storeOpeningDayIndex}.fineLocation.email`,
+                                { required: true }
+                              )}
+                            />
+                            {errors.StoreOpeningDaysAndLocation?.[
+                              storeOpeningDayIndex
+                            ]?.fineLocation?.email && (
+                              <span className="text-danger">
+                                This field is required
+                              </span>
+                            )}
                           </Col>
+                          <Col>
+                            <LocationPicker
+                              onLocationSelect={(location) =>
+                                handleLocationSelect(
+                                  location,
+                                  storeOpeningDayIndex
+                                )
+                              }
+                            />
+                          </Col>
+                        </Row>
+
+                        <div className="mb-3">
+                          <h4>Days</h4>
+                          <NestedDays
+                            control={control}
+                            storeOpeningDayIndex={storeOpeningDayIndex}
+                            register={register}
+                            errors={errors}
+                            days={days}
+                          />
                         </div>
-                      )
-                    )}
-                  </LoadScript>
+                        <Col className="address-button">
+                          <Button
+                            variant="danger"
+                            type="button"
+                            onClick={() =>
+                              removeStoreOpeningDay(storeOpeningDayIndex)
+                            }
+                          >
+                            Remove Store Location
+                          </Button>
+                        </Col>
+                      </div>
+                    )
+                  )}
 
                   <Col className="address-button">
                     <Button
@@ -789,7 +785,7 @@ const Add: React.FC = () => {
                             longtiude: "",
                             lattitude: "",
                             city: "",
-                            phone_number: "",
+                            phoneNumber: "",
                             email: "",
                           },
                           days: [
