@@ -103,8 +103,9 @@
   position: relative;
 }
 .filter-popup-container .frame-6{
-  background-color: #ffff;
+  background-color: #717171;
   border:lightgray 0.01px solid;
+ 
 
 }
 .filter-popup-container .frame-7{
@@ -123,9 +124,11 @@
   white-space: nowrap;
   text-align: center;
   margin: 0;
+  color: #ffff;
 }
+
 .filter-popup-container .text-wrapper-3{
   letter-spacing: 1px;
-  color: #ffff;
+  
 
 }
