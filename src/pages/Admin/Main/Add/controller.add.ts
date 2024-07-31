@@ -119,6 +119,22 @@ export interface Days{
       return [];
     }
   };
+  export const uploadFile = async (file: File): Promise<string> => {
+    const formData = new FormData();
+    formData.append('file', file);
+  
+    try {
+      const response = await axios.post(`${url}/file-upload/upload/`, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      });
+      return response.data.fileNew.path;
+    } catch (error) {
+      console.error('Error uploading file:', error);
+      throw error;
+    }
+  };
   export async function addStore(data: StoreData) {
     try {
       console.log('Sending data to API:', data); // Log data being sent

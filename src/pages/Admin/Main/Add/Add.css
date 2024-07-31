@@ -37,3 +37,13 @@
     justify-content: end;
     align-items: center;
 }
+.add-container .previous-button{
+    display: flex;
+    justify-content: start;
+    align-items: center;
+}
+.add-container .save-button{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}

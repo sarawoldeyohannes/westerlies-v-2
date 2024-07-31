@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useForm, useFieldArray, SubmitHandler } from "react-hook-form";
 import {
   addStore,
@@ -9,6 +9,7 @@ import {
   Link,
   StoreData,
   Tag,
+  uploadFile,
 } from "./controller.add";
 import LocationPicker from "../../../../components/Admin_components/LocationPicker/LocationPicker";
 import { Container, Button, Nav, Row, Col } from "react-bootstrap";
@@ -103,6 +104,24 @@ const Add: React.FC = () => {
       location.city
     );
   };
+  const handleFileChange = async (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const file = event.target.files?.[0];
+
+    if (file) {
+      try {
+        const storePicturePath = await uploadFile(file);
+        setValue("storePicture", storePicturePath);
+        setSuccessMessage(`File upload success:${storePicturePath}`);
+
+        console.log("File upload success:", storePicturePath);
+      } catch (error) {
+        console.error("Error uploading file:", error);
+        setErrorMessage(`Error uploading file: ${error}`);
+      }
+    }
+  };
   const onSubmit: SubmitHandler<StoreData> = async (data) => {
     // Set default values for any missing fields
     const completeData = {
@@ -122,9 +141,9 @@ const Add: React.FC = () => {
       StoreOpeningDaysAndLocation: data.StoreOpeningDaysAndLocation || [],
       storeTags: data.storeTags || [],
     };
-    setLoading(true);
-
     try {
+      setLoading(true);
+
       console.log("Submitting data:", completeData);
       const response = await addStore(completeData);
       console.log("Store added successfully:", response);
@@ -159,11 +178,24 @@ const Add: React.FC = () => {
   };
   const [currentStep, setCurrentStep] = useState(0);
   const steps = ["Store Info", "Address"];
+  const errorMessageRef = useRef<HTMLDivElement>(null);
   const handleNext = async () => {
-    const isValid = await trigger();
+    const isValid = await trigger(); // Trigger validation
     if (isValid) {
       setCurrentStep((prevStep) => prevStep + 1);
+    } else {
+      // Set error message and scroll to the error message
+      setErrorMessage("Please fill out the required fields.");
+      if (errorMessageRef.current) {
+        errorMessageRef.current.scrollIntoView({
+          behavior: "smooth",
+          block: "center",
+        });
+      }
     }
+  };
+  const handlePrevious = () => {
+    setCurrentStep((prevStep) => prevStep - 1);
   };
   return (
     <>
@@ -174,12 +206,6 @@ const Add: React.FC = () => {
             <span className="visually-hidden">Loading...</span>
           </div>
         </div>
-      ) : successMessage ? (
-        <div className="alert alert-success" role="alert">
-          {successMessage}
-        </div>
-      ) : errorMessage ? (
-        <span className="text-danger">{errorMessage}</span>
       ) : (
         <Container className="add-container">
           <h1>Add Store</h1>
@@ -190,7 +216,6 @@ const Add: React.FC = () => {
                   href="#store-info"
                   key={index}
                   className={currentStep === index ? "active" : ""}
-                  onClick={() => setCurrentStep(index)}
                 >
                   {step}
                 </Nav.Link>
@@ -198,6 +223,14 @@ const Add: React.FC = () => {
             ))}
           </Nav>
           <form onSubmit={handleSubmit(onSubmit)} className="add-form">
+            {successMessage && (
+              <div className="alert alert-success" role="alert">
+                {successMessage}
+              </div>
+            )}
+            {errorMessage && (
+              <span className="text-danger">{errorMessage}</span>
+            )}
             {currentStep === 0 && (
               <>
                 {/* Store Info Section */}
@@ -228,7 +261,9 @@ const Add: React.FC = () => {
                       <input
                         className="form-control"
                         id="storePicture"
-                        {...register("storePicture", { required: true })}
+                        type="file"
+                        onChange={handleFileChange}
+                        required
                       />
                       {errors.storePicture && (
                         <span className="text-danger">
@@ -802,7 +837,20 @@ const Add: React.FC = () => {
                     </Button>
                   </Col>
                 </div>
-                <Button type="submit">Save</Button>
+                <Col className="save-button">
+                  <div className="previous-button">
+                    <Button
+                      className="btn btn-secondary"
+                      type="button"
+                      onClick={handlePrevious}
+                    >
+                      Previous
+                    </Button>
+                  </div>
+                  <div className="next-button">
+                    <Button type="submit">Save</Button>
+                  </div>
+                </Col>
               </>
             )}
           </form>
