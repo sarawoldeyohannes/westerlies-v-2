@@ -114,11 +114,16 @@ const Add: React.FC = () => {
         const storePicturePath = await uploadFile(file);
         setValue("storePicture", storePicturePath);
         setSuccessMessage(`File upload success:${storePicturePath}`);
-
+        setTimeout(() => {
+          setSuccessMessage("");
+        }, 4000);
         console.log("File upload success:", storePicturePath);
       } catch (error) {
         console.error("Error uploading file:", error);
         setErrorMessage(`Error uploading file: ${error}`);
+        setTimeout(() => {
+          setErrorMessage("");
+        }, 4000);
       }
     }
   };
@@ -140,6 +145,8 @@ const Add: React.FC = () => {
       storeLinks: data.storeLinks || [],
       StoreOpeningDaysAndLocation: data.StoreOpeningDaysAndLocation || [],
       storeTags: data.storeTags || [],
+      isClaimed: data.isClaimed || false,
+      isBazaar: data.isBazaar || false,
     };
     try {
       setLoading(true);
@@ -531,7 +538,7 @@ const Add: React.FC = () => {
                   {storeTagFields.map((field, index) => (
                     <div key={field.id}>
                       <Row>
-                        <Col>
+                        <Col className="hidden-inputs">
                           <label
                             className="form-label"
                             htmlFor={`storeTags.${index}.storeTagId`}
@@ -551,7 +558,7 @@ const Add: React.FC = () => {
                             </span>
                           )}
                         </Col>
-                        <Col>
+                        <Col className="hidden-inputs">
                           <label
                             className="form-label"
                             htmlFor={`storeTags.${index}.storeId`}
@@ -860,7 +867,18 @@ const Add: React.FC = () => {
   );
 };
 
-// NestedDays component to handle the nested useFieldArray for days
+const generateTimeOptions = () => {
+  const times = [];
+  const periods = ["AM", "PM"];
+  for (let i = 0; i < 24; i++) {
+    const hour = i % 12 === 0 ? 12 : i % 12;
+    const period = i < 12 ? "AM" : "PM";
+    times.push(`${hour}:00 ${period}`);
+    times.push(`${hour}:30 ${period}`);
+  }
+  return times;
+};
+
 const NestedDays: React.FC<{
   control: any;
   storeOpeningDayIndex: number;
@@ -872,6 +890,8 @@ const NestedDays: React.FC<{
     control,
     name: `StoreOpeningDaysAndLocation.${storeOpeningDayIndex}.days`,
   });
+
+  const timeOptions = generateTimeOptions();
 
   return (
     <div className="col">
@@ -911,14 +931,20 @@ const NestedDays: React.FC<{
               >
                 Open Time
               </label>
-              <input
-                className="form-control"
+              <select
+                className="form-select"
                 id={`StoreOpeningDaysAndLocation.${storeOpeningDayIndex}.days.${index}.openTime`}
                 {...register(
                   `StoreOpeningDaysAndLocation.${storeOpeningDayIndex}.days.${index}.openTime`,
                   { required: true }
                 )}
-              />
+              >
+                {timeOptions.map((time, idx) => (
+                  <option key={idx} value={time}>
+                    {time}
+                  </option>
+                ))}
+              </select>
               {errors.StoreOpeningDaysAndLocation?.[storeOpeningDayIndex]
                 ?.days?.[index]?.openTime && (
                 <span className="text-danger">This field is required</span>
@@ -931,14 +957,20 @@ const NestedDays: React.FC<{
               >
                 Close Time
               </label>
-              <input
-                className="form-control"
+              <select
+                className="form-select"
                 id={`StoreOpeningDaysAndLocation.${storeOpeningDayIndex}.days.${index}.closeTime`}
                 {...register(
                   `StoreOpeningDaysAndLocation.${storeOpeningDayIndex}.days.${index}.closeTime`,
                   { required: true }
                 )}
-              />
+              >
+                {timeOptions.map((time, idx) => (
+                  <option key={idx} value={time}>
+                    {time}
+                  </option>
+                ))}
+              </select>
               {errors.StoreOpeningDaysAndLocation?.[storeOpeningDayIndex]
                 ?.days?.[index]?.closeTime && (
                 <span className="text-danger">This field is required</span>

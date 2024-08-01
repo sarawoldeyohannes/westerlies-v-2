@@ -50,6 +50,12 @@ const Update = () => {
     fetchData();
   }, [id]);
 
+  // Helper function to remove unwanted properties
+  const fetchedData = (data: any) => {
+    const { fineLocations, shopOwner, ...rest } = data;
+    setFormValues(fetchedData);
+    return rest;
+  };
   useEffect(() => {
     if (formValues) {
       console.log("formValues", formValues);
@@ -178,43 +184,54 @@ const Update = () => {
         const storePicturePath = await uploadFile(file);
         setValue("storePicture", storePicturePath);
         setSuccessMessage(`File upload success: ${storePicturePath}`);
-
+        setTimeout(() => {
+          setSuccessMessage("");
+        }, 4000);
         console.log("File upload success:", storePicturePath);
       } catch (error) {
         console.error("Error uploading file:", error);
         setErrorMessage(`Error uploading file: ${error}`);
+        setTimeout(() => {
+          setErrorMessage("");
+        }, 4000);
       }
     }
   };
-  const formatData = (data: StoreData) => {
+  const formatData = (data: any) => {
+    // Removing fineLocations and shopOwner from the formatted data
+    const { fineLocations, shopOwner, ...restData } = data;
     return {
-      ...data,
-      storeLinks: data.storeLinks.map((link: { link: any; linkType: any }) => ({
-        link: link.link,
-        linkType: link.linkType,
-      })),
+      ...restData,
+      storeLinks: data.storeLinks.map(
+        (link: { link: string; linkType: number }) => ({
+          link: link.link,
+          linkType: link.linkType,
+        })
+      ),
       StoreOpeningDaysAndLocation: data.StoreOpeningDaysAndLocation.map(
         (location: {
           fineLocation: {
-            address: any;
+            fineLocationId?: number;
+            address: string;
             longtiude: string;
             lattitude: string;
-            city: any;
-            phoneNumber: any;
-            email: any;
+            city: string;
+            phoneNumber: string;
+            email: string;
           };
           days: any[];
         }) => ({
           fineLocation: {
+            fineLocationId: location.fineLocation.fineLocationId,
             address: location.fineLocation.address,
-            longtiude: parseFloat(location.fineLocation.longtiude),
-            lattitude: parseFloat(location.fineLocation.lattitude),
+            longtiude: location.fineLocation.longtiude,
+            lattitude: location.fineLocation.lattitude,
             city: location.fineLocation.city,
             phoneNumber: location.fineLocation.phoneNumber,
             email: location.fineLocation.email,
           },
           days: location.days.map(
-            (day: { openTime: any; closeTime: any; dayId: any }) => ({
+            (day: { openTime: string; closeTime: string; dayId: number }) => ({
               openTime: day.openTime,
               closeTime: day.closeTime,
               dayId: day.dayId,
@@ -222,11 +239,13 @@ const Update = () => {
           ),
         })
       ),
-      instagramPhotos: data.instagramPhotos.map((photo: { urlLink: any }) => ({
-        urlLink: photo.urlLink,
-      })),
-      storeTags: data.storeTags.map((tag: { tagId: any }) => ({
-        storeTagId: "0",
+      instagramPhotos: data.instagramPhotos.map(
+        (photo: { urlLink: string }) => ({
+          urlLink: photo.urlLink || "",
+        })
+      ),
+      storeTags: data.storeTags.map((tag: { tagId: number }) => ({
+        storeTagId: 0,
         storeId: 0,
         tagId: tag.tagId,
       })),
@@ -235,11 +254,13 @@ const Update = () => {
       learnWithUs: data.learnWithUs || "",
       meetUs: data.meetUs || "",
       classInfo: data.classInfo || "",
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString(),
+      createdAt: new Date(),
+      updatedAt: new Date(),
       bazaarDetails: data.bazaarDetails || [],
       products: data.products || [],
       shopOwner2: data.shopOwner2 || { username: "", email: "" },
+      isClaimed: data.isClaimed || false,
+      isBazaar: data.isBazaar || false,
     };
   };
   const onSubmit: SubmitHandler<StoreData> = async (formData) => {
@@ -250,8 +271,8 @@ const Update = () => {
     try {
       if (id !== undefined) {
         console.log("Submitting data:", formattedData);
-        //const response = await UpdateStore(completeData, id);
-        //console.log("Store Updated successfully:", response);
+        const response = await UpdateStore(formattedData, id);
+        console.log("Store Updated successfully:", response);
         setSuccessMessage("Store updated successfully");
 
         setTimeout(() => {
@@ -621,7 +642,7 @@ const Update = () => {
                   {storeTagFields.map((field, index) => (
                     <div key={field.id}>
                       <Row>
-                        <Col>
+                        <Col className="hidden-inputs">
                           <label
                             className="form-label"
                             htmlFor={`storeTags.${index}.storeTagId`}
@@ -641,7 +662,7 @@ const Update = () => {
                             </span>
                           )}
                         </Col>
-                        <Col>
+                        <Col className="hidden-inputs">
                           <label
                             className="form-label"
                             htmlFor={`storeTags.${index}.storeId`}
@@ -955,7 +976,18 @@ const Update = () => {
     </>
   );
 };
-// NestedDays component to handle the nested useFieldArray for days
+const generateTimeOptions = () => {
+  const times = [];
+  const periods = ["AM", "PM"];
+  for (let i = 0; i < 24; i++) {
+    const hour = i % 12 === 0 ? 12 : i % 12;
+    const period = i < 12 ? "AM" : "PM";
+    times.push(`${hour}:00 ${period}`);
+    times.push(`${hour}:30 ${period}`);
+  }
+  return times;
+};
+
 const NestedDays: React.FC<{
   control: any;
   storeOpeningDayIndex: number;
@@ -967,6 +999,8 @@ const NestedDays: React.FC<{
     control,
     name: `StoreOpeningDaysAndLocation.${storeOpeningDayIndex}.days`,
   });
+
+  const timeOptions = generateTimeOptions();
 
   return (
     <div className="col">
@@ -1006,14 +1040,20 @@ const NestedDays: React.FC<{
               >
                 Open Time
               </label>
-              <input
-                className="form-control"
+              <select
+                className="form-select"
                 id={`StoreOpeningDaysAndLocation.${storeOpeningDayIndex}.days.${index}.openTime`}
                 {...register(
                   `StoreOpeningDaysAndLocation.${storeOpeningDayIndex}.days.${index}.openTime`,
                   { required: true }
                 )}
-              />
+              >
+                {timeOptions.map((time, idx) => (
+                  <option key={idx} value={time}>
+                    {time}
+                  </option>
+                ))}
+              </select>
               {errors.StoreOpeningDaysAndLocation?.[storeOpeningDayIndex]
                 ?.days?.[index]?.openTime && (
                 <span className="text-danger">This field is required</span>
@@ -1026,14 +1066,20 @@ const NestedDays: React.FC<{
               >
                 Close Time
               </label>
-              <input
-                className="form-control"
+              <select
+                className="form-select"
                 id={`StoreOpeningDaysAndLocation.${storeOpeningDayIndex}.days.${index}.closeTime`}
                 {...register(
                   `StoreOpeningDaysAndLocation.${storeOpeningDayIndex}.days.${index}.closeTime`,
                   { required: true }
                 )}
-              />
+              >
+                {timeOptions.map((time, idx) => (
+                  <option key={idx} value={time}>
+                    {time}
+                  </option>
+                ))}
+              </select>
               {errors.StoreOpeningDaysAndLocation?.[storeOpeningDayIndex]
                 ?.days?.[index]?.closeTime && (
                 <span className="text-danger">This field is required</span>

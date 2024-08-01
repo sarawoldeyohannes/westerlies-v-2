@@ -39,6 +39,7 @@ export interface Day {
 }
 
 export interface FineLocation {
+  fineLocationId?: number;
     address:      string;
     longtiude:    string;
     lattitude:    string;
