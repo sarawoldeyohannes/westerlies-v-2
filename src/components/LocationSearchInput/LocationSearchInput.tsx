@@ -11,9 +11,11 @@ interface LocationSearchInputProps {
   tags: any[];
   selectedLocation: string;
   setSelectedLocation: (selectedLocation: string) => void;
+  setSelectedTags: (selectedTags: any) => void;
+  selectedTagsList: any[];
 }
 
-const LocationSearchInput = ({setLocationList,tags,selectedLocation,setSelectedLocation}:LocationSearchInputProps) => {
+const LocationSearchInput = ({setLocationList,tags,selectedLocation,setSelectedLocation,setSelectedTags,selectedTagsList}:LocationSearchInputProps) => {
 
   const [items, setItems] = useState<any[]>([]);
   
@@ -60,7 +62,7 @@ const LocationSearchInput = ({setLocationList,tags,selectedLocation,setSelectedL
         } */}
      
       </div>
-      <Filter tags={tags} selectedLocation={selectedLocation} setSelectedLocation={setSelectedLocation} setLocationList={setLocationList} />
+      <Filter tags={tags} selectedLocation={selectedLocation} setSelectedLocation={setSelectedLocation} setLocationList={setLocationList} setSelectedTags={setSelectedTags} selectedTagsList={selectedTagsList} />
       <div className="search-button">
         <CiSearch />
       </div>

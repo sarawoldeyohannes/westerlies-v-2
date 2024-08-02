@@ -7,8 +7,7 @@ import {
   fetchLinks,
   fetchTags,
   Link,
-  StoreData,
-  Tag,
+  StoreData
 } from "./controller.add";
 import LocationPicker from "../../../../components/Admin_components/LocationPicker/LocationPicker";
 import { Container, Button, Nav, Row, Col } from "react-bootstrap";
@@ -80,7 +79,7 @@ const Add: React.FC = () => {
   });
   const [links, setLinks] = useState<Link[]>([]);
   const [days, setDays] = useState<Days[]>([]);
-  const [tags, setTags] = useState<Tag[]>([]);
+  const [tags, setTags] = useState<any[]>([]);
   useEffect(() => {
     const loadLinksAndDaysAndTags = async () => {
       const linksData = await fetchLinks();

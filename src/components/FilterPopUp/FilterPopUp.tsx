@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./FilterPopUp.css";
 import "./mobile.filterPopUp.css";
 import { IoIosCloseCircleOutline } from "react-icons/io";
@@ -8,10 +8,17 @@ import {
   filterItems,
 } from "./controller.filterPopUp";
 
-const FilterPopUp: React.FC<FilterPopUpProps> = ({ onClose, filterType, tags }) => {
+const FilterPopUp: React.FC<FilterPopUpProps> = ({ onClose, filterType, tags,selectedTags,selectedTagsList }) => {
   const [items, setItems] = useState<FilterItem[]>(filterItems);
+  const [finalTags, setFinalTags] = useState<FilterItem[]>([]);
 
   const handleCheckboxChange = (id: number) => {
+    selectedTags((prevItems:any) => 
+      prevItems.map((item:any) =>
+        item.id === id ? { ...item, checked: !item.checked } : item
+      )
+    );  
+    
     setItems((prevItems) =>
       prevItems.map((item) =>
         item.id === id ? { ...item, checked: !item.checked } : item
@@ -23,6 +30,30 @@ const FilterPopUp: React.FC<FilterPopUpProps> = ({ onClose, filterType, tags }) 
       prevItems.map((item) => ({ ...item, checked: false }))
     );
   };
+
+  useEffect(()=>{
+
+      
+
+
+    let localTagData: any = [];
+    tags.map((tag) => {
+      
+      if(tag.tagTypeId == 2 && filterType == "SOCIAL IMPACT"){
+        localTagData.push(tag);
+      }
+      if(tag.tagTypeId == 1 && filterType == "PRODUCT"){
+        localTagData.push(tag);
+      }
+        
+
+    });
+
+    setFinalTags(localTagData);
+
+  },[])
+
+
   return (
     <div className="filter-popup-container">
       <div className="overlay" onClick={onClose}></div>
@@ -37,7 +68,7 @@ const FilterPopUp: React.FC<FilterPopUpProps> = ({ onClose, filterType, tags }) 
         </div>
         <div className="frame-2">
           <div className="filter-items-container">
-            {tags.map((item) => (
+            {finalTags.map((item: any) => (
               <div key={item.id} className="filter-item">
                 <input
                   type="checkbox"

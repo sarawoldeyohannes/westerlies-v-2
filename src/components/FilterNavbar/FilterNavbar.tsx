@@ -2,7 +2,7 @@ import "./FilterNavbar.css";
 import "./mobile.filterNavbar.css";
 import { useState } from "react";
 import FilterPopUp from "../FilterPopUp/FilterPopUp";
-const FilterNavbar = () => {
+const FilterNavbar = ({}) => {
   const [showPopup, setShowPopup] = useState(false);
   const [filterType, setFilterType] = useState("");
 
@@ -37,7 +37,7 @@ const FilterNavbar = () => {
         </div>
       </div>
       {showPopup && (
-        <FilterPopUp onClose={handleClosePopup} filterType={filterType} />
+        <FilterPopUp onClose={handleClosePopup} filterType={filterType} tags={[]} selectedTags={"df"} selectedTagsList={[]} />
       )}
     </div>
   );

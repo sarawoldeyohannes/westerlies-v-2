@@ -3,4 +3,5 @@ export interface CardProps {
     description: string;
     storePicture: string;
     storeId: number;
+    primaryTag2: any;
   }

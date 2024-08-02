@@ -1,7 +1,7 @@
 import "./EmailCollectionInput.css";
 import "./controller.emailCollectionInput";
 
-export const EmailCollectionInput = () => {
+export const EmailCollectionInput = ({onClose}: any) => {
   return (
     <div className="email-collection">
       <input
@@ -10,7 +10,9 @@ export const EmailCollectionInput = () => {
         placeholder="Email address"
       />
       <div className="div-wrapper">
-        <button className="sign-up-btn">
+        <button onClick={()=>{
+          onClose();
+        }} className="sign-up-btn">
           <div className="text-wrapper-4">Sign Up</div>
         </button>
       </div>

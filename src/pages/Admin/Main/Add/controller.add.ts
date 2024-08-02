@@ -75,12 +75,7 @@ export interface StoreTag {
     storeId:    number;
     tagId:      number;
 }
-export interface Tag {
-    tagId:          number;
-    tagTypeId:      null;
-    tagName:        string;
-    tagDescription: null;
-}
+
 export interface Link {
     linkTypeId: number;
     linkTypeName: string;
@@ -90,9 +85,10 @@ export interface Days{
     dayName: string;
 }
   // Function to fetch tags from the API using axios
-  export const fetchTags = async (): Promise<Tag[]> => {
+  export const fetchTags = async () => {
     try {
       const response = await axios.get(`${url}/tag`);
+      console.log("RESPONSE:  ", response.data);
       return response.data;
     } catch (error) {
       console.error('Fetch error:', error);

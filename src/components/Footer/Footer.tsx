@@ -40,7 +40,9 @@ const Footer = forwardRef<HTMLDivElement, FooterPropsWithRef>(
               <div className="connect-with-us">
                 <div className="text-wrapper-2">Connect with us</div>
               </div>
-              <div className="instagram-icon">
+              <div onClick={()=>{
+                window.open("https://www.instagram.com/followthewesterlies/", "_blank");
+              }} className="instagram-icon">
                 <FaInstagram />
               </div>
             </div>

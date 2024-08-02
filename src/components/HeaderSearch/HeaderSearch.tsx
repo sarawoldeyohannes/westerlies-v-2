@@ -37,7 +37,7 @@ const HeaderSearch = ({searchResult}: HeaderSearchProps) => {
         let search_body =  {
           "freeSearch": freeSearchValue,
           "cityId": selectedLocationId,
-
+          "tags": selectedTags
           }
           let searchResult_data = await searchStores_Combined(search_body);
           console.log(searchResult_data);
@@ -46,7 +46,7 @@ const HeaderSearch = ({searchResult}: HeaderSearchProps) => {
 
         freeSearch();
 
-    },[freeSearchValue,selectedLocationId])
+    },[freeSearchValue,selectedLocationId,selectedTags])
 
 
 
@@ -62,7 +62,7 @@ const HeaderSearch = ({searchResult}: HeaderSearchProps) => {
       </div>
       <div className="inputs">
         {searchType === "free" && <FreeSearch setLocationList={setLocationList} selectedLocation={selectedLocation} setSelectedLocation={setSelectedLocation} />}
-        {searchType === "location" && <LocationSearchInput  selectedLocation={selectedLocation} setSelectedLocation={setSelectedLocation} setLocationList={setLocationList} tags={tags} />}
+        {searchType === "location" && <LocationSearchInput setSelectedTags={setSelectedTags} selectedTagsList={selectedTags}  selectedLocation={selectedLocation} setSelectedLocation={setSelectedLocation} setLocationList={setLocationList} tags={tags} />}
         {searchType === "product" && <ProductSearchInput setFreeSearch={setFreeSearchValue}  selectedLocation={selectedLocation} setSelectedLocation={setSelectedLocation} setLocationList={setLocationList} tags={tags} />}
         <div style={{width:300, alignSelf: 'flex-start',margin:5,position:'absolute',zIndex: 2000,marginTop:75}}>
       {locationList.length > 0 &&

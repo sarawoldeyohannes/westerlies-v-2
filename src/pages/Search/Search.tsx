@@ -76,9 +76,14 @@ const Search = () => {
         <div className="map-and-items">
           <div className="items-pagination">
             <div className="items-container">
-              {selectedItems.map((item) => (
-                <Card name={"test"} storePicture={"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSyo4kPjPIxHwfpRwck9He7a7eHuJ3_1Tzhyg&s"} key={item.id} {...item} />
-              ))}
+              {selectedItems?.length > 0 &&  selectedItems?.map((item: any) => { 
+                  console.log("SELECTED: ", selectedItems);
+                return(
+                <Card name={item.name} storePicture={item.storePicture} primaryTag2={item?.primaryTag2} description={""} storeId={item.storeId} />
+              );
+                            
+                })}
+
 
               {selectedItems.length == 0 &&
                 <div style={{width:'100%',height:500,display: 'flex',flexDirection:'column',justifyContent:'center',alignItems:'center'}}>
