@@ -13,27 +13,37 @@ const FilterPopUp: React.FC<FilterPopUpProps> = ({ onClose, filterType, tags,sel
   const [finalTags, setFinalTags] = useState<FilterItem[]>([]);
 
   const handleCheckboxChange = (id: number) => {
-    selectedTags((prevItems:any) => 
-      prevItems.map((item:any) =>
-        item.id === id ? { ...item, checked: !item.checked } : item
-      )
-    );  
-    
+
     setItems((prevItems) =>
       prevItems.map((item) =>
         item.id === id ? { ...item, checked: !item.checked } : item
       )
     );
+
+
+    if(selectedTagsList.includes(id)){
+      let index = selectedTagsList.indexOf(id);
+      selectedTagsList.splice(index,1);
+
+    }
+    selectedTags([...selectedTagsList, id]);  
+    
+    
   };
   const handleClearSearch = () => {
-    setItems((prevItems) =>
+    // setItems((prevItems) =>
+    //   prevItems.map((item) => ({ ...item, checked: false }))
+    // );
+    setFinalTags((prevItems) =>
       prevItems.map((item) => ({ ...item, checked: false }))
+
     );
+    selectedTags([]);
   };
 
   useEffect(()=>{
 
-      
+
 
 
     let localTagData: any = [];

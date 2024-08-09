@@ -11,8 +11,9 @@ import { searchitems } from "../../pages/Home/controller.home";
 
 interface HeaderSearchProps {
   searchResult: (searchedItemList: any) => void;
+  cityId: string;
 }
-const HeaderSearch = ({searchResult}: HeaderSearchProps) => {
+const HeaderSearch = ({searchResult,cityId}: HeaderSearchProps) => {
   const [searchType, setSearchType] = useState("free");
   const [locationList, setLocationList] = useState<any[]>([]);
   const [tags, setTags] = useState<any[]>([]);
@@ -26,6 +27,31 @@ const HeaderSearch = ({searchResult}: HeaderSearchProps) => {
       let tagsList = await getTagsApi();
       setTags(tagsList);
     }
+    const params = new URLSearchParams(window.location.search);
+     
+    let cityIds: string = params.get("cityId")?.toString() as string;
+    
+    if(cityIds){
+    setSelectedLocationId(cityIds);
+    }
+    // async function freeSearch(){
+    //   //        let {tagId, cityId , socialImpact, offersClasses,freeSearch } = body;
+    //   const params = new URLSearchParams(window.location.search);
+     
+    //   let cityIds: string = params.get("cityId")?.toString() as string;
+    //   setSelectedLocationId(cityIds);
+    // let search_body =  {
+    //   "freeSearch": freeSearchValue,
+    //   "cityId": cityIds,
+    //   "socialImpact": selectedTags
+    //   }
+    //   let searchResult_data = await searchStores_Combined(search_body);
+    //   console.log(searchResult_data);
+    //   searchResult(searchResult_data);
+    // }
+
+    // freeSearch();
+    
     getTags();
   },[])
 
@@ -33,15 +59,16 @@ const HeaderSearch = ({searchResult}: HeaderSearchProps) => {
     useEffect(()=>{
         async function freeSearch(){
           //        let {tagId, cityId , socialImpact, offersClasses,freeSearch } = body;
-
+            if(selectedLocationId !== "" || selectedTags.length > 0 || freeSearchValue !== ""){
         let search_body =  {
           "freeSearch": freeSearchValue,
           "cityId": selectedLocationId,
-          "tags": selectedTags
+          "socialImpact": selectedTags
           }
           let searchResult_data = await searchStores_Combined(search_body);
           console.log(searchResult_data);
           searchResult(searchResult_data);
+        }
         }
 
         freeSearch();
@@ -70,6 +97,7 @@ const HeaderSearch = ({searchResult}: HeaderSearchProps) => {
           { locationList.map((location) => (
             <div 
               onClick={async()=>{
+               
                 let placeId = location.place_id;
                 setSelectedLocationId(location.place_id);
                 setSelectedLocation(location.description);
@@ -82,7 +110,7 @@ const HeaderSearch = ({searchResult}: HeaderSearchProps) => {
               }}
             className="location-item">
               <FaLocationDot style={{margin: 10}} />
-              {location.description}</div>
+              {location.description + " TEST"}</div>
           ))
           }
         </div>

@@ -16,22 +16,25 @@ const Search = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [searchitems,setSearchItems] = useState<any[]>([]);
   const [cityDetail,setCityDetail] = useState<Location>();
+  const [cityId,setCityId] = useState("");
   const handlePageChange = (newPage: number) => {
     setCurrentPage(newPage);
   };
 
+  const params3 = new URLSearchParams(window.location.search);
 
   useEffect(()=>{
     async function getCityDetailSearchPage(placeId: string){
       let cityDetail = await getCityDetail(placeId) as Location;
-      let store_list = await getStores_around_city(placeId);
+      // let store_list = await getStores_around_city(placeId);
       console.log("City Detail",cityDetail);
-      setSearchItems(store_list);
+      // setSearchItems(store_list);
       setCityDetail(cityDetail);
     }
     const params = new URLSearchParams(window.location.search);
 
     let cityId: string = params.get("cityId")?.toString() as string;
+    setCityId(cityId);
     getCityDetailSearchPage(cityId);
   },[])
 
@@ -69,7 +72,7 @@ const Search = () => {
   };
   return (
     <>
-      <Head headerClassName="head-instance" searchResult={setSearchItems} />
+      <Head headerClassName="head-instance" searchResult={setSearchItems}  cityId={cityId} />
       <div className="search-container">
         <FilterNavbar />
 
@@ -77,7 +80,7 @@ const Search = () => {
           <div className="items-pagination">
             <div className="items-container">
               {selectedItems?.length > 0 &&  selectedItems?.map((item: any) => { 
-                  console.log("SELECTED: ", selectedItems);
+                  
                 return(
                 <Card name={item.name} storePicture={item.storePicture} primaryTag2={item?.primaryTag2} description={""} storeId={item.storeId} />
               );

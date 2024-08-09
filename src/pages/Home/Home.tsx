@@ -75,7 +75,7 @@ const Home = () => {
   };
   return (
     <>
-      <Head headerClassName="head-instance" type="About" searchResult={setItems} />
+      <Head headerClassName="head-instance" type="About" searchResult={setItems} cityId={""} />
       <div className="home-container">
         <FilterNavbar />
         <div className="splash">
