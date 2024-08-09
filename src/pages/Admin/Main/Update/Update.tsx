@@ -173,6 +173,18 @@ const Update = () => {
       `StoreOpeningDaysAndLocation.${index}.fineLocation.city`,
       location.city
     );
+    setValue(
+      `StoreOpeningDaysAndLocation.${index}.fineLocation.state`,
+      location.state
+    );
+    setValue(
+      `StoreOpeningDaysAndLocation.${index}.fineLocation.street`,
+      location.street
+    );
+    setValue(
+      `StoreOpeningDaysAndLocation.${index}.fineLocation.zipCode`,
+      location.zipCode
+    );
   };
   const handleFileChange = async (
     event: React.ChangeEvent<HTMLInputElement>
@@ -217,6 +229,9 @@ const Update = () => {
             lattitude: string;
             city: string;
             phoneNumber: string;
+            state: string;
+            zipCode: string;
+            street: string;
             email: string;
           };
           days: any[];
@@ -228,6 +243,9 @@ const Update = () => {
             lattitude: location.fineLocation.lattitude,
             city: location.fineLocation.city,
             phoneNumber: location.fineLocation.phoneNumber,
+            state: location.fineLocation.state,
+            zipCode: location.fineLocation.zipCode,
+            street: location.fineLocation.street,
             email: location.fineLocation.email,
           },
           days: location.days.map(
@@ -250,7 +268,7 @@ const Update = () => {
         tagId: tag.tagId,
       })),
       storePicture: data.storePicture,
-      storeId: "",
+      storeId: data.storeId,
       learnWithUs: data.learnWithUs || "",
       meetUs: data.meetUs || "",
       classInfo: data.classInfo || "",
@@ -839,6 +857,69 @@ const Update = () => {
                                 This field is required
                               </span>
                             )}
+                            <label
+                              className="form-label"
+                              htmlFor={`StoreOpeningDaysAndLocation.${storeOpeningDayIndex}.fineLocation.state`}
+                            >
+                              State
+                            </label>
+                            <input
+                              className="form-control"
+                              id={`StoreOpeningDaysAndLocation.${storeOpeningDayIndex}.fineLocation.state`}
+                              {...register(
+                                `StoreOpeningDaysAndLocation.${storeOpeningDayIndex}.fineLocation.state`,
+                                { required: true }
+                              )}
+                            />
+                            {errors.StoreOpeningDaysAndLocation?.[
+                              storeOpeningDayIndex
+                            ]?.fineLocation?.state && (
+                              <span className="text-danger">
+                                This field is required
+                              </span>
+                            )}
+                            <label
+                              className="form-label"
+                              htmlFor={`StoreOpeningDaysAndLocation.${storeOpeningDayIndex}.fineLocation.street`}
+                            >
+                              Street
+                            </label>
+                            <input
+                              className="form-control"
+                              id={`StoreOpeningDaysAndLocation.${storeOpeningDayIndex}.fineLocation.street`}
+                              {...register(
+                                `StoreOpeningDaysAndLocation.${storeOpeningDayIndex}.fineLocation.street`,
+                                { required: true }
+                              )}
+                            />
+                            {errors.StoreOpeningDaysAndLocation?.[
+                              storeOpeningDayIndex
+                            ]?.fineLocation?.street && (
+                              <span className="text-danger">
+                                This field is required
+                              </span>
+                            )}
+                            <label
+                              className="form-label"
+                              htmlFor={`StoreOpeningDaysAndLocation.${storeOpeningDayIndex}.fineLocation.zipCode`}
+                            >
+                              Zip Code
+                            </label>
+                            <input
+                              className="form-control"
+                              id={`StoreOpeningDaysAndLocation.${storeOpeningDayIndex}.fineLocation.zipCode`}
+                              {...register(
+                                `StoreOpeningDaysAndLocation.${storeOpeningDayIndex}.fineLocation.zipCode`,
+                                { required: true }
+                              )}
+                            />
+                            {errors.StoreOpeningDaysAndLocation?.[
+                              storeOpeningDayIndex
+                            ]?.fineLocation?.zipCode && (
+                              <span className="text-danger">
+                                This field is required
+                              </span>
+                            )}
 
                             <label
                               className="form-label"
@@ -937,7 +1018,11 @@ const Update = () => {
                             longtiude: "",
                             lattitude: "",
                             city: "",
+
                             phoneNumber: "",
+                            state: "",
+                            zipCode: "",
+                            street: "",
                             email: "",
                           },
                           days: [
@@ -978,7 +1063,6 @@ const Update = () => {
 };
 const generateTimeOptions = () => {
   const times = [];
-  const periods = ["AM", "PM"];
   for (let i = 0; i < 24; i++) {
     const hour = i % 12 === 0 ? 12 : i % 12;
     const period = i < 12 ? "AM" : "PM";

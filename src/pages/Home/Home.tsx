@@ -10,12 +10,9 @@ import MapComponent from "../../components/Map/MapComponent";
 import FilterNavbar from "../../components/FilterNavbar/FilterNavbar";
 import SignUpPopUp from "../../components/SignUpPopUp/SignUpPopUp";
 import splash from "../../assets/homePage.jpg";
-import { SearchLocation, getCityDetail, getItems, searchitems } from "./controller.home";
-import { RiUserLocationFill } from "react-icons/ri";
-import { FaLocationArrow } from "react-icons/fa";
-import { FaLocationDot } from "react-icons/fa6";
-import { useNavigate, useNavigation } from "react-router-dom";
-import LocationSearchInputOnly from "../../components/LocationSearchInput/LocationSearchInputOnly";
+import { getItems } from "./controller.home";
+
+import { useNavigate } from "react-router-dom";
 import LocationSearchAutoComplete from "../../components/LocationSearchAutoComplete/LocationSearchAutoComplete";
 const Home = () => {
   const [showMap, setShowMap] = useState(false);
@@ -23,7 +20,6 @@ const Home = () => {
   const footerRef = useRef(null);
   const [showSignUp, setShowSignUp] = useState(true);
   const [items, setItems] = useState<any[]>([]);
-  const [locationList, setLocationList] = useState<any[]>([]);
   const navigation = useNavigate();
 
   const handleToggle = () => {
@@ -37,20 +33,17 @@ const Home = () => {
     } else {
       localStorage.setItem("visited", "true");
     }
-  }
-  , []);
+  }, []);
 
   useEffect(() => {
-    async function getItemsState(){
-      let itemsList= await getItems() as any;
+    async function getItemsState() {
+      let itemsList = (await getItems()) as any;
       setItems(itemsList);
     }
     getItemsState();
   }, []);
 
-
   useEffect(() => {
-   
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -75,7 +68,11 @@ const Home = () => {
   };
   return (
     <>
-      <Head headerClassName="head-instance" type="About" searchResult={setItems} />
+      <Head
+        headerClassName="head-instance"
+        type="About"
+        searchResult={setItems}
+      />
       <div className="home-container">
         <FilterNavbar />
         <div className="splash">
@@ -88,10 +85,11 @@ const Home = () => {
                 Discover locally owned shops and makers around the corner or
                 across the world
               </div>
-              <LocationSearchAutoComplete locationSelected={(placeId:string)=>{
-                navigation("/search/?cityId="+placeId);
-              }} />
-            
+              <LocationSearchAutoComplete
+                locationSelected={(placeId: string) => {
+                  navigation("/search/?cityId=" + placeId);
+                }}
+              />
             </div>
           </div>
           <div className="splash-image-container">
@@ -102,10 +100,10 @@ const Home = () => {
         {showMap ? (
           <div className="map-container">
             <MapComponent lat={0} lng={0} />
-          </div>  
+          </div>
         ) : (
           <div className="items-container">
-            {  items?.map((item:any) => (
+            {items?.map((item: any) => (
               <Card key={item.id} {...item} />
             ))}
           </div>

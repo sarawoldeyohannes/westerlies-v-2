@@ -45,6 +45,9 @@ export interface FineLocation {
     lattitude:    string;
     city:         string;
     phoneNumber: string;
+    state: string;
+    zipCode: string;
+    street: string;
     email:        string;
 }
 

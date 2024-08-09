@@ -28,7 +28,7 @@ export const freeSearch = async ( freeSearchtxt: string): Promise<StoreData[]> =
 // Function to delete a store
 export const deleteStore = async (storeId: string): Promise<void> => {
   try {
-    const response = await axios.delete(`${url}/store/${storeId}`);
+    const response = await axios.get(`${url}/store/delete/${storeId}`);
     console.error('Deleted successfully:', response.data);
   } catch (error) {
     console.error('Delete error:', error);

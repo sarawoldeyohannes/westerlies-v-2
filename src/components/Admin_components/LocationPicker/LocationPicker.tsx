@@ -1,14 +1,11 @@
 import React, { useState, useEffect, useRef } from "react";
-import { GoogleMap, LoadScript } from "@react-google-maps/api";
+import { GoogleMap } from "@react-google-maps/api";
 import SearchBox from "../SearchBox/SearchBox";
 
 const containerStyle = {
   width: "100%",
   height: "400px",
 };
-
-// Use string literals directly for libraries
-const libraries: ("places" | "marker")[] = ["places", "marker"];
 
 const LocationPicker: React.FC<{
   onLocationSelect: (location: any) => void;
@@ -74,6 +71,9 @@ const LocationPicker: React.FC<{
           const addressComponents = results[0].address_components;
           let city = "";
           let country = "";
+          let state = "";
+          let zipCode = "";
+          let street = "";
 
           for (let component of addressComponents) {
             if (component.types.includes("locality")) {
@@ -81,6 +81,18 @@ const LocationPicker: React.FC<{
             }
             if (component.types.includes("country")) {
               country = component.long_name;
+            }
+            if (component.types.includes("administrative_area_level_1")) {
+              state = component.long_name;
+            }
+            if (component.types.includes("postal_code")) {
+              zipCode = component.long_name;
+            }
+            if (
+              component.types.includes("route") ||
+              component.types.includes("street_address")
+            ) {
+              street = component.long_name;
             }
           }
 
@@ -90,6 +102,9 @@ const LocationPicker: React.FC<{
             address: results[0].formatted_address,
             city,
             country,
+            state,
+            zipCode,
+            street,
           });
         }
       });
@@ -109,6 +124,9 @@ const LocationPicker: React.FC<{
           const addressComponents = place.address_components;
           let city = "";
           let country = "";
+          let state = "";
+          let zipCode = "";
+          let street = "";
 
           for (let component of addressComponents) {
             if (component.types.includes("locality")) {
@@ -116,6 +134,18 @@ const LocationPicker: React.FC<{
             }
             if (component.types.includes("country")) {
               country = component.long_name;
+            }
+            if (component.types.includes("administrative_area_level_1")) {
+              state = component.long_name;
+            }
+            if (component.types.includes("postal_code")) {
+              zipCode = component.long_name;
+            }
+            if (
+              component.types.includes("route") ||
+              component.types.includes("street_address")
+            ) {
+              street = component.long_name;
             }
           }
 
@@ -125,6 +155,9 @@ const LocationPicker: React.FC<{
             address: place.formatted_address,
             city,
             country,
+            state,
+            zipCode,
+            street,
           });
         }
       }
@@ -146,10 +179,7 @@ const LocationPicker: React.FC<{
   };
 
   return (
-    <LoadScript
-      googleMapsApiKey="AIzaSyBXKcXjKnsuqS48iQOuXc-ruvr0vV8iCLs"
-      libraries={libraries}
-    >
+    <>
       <SearchBox onPlaceChanged={handlePlaceChanged} />
       <GoogleMap
         mapContainerStyle={containerStyle}
@@ -159,7 +189,7 @@ const LocationPicker: React.FC<{
         onLoad={onMapLoad}
         options={{ mapId: "2d74113481ef49e9" }}
       />
-    </LoadScript>
+    </>
   );
 };
 
