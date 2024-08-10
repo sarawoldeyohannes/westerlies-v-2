@@ -1,20 +1,20 @@
 import axios from "axios";
 import { url } from "../../../../util/constant";
 export interface StoreData {
-    storeId?: string;
+    storeId?: number;
     name:                        string;
     about:                       string;
     moreInfo:                    string;
     description:                 string;
     learnWithUs:                 string;
     meetUs:                      string;
-    isClaimed:                   boolean;
+    isClaimed:                   number;
     storePicture:                string;
     googleReiviewUrl:            string;
     yelpReviewUrl:               string;
-    hasClasses:                  boolean;
+    hasClasses:                  number;
     classInfo:                   string;
-    isBazaar:                    boolean;
+    isBazaar:                    number;
     createdAt:                   Date;
     updatedAt:                   Date;
     bazaarDetails:               BazaarDetail[];
@@ -33,14 +33,16 @@ export interface StoreOpeningDaysAndLocation {
 }
 
 export interface Day {
-    openTime:  string;
-    closeTime: string;
-    dayId:     number;
+  id?:             number;
+  storeId?:        number;
+  dayId:          number;
+  openTime:       string;
+  closeTime:      string;
+  fineLocationId?: number;
 }
 
 export interface FineLocation {
   fineLocationId?: number;
-    address:      string;
     longtiude:    string;
     lattitude:    string;
     city:         string;
@@ -49,6 +51,7 @@ export interface FineLocation {
     zipCode: string;
     street: string;
     email:        string;
+    storeOpeningDays?: Day[];
 }
 
 export interface BazaarDetail {
@@ -56,7 +59,8 @@ export interface BazaarDetail {
 }
 
 export interface InstagramPhoto {
-  urlLink: string;
+  instagramPhotosId?: number;
+  li: string;
 }
 
 export interface Product {
@@ -70,6 +74,7 @@ export interface ShopOwner2 {
 }
 
 export interface StoreLink {
+  storeLinkId?: number;
     link:     string;
     linkType: number;
 }
@@ -141,13 +146,11 @@ export interface Days{
   };
   export async function addStore(data: StoreData) {
     try {
-      console.log('Sending data to API:', data); // Log data being sent
       const response = await axios.post(url + "/store/", data, {
         headers: {
           "Content-Type": "application/json",
         },
       });
-      console.log('API response:', response.data); // Log API response
       return response.data;
     } catch (error: unknown) {
       if (axios.isAxiosError(error)) {

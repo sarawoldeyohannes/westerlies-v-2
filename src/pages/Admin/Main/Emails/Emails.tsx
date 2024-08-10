@@ -1,77 +1,99 @@
 import AdminHeader from "../../../../components/Admin_components/AdminHeader/AdminHeader";
 import DataTable from "react-data-table-component";
-import { data } from "./controller.emails.ts";
+import { fetchData } from "./controller.emails.ts";
 import "../AdminHome/AdminHome.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { CSVLink } from "react-csv";
-
-// import { FaEdit } from "react-icons/fa";
-// import { IoEyeSharp } from "react-icons/io5";
-// import { RiDeleteBin6Line } from "react-icons/ri";
+import { useEffect, useState } from "react";
 
 const Emails = () => {
-  // const handleEdit = (row: any) => {
-  //   console.log("Edit", row);
-  //   // Add your edit logic here
-  // };
+  const [emailData, setemailData] = useState<
+    { emailId: number; email: string }[]
+  >([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const [successMessage, setSuccessMessage] = useState<string>("");
+  const [errorMessage, setErrorMessage] = useState<string>("");
 
-  // const handleDelete = (row: any) => {
-  //   console.log("Delete", row);
-  //   // Add your delete logic here
-  // };
+  useEffect(() => {
+    const loadEmailData = async () => {
+      try {
+        console.log("Fetching email data...");
+        const data = await fetchData();
+        console.log("Email data fetched successfully:", data);
+        setemailData(data);
+        setError(null); // Reset error state if data is fetched successfully
+      } catch (error) {
+        console.error("Error fetching email data:", error);
+        setError("Failed to load email data");
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  // const handleView = (row: any) => {
-  //   console.log("View", row);
-  //   // Add your view logic here
-  // };
-  // Create the CSV string from your data
-  const csvData = data.map((row) => ({
-    Email: row.email, // Adjust this based on your data structure
-  }));
+    loadEmailData();
+  }, []);
 
-  // Trigger the download
-  const csvHeaders = [{ label: "Email", key: "Email" }]; // Column headers
+  const csvHeaders = [
+    { label: "Email ID", key: "emailId" },
+    { label: "Email", key: "email" },
+  ]; // Column headers for CSV
   const csvFilename = "email_data.csv"; // Desired filename
 
   const columns = [
     {
-      name: "Email",
-      selector: (row: any) => row.email,
+      name: "Email ID",
+      selector: (row: { emailId: number }) => row.emailId,
       sortable: true,
     },
-    // {
-    //   name: "Manage",
-    //   cell: (row: any) => (
-    //     <div className="button-container">
-    //       <FaEdit color="#202D3F" onClick={() => handleEdit(row)} />
-    //       <IoEyeSharp color="#202D3F" onClick={() => handleView(row)} />
-    //       <RiDeleteBin6Line color="red" onClick={() => handleDelete(row)} />
-    //     </div>
-    //   ),
-    //   ignoreRowClick: true,
-    //   allowOverflow: true,
-    //   button: true,
-    // },
+    {
+      name: "Email",
+      selector: (row: { email: string }) => row.email,
+      sortable: true,
+    },
   ];
 
   return (
     <>
       <AdminHeader />
       <div className="Admin-container">
-        <div className="add-wrapper">
-          <CSVLink data={csvData} headers={csvHeaders} filename={csvFilename}>
-            Download CSV
-          </CSVLink>
-        </div>
-        <DataTable
-          title="Email Management"
-          columns={columns}
-          data={data}
-          pagination
-          highlightOnHover
-          responsive
-          striped
-        />
+        {successMessage && (
+          <div className="alert alert-success" role="alert">
+            {successMessage}
+          </div>
+        )}
+        {errorMessage && <span className="text-danger">{errorMessage}</span>}
+        {loading ? (
+          <div className="d-flex justify-content-center">
+            <div className="spinner-border" role="status">
+              <span className="visually-hidden">Loading...</span>
+            </div>
+          </div>
+        ) : error ? (
+          <div>{error}</div>
+        ) : (
+          <>
+            <div className="add-wrapper">
+              <CSVLink
+                data={emailData}
+                headers={csvHeaders}
+                filename={csvFilename}
+                className="btn btn-primary"
+              >
+                Download CSV
+              </CSVLink>
+            </div>
+            <DataTable
+              title="Email Management"
+              columns={columns}
+              data={emailData}
+              pagination
+              highlightOnHover
+              responsive
+              striped
+            />
+          </>
+        )}
       </div>
     </>
   );

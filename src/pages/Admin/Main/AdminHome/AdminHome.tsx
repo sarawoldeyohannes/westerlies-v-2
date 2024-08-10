@@ -112,7 +112,7 @@ const AdminHome = () => {
   const columns = [
     {
       name: "id",
-      selector: (row: StoreData): string => row.storeId || "", // Provide a default value
+      selector: (row: StoreData): number => row.storeId || 0, // Provide a default value
     },
     {
       name: "Store Name",

@@ -12,15 +12,14 @@ import {
   uploadFile,
 } from "./controller.add";
 import LocationPicker from "../../../../components/Admin_components/LocationPicker/LocationPicker";
-import { Container, Button, Nav, Row, Col } from "react-bootstrap";
+import { Container, Button, Row, Col } from "react-bootstrap";
 import AdminHeader from "../../../../components/Admin_components/AdminHeader/AdminHeader";
 import "./Add.css";
-import { useNavigate } from "react-router-dom";
 const Add: React.FC = () => {
   const [successMessage, setSuccessMessage] = useState<string>("");
   const [errorMessage, setErrorMessage] = useState<string>("");
   const [loading, setLoading] = useState(false);
-  const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
@@ -29,7 +28,43 @@ const Add: React.FC = () => {
     trigger,
     formState: { errors },
   } = useForm<StoreData>();
+  const [currentStep, setCurrentStep] = useState(0);
+  const errorMessageRef = useRef<HTMLDivElement>(null);
+  const handleNext = async () => {
+    const isValid = await trigger(); // Trigger validation
+    if (isValid) {
+      setCurrentStep((prevStep) => prevStep + 1);
+    } else {
+      // Set error message and scroll to the error message
+      setErrorMessage("Please fill out the required fields.");
+      if (errorMessageRef.current) {
+        errorMessageRef.current.scrollIntoView({
+          behavior: "smooth",
+          block: "center",
+        });
+      }
+    }
+  };
+  const handlePrevious = () => {
+    setCurrentStep((prevStep) => prevStep - 1);
+  };
+  const [links, setLinks] = useState<Link[]>([]);
+  const [days, setDays] = useState<Days[]>([]);
+  const [tags, setTags] = useState<Tag[]>([]);
+  useEffect(() => {
+    const loadLinksAndDaysAndTags = async () => {
+      const linksData = await fetchLinks();
+      setLinks(linksData);
 
+      const daysData = await fetchDays();
+      setDays(daysData);
+
+      const tagsData = await fetchTags();
+      setTags(tagsData);
+    };
+
+    loadLinksAndDaysAndTags();
+  }, []);
   // For storeLinks
   const {
     fields: storeLinkFields,
@@ -69,28 +104,8 @@ const Add: React.FC = () => {
     control,
     name: "storeTags",
   });
-  const [links, setLinks] = useState<Link[]>([]);
-  const [days, setDays] = useState<Days[]>([]);
-  const [tags, setTags] = useState<Tag[]>([]);
-  useEffect(() => {
-    const loadLinksAndDaysAndTags = async () => {
-      const linksData = await fetchLinks();
-      setLinks(linksData);
 
-      const daysData = await fetchDays();
-      setDays(daysData);
-
-      const tagsData = await fetchTags();
-      setTags(tagsData);
-    };
-
-    loadLinksAndDaysAndTags();
-  }, []);
   const handleLocationSelect = (location: any, index: number) => {
-    setValue(
-      `StoreOpeningDaysAndLocation.${index}.fineLocation.address`,
-      location.address
-    );
     setValue(
       `StoreOpeningDaysAndLocation.${index}.fineLocation.lattitude`,
       location.lat
@@ -139,11 +154,14 @@ const Add: React.FC = () => {
       }
     }
   };
+  const convertBooleanToNumber = (value: boolean): number => {
+    return value ? 1 : 0;
+  };
   const onSubmit: SubmitHandler<StoreData> = async (data) => {
     // Set default values for any missing fields
     const completeData = {
       ...data,
-      storeId: data.storeId || "",
+      storeId: data.storeId || 0,
       learnWithUs: data.learnWithUs || "",
       meetUs: data.meetUs || "",
       classInfo: data.classInfo || "",
@@ -157,24 +175,21 @@ const Add: React.FC = () => {
       storeLinks: data.storeLinks || [],
       StoreOpeningDaysAndLocation: data.StoreOpeningDaysAndLocation || [],
       storeTags: data.storeTags || [],
-      isClaimed: data.isClaimed || false,
-      isBazaar: data.isBazaar || false,
+      hasClasses:
+        convertBooleanToNumber(data.hasClasses as unknown as boolean) || 0,
+      isClaimed:
+        convertBooleanToNumber(data.isClaimed as unknown as boolean) || 0,
+      isBazaar:
+        convertBooleanToNumber(data.isBazaar as unknown as boolean) || 0,
     };
     try {
       setLoading(true);
-
-      console.log("Submitting data:", completeData);
-      const response = await addStore(completeData);
-      console.log("Store added successfully:", response);
+      await addStore(completeData);
       setSuccessMessage("Store added successfully");
 
       setTimeout(() => {
         setSuccessMessage("");
       }, 4000);
-      // Navigate to adminHome after 5 seconds
-      setTimeout(() => {
-        navigate("/adminHome");
-      }, 5000);
     } catch (error) {
       console.error("Error adding store:", error);
       setErrorMessage(`Error adding store:${error}`);
@@ -185,37 +200,8 @@ const Add: React.FC = () => {
     } finally {
       setLoading(false); // Hide loading spinner after submission is complete
     }
-    const jsonString = JSON.stringify(completeData, null, 2);
-    const blob = new Blob([jsonString], { type: "application/json" });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = "storeData.json";
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
   };
-  const [currentStep, setCurrentStep] = useState(0);
-  const steps = ["Store Info", "Address"];
-  const errorMessageRef = useRef<HTMLDivElement>(null);
-  const handleNext = async () => {
-    const isValid = await trigger(); // Trigger validation
-    if (isValid) {
-      setCurrentStep((prevStep) => prevStep + 1);
-    } else {
-      // Set error message and scroll to the error message
-      setErrorMessage("Please fill out the required fields.");
-      if (errorMessageRef.current) {
-        errorMessageRef.current.scrollIntoView({
-          behavior: "smooth",
-          block: "center",
-        });
-      }
-    }
-  };
-  const handlePrevious = () => {
-    setCurrentStep((prevStep) => prevStep - 1);
-  };
+
   return (
     <>
       <AdminHeader />
@@ -228,19 +214,7 @@ const Add: React.FC = () => {
       ) : (
         <Container className="add-container">
           <h1>Add Store</h1>
-          <Nav variant="tabs" defaultActiveKey="#store-info">
-            {steps.map((step, index) => (
-              <Nav.Item>
-                <Nav.Link
-                  href="#store-info"
-                  key={index}
-                  className={currentStep === index ? "active" : ""}
-                >
-                  {step}
-                </Nav.Link>
-              </Nav.Item>
-            ))}
-          </Nav>
+
           <form onSubmit={handleSubmit(onSubmit)} className="add-form">
             {successMessage && (
               <div className="alert alert-success" role="alert">
@@ -508,18 +482,18 @@ const Add: React.FC = () => {
                         <Col>
                           <label
                             className="form-label"
-                            htmlFor={`instagramPhotos.${index}.urlLink`}
+                            htmlFor={`instagramPhotos.${index}.li`}
                           >
                             Photo URL
                           </label>
                           <input
                             className="form-control"
-                            id={`instagramPhotos.${index}.urlLink`}
-                            {...register(`instagramPhotos.${index}.urlLink`, {
+                            id={`instagramPhotos.${index}.li`}
+                            {...register(`instagramPhotos.${index}.li`, {
                               required: true,
                             })}
                           />
-                          {errors.instagramPhotos?.[index]?.urlLink && (
+                          {errors.instagramPhotos?.[index]?.li && (
                             <span className="text-danger">
                               This field is required
                             </span>
@@ -539,7 +513,11 @@ const Add: React.FC = () => {
                   ))}
                   <Button
                     type="button"
-                    onClick={() => appendInstagramPhoto({ urlLink: "" })}
+                    onClick={() =>
+                      appendInstagramPhoto({
+                        li: "",
+                      })
+                    }
                   >
                     Add Instagram Photo
                   </Button>
@@ -660,28 +638,6 @@ const Add: React.FC = () => {
                       <div key={storeOpeningDay.id}>
                         <Row>
                           <Col>
-                            <label
-                              className="form-label"
-                              htmlFor={`StoreOpeningDaysAndLocation.${storeOpeningDayIndex}.fineLocation.address`}
-                            >
-                              Address
-                            </label>
-                            <input
-                              className="form-control"
-                              id={`StoreOpeningDaysAndLocation.${storeOpeningDayIndex}.fineLocation.address`}
-                              {...register(
-                                `StoreOpeningDaysAndLocation.${storeOpeningDayIndex}.fineLocation.address`,
-                                { required: true }
-                              )}
-                            />
-                            {errors.StoreOpeningDaysAndLocation?.[
-                              storeOpeningDayIndex
-                            ]?.fineLocation?.address && (
-                              <span className="text-danger">
-                                This field is required
-                              </span>
-                            )}
-
                             <label
                               className="form-label"
                               htmlFor={`StoreOpeningDaysAndLocation.${storeOpeningDayIndex}.fineLocation.longtiude`}
@@ -897,7 +853,6 @@ const Add: React.FC = () => {
                       onClick={() =>
                         appendStoreOpeningDay({
                           fineLocation: {
-                            address: "",
                             longtiude: "",
                             lattitude: "",
                             city: "",
