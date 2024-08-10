@@ -7,7 +7,6 @@ import { IoEyeSharp } from "react-icons/io5";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { useEffect, useState } from "react";
 import { deleteStore, fetchData, freeSearch } from "./controller.adminHome.ts";
-
 import { StoreData } from "../Add/controller.add.ts";
 import { CiSearch } from "react-icons/ci";
 
@@ -121,11 +120,10 @@ const AdminHome = () => {
     {
       name: "City",
       selector: (row: StoreData): string => {
-        const firstAddress =
-          row.StoreOpeningDaysAndLocation && row.StoreOpeningDaysAndLocation[0];
-        return firstAddress && firstAddress.fineLocation
-          ? firstAddress.fineLocation.city
-          : ""; // Provide a default value
+        if (row.fineLocations && row.fineLocations.length > 0) {
+          return row.fineLocations[0].city || "N/A";
+        }
+        return "N/A";
       },
     },
     {

@@ -1,6 +1,7 @@
 import axios from "axios";
 import { url } from "../../../../util/constant";
 export interface StoreData {
+    fineLocations?: FineLocation[];
     storeId?: number;
     name:                        string;
     about:                       string;
@@ -26,7 +27,6 @@ export interface StoreData {
     StoreOpeningDaysAndLocation: StoreOpeningDaysAndLocation[];
     storeTags:                   StoreTag[];
 }
-
 export interface StoreOpeningDaysAndLocation {
     fineLocation: FineLocation;
     days:         Day[];

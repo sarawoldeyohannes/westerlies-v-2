@@ -3,7 +3,6 @@ import { StoreData } from "../Add/controller.add";
 import axios from 'axios';
 
 
-  // Function to fetch data from the API using axios
 export const fetchData = async (): Promise<StoreData[]> => {
   try {
     const response = await axios.get(`${url}/store/`);
