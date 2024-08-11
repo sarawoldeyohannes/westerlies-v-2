@@ -110,7 +110,7 @@ const HeaderSearch = ({searchResult,cityId}: HeaderSearchProps) => {
               }}
             className="location-item">
               <FaLocationDot style={{margin: 10}} />
-              {location.description + " TEST"}</div>
+              {location.description }</div>
           ))
           }
         </div>

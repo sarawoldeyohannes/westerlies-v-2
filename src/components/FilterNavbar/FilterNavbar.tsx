@@ -2,7 +2,7 @@ import "./FilterNavbar.css";
 import "./mobile.filterNavbar.css";
 import { useState } from "react";
 import FilterPopUp from "../FilterPopUp/FilterPopUp";
-const FilterNavbar = ({}) => {
+const FilterNavbar = ({cityId}:any) => {
   const [showPopup, setShowPopup] = useState(false);
   const [filterType, setFilterType] = useState("");
 

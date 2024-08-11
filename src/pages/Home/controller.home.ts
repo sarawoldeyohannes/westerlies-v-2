@@ -26,7 +26,7 @@ export const items = [
 
   export async function getItems() {
    
-      let response = await axios.get(url+'/store/random/20');
+      let response = await axios.get(url+'/store/random/16');
       return response.data;
   }
 
