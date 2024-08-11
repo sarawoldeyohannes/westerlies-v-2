@@ -10,10 +10,12 @@ interface ProductSearchInputProps {
   selectedLocation: string;
   setSelectedLocation: (selectedLocation: string) => void;
   setFreeSearch: (freeSearch: string) => void;
+  selectedTagsList: any[];
+  setSelectedTags: (tags: any[]) => void;
 }
 
 
-const ProductSearchInput = ({tags,setFreeSearch,setSelectedLocation,selectedLocation,setLocationList}:ProductSearchInputProps) => {
+const ProductSearchInput = ({tags,setFreeSearch,setSelectedLocation,selectedLocation,setLocationList,setSelectedTags,selectedTagsList}:ProductSearchInputProps) => {
  
 
   return (
@@ -31,7 +33,7 @@ const ProductSearchInput = ({tags,setFreeSearch,setSelectedLocation,selectedLoca
           }}  
         />
       </div>
-      <Filter type="Product" tags={tags} selectedLocation={selectedLocation} setSelectedLocation={setSelectedLocation} setLocationList={setLocationList} />
+      <Filter type="Product" tags={tags} selectedLocation={selectedLocation} setSelectedLocation={setSelectedLocation} setLocationList={setLocationList} selectedTagsList={selectedTagsList} setSelectedTags={setSelectedTags} />
       <div className="search-button">
         <CiSearch />
       </div>

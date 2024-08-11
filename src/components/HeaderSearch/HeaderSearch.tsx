@@ -90,7 +90,7 @@ const HeaderSearch = ({searchResult,cityId}: HeaderSearchProps) => {
       <div className="inputs">
         {searchType === "free" && <FreeSearch setLocationList={setLocationList} selectedLocation={selectedLocation} setSelectedLocation={setSelectedLocation} />}
         {searchType === "location" && <LocationSearchInput setSelectedTags={setSelectedTags} selectedTagsList={selectedTags}  selectedLocation={selectedLocation} setSelectedLocation={setSelectedLocation} setLocationList={setLocationList} tags={tags} />}
-        {searchType === "product" && <ProductSearchInput setFreeSearch={setFreeSearchValue}  selectedLocation={selectedLocation} setSelectedLocation={setSelectedLocation} setLocationList={setLocationList} tags={tags} />}
+        {searchType === "product" && <ProductSearchInput setSelectedTags={setSelectedTags} selectedTagsList={selectedTags}  setFreeSearch={setFreeSearchValue}  selectedLocation={selectedLocation} setSelectedLocation={setSelectedLocation} setLocationList={setLocationList} tags={tags} />}
         <div style={{width:300, alignSelf: 'flex-start',margin:5,position:'absolute',zIndex: 2000,marginTop:75}}>
       {locationList.length > 0 &&
         <div className="selectLocation">

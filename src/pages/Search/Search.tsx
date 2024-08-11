@@ -74,7 +74,7 @@ const Search = () => {
     <>
       <Head headerClassName="head-instance" searchResult={setSearchItems}  cityId={cityId} />
       <div className="search-container">
-        <FilterNavbar />
+        <FilterNavbar  />
 
         <div className="map-and-items">
           <div className="items-pagination">
@@ -112,6 +112,7 @@ const Search = () => {
           {cityDetail &&
             <MapComponent lat={cityDetail?.lat || 0} lng={cityDetail?.lng || 0} to_be_marked={selectedItems}  />
           }
+          
             </div>
         </div>
         {!isFooterVisible && (
