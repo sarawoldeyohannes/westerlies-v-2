@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { GoogleMap, InfoWindow, LoadScript, Marker } from "@react-google-maps/api";
 import "./MapComponent.css";
 import { useNavigate, useNavigation } from "react-router-dom";
@@ -23,6 +23,7 @@ const MapComponent: React.FC<Location> = (location : Location) => {
   const [activeMarker, setActiveMarker] = useState<google.maps.LatLngLiteral | null>(null);
   const [activeDescription, setActiveDescription] = useState<string | null>(null);
   const [selectedStoreId, setSelectedStoreId] = useState<number | null>(null);
+  const [zoom,setZoom] = useState(11);
   const navigate = useNavigate();
   const handleMarkerClick = (position: google.maps.LatLngLiteral, description: string, storeId: number) => {
     setActiveMarker(position);
@@ -30,17 +31,19 @@ const MapComponent: React.FC<Location> = (location : Location) => {
     setSelectedStoreId(storeId);
   };
 
+  useEffect(()=>{
+    console.log("ALLLL: ", location);
+   
+  },[])
+
   const handleCloseClick = () => {
     setActiveMarker(null);
     setActiveDescription(null);
   };
   return (
-    <LoadScript googleMapsApiKey="AIzaSyBXKcXjKnsuqS48iQOuXc-ruvr0vV8iCLs"
-    onLoad={() => console.log("Google Maps script loaded successfully")}
-    onError={(e) => console.error("Error loading Google Maps script", e)}
-    >
+  
 
-      <GoogleMap mapContainerStyle={containerStyle} center={{lat: location.lat , lng: location.lng}} zoom={14}>
+      <GoogleMap mapContainerStyle={containerStyle} center={{lat: location.lat , lng: location.lng}} zoom={11}>
         {/* Child components, such as markers, info windows, etc. */}
         {location.to_be_marked?.map((loc, index) => {
           const fineLocation = loc.fineLocations[0];
@@ -75,7 +78,6 @@ const MapComponent: React.FC<Location> = (location : Location) => {
 
         <></>
       </GoogleMap>
-    </LoadScript>
   );
 };
 

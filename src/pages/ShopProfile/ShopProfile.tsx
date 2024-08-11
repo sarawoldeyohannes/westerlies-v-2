@@ -22,6 +22,7 @@ import { useEffect, useState } from "react";
 const ShopProfile = () => {
   const params = useParams();
   const [storeDetailInfo,setStoreDetailInfo] = useState<any>();
+  const [loadMap,setLoadMap] = useState<boolean>(false);
   const [nearByStoreList,setNearByStoreList] = useState<any[]>([]);
   const [locationIndex,setLocationIndex] = useState<number>(0);
   const [dayId,setDayId] = useState<any>({
@@ -41,16 +42,21 @@ const ShopProfile = () => {
     let storeDetail = await getStoreBY_id(storeId) ;
     let nearByStore = await getNearbayStores(parseInt(storeId));
     setStoreDetailInfo(storeDetail[0]);
+    
     // limit nearby stores to 3
     nearByStore = nearByStore.slice(0,3);
     setNearByStoreList(nearByStore);
     console.log("Store Detail",storeDetail);
   }
-
+  
   let storeId = params.storeId as string;
   getStoreDetail(storeId);
   
   },[]);
+
+useEffect(()=>{
+  setLoadMap(true);
+},[storeDetailInfo])
 
   if(storeDetailInfo === undefined){
     return(
@@ -232,8 +238,11 @@ const ShopProfile = () => {
               </div>
             </div>
             <div className="map-wrapper">
+             {loadMap &&
              
-              <MapComponent lat={  storeDetailInfo.StoreOpeningDaysAndLocation[locationIndex].fineLocation.lattitude} lng={  storeDetailInfo.StoreOpeningDaysAndLocation[locationIndex].fineLocation.longtiude}  to_be_marked={[]} />
+              <MapComponent lat={parseFloat(storeDetailInfo.StoreOpeningDaysAndLocation[locationIndex].fineLocation.lattitude)} lng={parseFloat(storeDetailInfo.StoreOpeningDaysAndLocation[locationIndex].fineLocation.longtiude)}  to_be_marked={[]} />
+             
+             }
             </div>
           </div>
           )
