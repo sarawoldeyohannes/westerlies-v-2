@@ -100,7 +100,10 @@
   letter-spacing:1px;
   font-style: normal;
 }
-
+.splash .s-text-container{
+  padding: 10px 0px 0px 0px;
+  height: 100%;
+}
 .selectLocation{
   display: flex;
   flex-direction: column;

@@ -79,18 +79,20 @@ const Home = () => {
         <div className="splash">
           <div className="splash-text-container">
             <div className="s-container">
-              <div className="splash-text-wrapper">
-                Find and Support Independent Shops + Makers
+              <div className="s-text-container">
+                <div className="splash-text-wrapper">
+                  Find and Support Independent Shops + Makers
+                </div>
+                <div className="splash-text-wrapper2">
+                  Discover locally owned shops and makers around the corner or
+                  across the world
+                </div>
+                <LocationSearchAutoComplete
+                  locationSelected={(placeId: string) => {
+                    navigation("/search/?cityId=" + placeId);
+                  }}
+                />
               </div>
-              <div className="splash-text-wrapper2">
-                Discover locally owned shops and makers around the corner or
-                across the world
-              </div>
-              <LocationSearchAutoComplete
-                locationSelected={(placeId: string) => {
-                  navigation("/search/?cityId=" + placeId);
-                }}
-              />
             </div>
           </div>
           <div className="splash-image-container">
