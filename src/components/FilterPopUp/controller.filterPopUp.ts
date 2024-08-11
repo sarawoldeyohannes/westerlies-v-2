@@ -2,6 +2,8 @@ export interface FilterPopUpProps {
     onClose: () => void;
     filterType: string;
     tags: any[];
+    selectedTags: any;
+    selectedTagsList: any[];
   }
   export interface FilterItem {
     id: number;

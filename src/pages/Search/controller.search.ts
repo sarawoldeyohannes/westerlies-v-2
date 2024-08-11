@@ -1,7 +1,7 @@
 import axios from "axios";
 import { url } from "../../util/constant";
 
-export const searchitems = [
+export const searchitemsT = [
     { id: 1, title: 'Name1', description: 'Primary Tag', imageUrl: 'https://via.placeholder.com/300' },
     { id: 2, title: 'Name2', description: 'Primary Tag', imageUrl: 'https://via.placeholder.com/300' },
     { id: 3, title: 'Name3', description: 'Primary Tag', imageUrl: 'https://via.placeholder.com/300' },

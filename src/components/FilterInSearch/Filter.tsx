@@ -6,7 +6,7 @@ import FilterPopUp from "../FilterPopUp/FilterPopUp";
 import { FilterProps } from "./controller.Filter";
 import LocationSearchInputOnly from "../LocationSearchInput/LocationSearchInputOnly";
 import { SearchLocation } from "../../pages/Home/controller.home";
-const Filter = ({ type,tags,selectedLocation, setSelectedLocation,setLocationList }: FilterProps) => {
+const Filter = ({ type,tags,selectedLocation, setSelectedLocation,setLocationList,setSelectedTags,selectedTagsList}: FilterProps) => {
   const [showPopup, setShowPopup] = useState(false);
   const [filterType, setFilterType] = useState("");
   
@@ -67,7 +67,7 @@ const Filter = ({ type,tags,selectedLocation, setSelectedLocation,setLocationLis
         </div>
       </div>
       {showPopup && (
-        <FilterPopUp onClose={handleClosePopup} filterType={filterType}  tags={tags} />
+        <FilterPopUp onClose={handleClosePopup} filterType={filterType} tags={tags} selectedTags={setSelectedTags} selectedTagsList={selectedTagsList}/>
       )}
     </div>
   );

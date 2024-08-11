@@ -72,6 +72,7 @@ const Home = () => {
         headerClassName="head-instance"
         type="About"
         searchResult={setItems}
+        cityId={""}
       />
       <div className="home-container">
         <FilterNavbar />
@@ -103,9 +104,17 @@ const Home = () => {
           </div>
         ) : (
           <div className="items-container">
-            {items?.map((item: any) => (
-              <Card key={item.id} {...item} />
-            ))}
+            {items.length > 0 &&
+              items?.map((item: any) => (
+                <Card
+                  key={item.storeId}
+                  name={item.name}
+                  description={""}
+                  storePicture={item.storePicture}
+                  storeId={item.storeId}
+                  primaryTag2={item?.primaryTag2}
+                />
+              ))}
           </div>
         )}
         {!isFooterVisible && (
