@@ -44,7 +44,7 @@
 .filter-popup-container .text-wrapper-7{
   color: black;
   font-family: 'Freight Sans Pro Medium', sans-serif;
-  font-size: 22px;
+  font-size: 18px;
   font-weight: 400;
   letter-spacing: 0;
   line-height: normal;
@@ -60,9 +60,9 @@
 
 .filter-popup-container .filter-items-container {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 20px;
-  padding: 20px;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  padding: 25px;
   max-height: 50vh;
   overflow-y: scroll;
 }
@@ -72,7 +72,7 @@
   align-items: center;
   color: black;
   font-family: 'Freight Sans Pro Medium', sans-serif;
-  font-size: 18px;
+  font-size: 14px;
   font-weight: 400;
   letter-spacing: 0;
   line-height: normal;
@@ -99,7 +99,7 @@
   display: inline-flex;
   flex: 0 0 auto;
   gap: 9.35px;
-  padding: 10px 20px;
+  padding: 10px 15px;
   position: relative;
 }
 .filter-popup-container .frame-6{
@@ -115,9 +115,8 @@
 
 .filter-popup-container .text-wrapper-2,
 .filter-popup-container .text-wrapper-3 {
-  font-size: 18px;
+  font-size: 14px;
   font-family: 'Freight Sans Pro Medium', sans-serif;
-  font-size: 18px;
   font-weight: 400;
   line-height: normal;
   position: relative;

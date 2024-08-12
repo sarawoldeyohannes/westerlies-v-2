@@ -213,7 +213,7 @@ const Add: React.FC = () => {
         </div>
       ) : (
         <Container className="add-container">
-          <h1>Add Store</h1>
+          <h3>Add Store</h3>
 
           <form onSubmit={handleSubmit(onSubmit)} className="add-form">
             {successMessage && (
@@ -269,27 +269,12 @@ const Add: React.FC = () => {
                 <Row>
                   <Col>
                     <div className="input-group">
-                      <span className="input-group-text">About</span>
-                      <textarea
-                        className="form-control"
-                        id="about"
-                        aria-label="About"
-                        {...register("about", { required: true })}
-                      />
-                      {errors.about && (
-                        <span className="text-danger">
-                          This field is required
-                        </span>
-                      )}
-                    </div>
-                  </Col>
-                  <Col>
-                    <div className="input-group">
                       <span className="input-group-text">Description</span>
                       <textarea
                         className="form-control"
                         id="description"
                         aria-label="description"
+                        {...register("about")}
                         {...register("description", { required: true })}
                       />
                       {errors.description && (
@@ -303,29 +288,13 @@ const Add: React.FC = () => {
                 <Row>
                   <Col>
                     <div className="mb-3">
-                      <label className="form-label" htmlFor="googleReiviewUrl">
-                        Google Reiview Url
-                      </label>
-                      <input
-                        className="form-control"
-                        id="googleReiviewUrl"
-                        {...register("googleReiviewUrl")}
-                      />
-                      {errors.googleReiviewUrl && (
-                        <span className="text-danger">
-                          This field is required
-                        </span>
-                      )}
-                    </div>
-                  </Col>
-                  <Col>
-                    <div className="mb-3">
                       <label className="form-label" htmlFor="yelpReviewUrl">
                         Yelp Review Url
                       </label>
                       <input
                         className="form-control"
                         id="yelpReviewUrl"
+                        {...register("googleReiviewUrl")}
                         {...register("yelpReviewUrl")}
                       />
                       {errors.yelpReviewUrl && (
@@ -394,7 +363,7 @@ const Add: React.FC = () => {
                 </Row>
                 {/* Dynamic Store Links */}
                 <div className="col">
-                  <h3>Store Links</h3>
+                  <h5>Store Links</h5>
                   {storeLinkFields.map((field, index) => (
                     <div key={field.id}>
                       <Row>
@@ -475,7 +444,7 @@ const Add: React.FC = () => {
 
                 {/* Dynamic Instagram Photos */}
                 <div className="mb-3">
-                  <h3>Instagram Photos</h3>
+                  <h5>Instagram Photos</h5>
                   {instagramPhotoFields.map((field, index) => (
                     <div key={field.id}>
                       <Row>
@@ -524,7 +493,13 @@ const Add: React.FC = () => {
                 </div>
                 {/* Dynamic Store Tags */}
                 <div className="mb-3">
-                  <h3>Store Tags</h3>
+                  <h5>Secondary Tags</h5>
+                  <div className="alert alert-info" role="alert">
+                    Please include both <strong>Product Tags</strong> and{" "}
+                    <strong>Social Impact Tags</strong> that apply to this
+                    store. These tags help categorize and highlight the store's
+                    offerings and impact.
+                  </div>
                   {storeTagFields.map((field, index) => (
                     <div key={field.id}>
                       <Row>

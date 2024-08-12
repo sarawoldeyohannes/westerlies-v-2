@@ -10,7 +10,7 @@
 .add-container .add-form{
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 10px;
 }
 .add-container .form-button{
     display: flex;
@@ -49,4 +49,11 @@
 }
 .add-container .hidden-inputs{
     display: none;
+}
+.add-container input{
+    display: flex;
+    width: 400px;
+}
+.add-container input[type="checkbox"] {
+    width: 15px; /* Adjust width for checkbox */
 }
