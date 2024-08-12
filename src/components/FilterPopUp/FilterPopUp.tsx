@@ -112,9 +112,15 @@ const FilterPopUp: React.FC<FilterPopUpProps> = ({ onClose, filterType, tags,sel
     tags.map((tag) => {
       
       if(tag.tagTypeId == 2 && filterType == "SOCIAL IMPACT"){
+        if(selectedTagsList.includes(tag.tagId)){
+          tag.checked = true;
+        }
         localTagData.push(tag);
       }
       if(tag.tagTypeId == 1 && filterType == "PRODUCT"){
+        if(selectedTagsList.includes(tag.tagId)){
+          tag.checked = true;
+        }
         localTagData.push(tag);
       }
 
@@ -122,14 +128,15 @@ const FilterPopUp: React.FC<FilterPopUpProps> = ({ onClose, filterType, tags,sel
         
 
     });
-
+      
     if(filterType == "OFFER CLASS"){
+      
       localTagData.push(  {
         "tagId": 1000,
         "tagTypeId": 1,
         "tagName": "yes",
         "tagDescription": null,
-        "checked": false
+        "checked": selectedTagsList.includes(1000)
 
     },);
       localTagData.push(  {
@@ -137,7 +144,7 @@ const FilterPopUp: React.FC<FilterPopUpProps> = ({ onClose, filterType, tags,sel
         "tagTypeId": 1,
         "tagName": "No",
         "tagDescription": null,
-        "checked": false
+        "checked": selectedTagsList.includes(1001)
     },);
 
     }

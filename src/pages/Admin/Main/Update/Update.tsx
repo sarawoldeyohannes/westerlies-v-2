@@ -343,7 +343,7 @@ const Update = () => {
                     </Col>
                     <Col>
                       <img
-                        src={getPictureUrl(formValues?.storePicture)}
+                        src={getPictureUrl(formValues?.storePicture.replace("http://", "https://").replace("api.westerlies.io", "apibeta.westerlies.com").replace("/api/","/images/"))}
                         className="img-fluid"
                         alt="..."
                       />

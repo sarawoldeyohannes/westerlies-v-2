@@ -60,23 +60,24 @@ const HeaderSearch = ({searchResult,cityId,setCityId}: HeaderSearchProps) => {
     useEffect(()=>{
         async function freeSearch(){
           //        let {tagId, cityId , socialImpact, offersClasses,freeSearch } = body;
+          let selected_tags_final = selectedTags;
           let has_no_class = selectedTags.includes(1001) ? true : false;
           let has_class = selectedTags.includes(1000) ? true : false;
           if(has_no_class){
             let index = selectedTags.indexOf(1001);
-            selectedTags.splice(index,1);
+            selected_tags_final.splice(index,1);
           }
 
           if(has_class){
             let index = selectedTags.indexOf(1000);
-            selectedTags.splice(index,1);
+            selected_tags_final.splice(index,1);
           }
 
-            if(selectedLocationId !== "" || selectedTags.length > 0 || freeSearchValue !== ""){
+            if(selectedLocationId !== "" || selected_tags_final.length > 0 || freeSearchValue !== ""){
         let search_body =  {
           "freeSearch": freeSearchValue,
           "cityId": selectedLocationId,
-          "socialImpact": selectedTags
+          "socialImpact": selected_tags_final
           }
           let searchResult_data = await searchStores_Combined(search_body);
           console.log(searchResult_data);
