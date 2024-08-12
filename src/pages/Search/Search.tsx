@@ -38,6 +38,17 @@ const Search = () => {
     getCityDetailSearchPage(cityId);
   },[])
 
+  useEffect(()=>{
+    async function getCityDetailSearchPage(placeId: string){
+      let cityDetail = await getCityDetail(placeId) as Location;
+      // let store_list = await getStores_around_city(placeId);
+      console.log("City Detail",cityDetail);
+      // setSearchItems(store_list);
+      setCityDetail(cityDetail);
+    }
+    getCityDetailSearchPage(cityId);
+  },[cityId]);
+
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -72,7 +83,7 @@ const Search = () => {
   };
   return (
     <>
-      <Head headerClassName="head-instance" searchResult={setSearchItems}  cityId={cityId} />
+      <Head headerClassName="head-instance" searchResult={setSearchItems}  cityId={cityId} setCityId={setCityId} />
       <div className="search-container">
         <FilterNavbar  />
 

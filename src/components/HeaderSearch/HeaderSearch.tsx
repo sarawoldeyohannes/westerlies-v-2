@@ -12,8 +12,9 @@ import { searchitems } from "../../pages/Home/controller.home";
 interface HeaderSearchProps {
   searchResult: (searchedItemList: any) => void;
   cityId: string;
+  setCityId: (cityId: string) => void;
 }
-const HeaderSearch = ({searchResult,cityId}: HeaderSearchProps) => {
+const HeaderSearch = ({searchResult,cityId,setCityId}: HeaderSearchProps) => {
   const [searchType, setSearchType] = useState("free");
   const [locationList, setLocationList] = useState<any[]>([]);
   const [tags, setTags] = useState<any[]>([]);
@@ -59,6 +60,18 @@ const HeaderSearch = ({searchResult,cityId}: HeaderSearchProps) => {
     useEffect(()=>{
         async function freeSearch(){
           //        let {tagId, cityId , socialImpact, offersClasses,freeSearch } = body;
+          let has_no_class = selectedTags.includes(1001) ? true : false;
+          let has_class = selectedTags.includes(1000) ? true : false;
+          if(has_no_class){
+            let index = selectedTags.indexOf(1001);
+            selectedTags.splice(index,1);
+          }
+
+          if(has_class){
+            let index = selectedTags.indexOf(1000);
+            selectedTags.splice(index,1);
+          }
+
             if(selectedLocationId !== "" || selectedTags.length > 0 || freeSearchValue !== ""){
         let search_body =  {
           "freeSearch": freeSearchValue,
@@ -67,8 +80,26 @@ const HeaderSearch = ({searchResult,cityId}: HeaderSearchProps) => {
           }
           let searchResult_data = await searchStores_Combined(search_body);
           console.log(searchResult_data);
+          let final_has_no_class = (has_class == false && has_no_class == false) ? "none" : has_class ? 1 : 0;
+          if(final_has_no_class === "none"){
+
+          }else{
+            
+            searchResult_data =   searchResult_data.filter((item:any) => {
+                console.log("item.hasClasses:", item.hasClasses, "final_has_no_class:", final_has_no_class);
+
+                return item.hasClasses == final_has_no_class;
+              })
+              console.log("test: "+final_has_no_class ,searchResult_data);
+         
+          }
+         
           searchResult(searchResult_data);
         }
+        }
+
+        if(selectedLocationId != cityId){
+          setCityId(selectedLocationId);
         }
 
         freeSearch();

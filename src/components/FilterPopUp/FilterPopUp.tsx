@@ -14,23 +14,85 @@ const FilterPopUp: React.FC<FilterPopUpProps> = ({ onClose, filterType, tags,sel
 
   const handleCheckboxChange = (id: number) => {
 
+      if(id == 1000){
+        setItems((prevItems) =>
+          prevItems.map((item) =>
+            item.id === 1000 ? { ...item, checked: !item.checked } : item
+          )
+        );
+      
+        setItems((prevItems) =>
+          prevItems.map((item) =>
+            item.id === 1001 ? { ...item, checked: false } : item
+          )
+        );
+
+        setFinalTags((prevItems) =>
+          prevItems.map((item: any) =>
+            item.tagId === 1000 ? { ...item, checked: !item.checked } : item
+          )
+        );
+    
+        setFinalTags((prevItems) =>
+          prevItems.map((item: any) =>
+            item.tagId === 1001 ? { ...item, checked: false} : item
+          )
+        );
+      }
+
+      if(id == 1001){
+        setItems((prevItems) =>
+          prevItems.map((item) =>
+            item.id === 1001 ? { ...item, checked: !item.checked } : item
+          )
+        );
+      
+        setItems((prevItems) =>
+          prevItems.map((item) =>
+            item.id === 1000 ? { ...item, checked: false } : item
+          )
+        );
+
+        setFinalTags((prevItems) =>
+          prevItems.map((item: any) =>
+            item.tagId === 1001 ? { ...item, checked: !item.checked } : item
+          )
+        );
+    
+        setFinalTags((prevItems) =>
+          prevItems.map((item: any) =>
+            item.tagId === 1000 ? { ...item, checked: false} : item
+          )
+        );
+
+      }
+      if(id != 1000 && id != 1001){
     setItems((prevItems) =>
       prevItems.map((item) =>
         item.id === id ? { ...item, checked: !item.checked } : item
       )
     );
 
-
+  }
     if(selectedTagsList.includes(id)){
       let index = selectedTagsList.indexOf(id);
       selectedTagsList.splice(index,1);
 
     }
-    selectedTags([...selectedTagsList, id]);  
+
+    if(id == 1000){
+      if(selectedTagsList.includes(1001)){
+        let index = selectedTagsList.indexOf(1001);
+        selectedTagsList.splice(index,1);
+      }
+      let index = selectedTagsList.indexOf(1000);
+      selectedTagsList.splice(index,1);
+    }
+  
+     selectedTags([...selectedTagsList, id]);  
     
     
-  };
-  const handleClearSearch = () => {
+  };  const handleClearSearch = () => {
     // setItems((prevItems) =>
     //   prevItems.map((item) => ({ ...item, checked: false }))
     // );
@@ -55,10 +117,30 @@ const FilterPopUp: React.FC<FilterPopUpProps> = ({ onClose, filterType, tags,sel
       if(tag.tagTypeId == 1 && filterType == "PRODUCT"){
         localTagData.push(tag);
       }
+
+     
         
 
     });
 
+    if(filterType == "OFFER CLASS"){
+      localTagData.push(  {
+        "tagId": 1000,
+        "tagTypeId": 1,
+        "tagName": "yes",
+        "tagDescription": null,
+        "checked": false
+
+    },);
+      localTagData.push(  {
+        "tagId": 1001,
+        "tagTypeId": 1,
+        "tagName": "No",
+        "tagDescription": null,
+        "checked": false
+    },);
+
+    }
     setFinalTags(localTagData);
 
   },[])

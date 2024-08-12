@@ -240,7 +240,7 @@ useEffect(()=>{
             <div className="map-wrapper">
              {loadMap &&
              
-              <MapComponent lat={parseFloat(storeDetailInfo.StoreOpeningDaysAndLocation[locationIndex].fineLocation.lattitude)} lng={parseFloat(storeDetailInfo.StoreOpeningDaysAndLocation[locationIndex].fineLocation.longtiude)}  to_be_marked={[]} />
+              <MapComponent lat={parseFloat(storeDetailInfo.StoreOpeningDaysAndLocation[locationIndex].fineLocation.lattitude)} lng={parseFloat(storeDetailInfo.StoreOpeningDaysAndLocation[locationIndex].fineLocation.longtiude)}  to_be_marked={storeDetailInfo.StoreOpeningDaysAndLocation} />
              
              }
             </div>

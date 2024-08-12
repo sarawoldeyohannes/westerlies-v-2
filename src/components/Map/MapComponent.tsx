@@ -33,7 +33,6 @@ const MapComponent: React.FC<Location> = (location : Location) => {
 
   useEffect(()=>{
     console.log("ALLLL: ", location);
-   
   },[])
 
   const handleCloseClick = () => {
@@ -46,18 +45,19 @@ const MapComponent: React.FC<Location> = (location : Location) => {
       <GoogleMap mapContainerStyle={containerStyle} center={{lat: location.lat , lng: location.lng}} zoom={11}>
         {/* Child components, such as markers, info windows, etc. */}
         {location.to_be_marked?.map((loc, index) => {
-          const fineLocation = loc.fineLocations[0];
+          const fineLocation = loc.fineLocations? loc.fineLocations[0] : loc.fineLocation;
           if (fineLocation) {
             const specificLocation = { lat: parseFloat(fineLocation.lattitude), lng: parseFloat(fineLocation.longtiude) };
             // add a random number to the key to avoid duplicate key error
             const rand = () => Math.random().toString(36).substr(2, 9);
-            let index_un =  index+ loc?.storeId + parseInt(rand());
+            let index_un =  index+ (loc?.storeId || fineLocation.storeId) + parseInt(rand());
+            // console.log("LOOOOC: ", loc?.storeId);
 
             return (
               <Marker
                 key={index_un}
                 position={specificLocation}
-                onClick={() => handleMarkerClick(specificLocation, loc?.description , loc?.storeId)}
+                onClick={() => handleMarkerClick(specificLocation, loc?.email , loc?.storeId)}
               />
             );
           }
