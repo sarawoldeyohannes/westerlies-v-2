@@ -14,7 +14,7 @@
   }
   .search-container .items-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(250px,  max-content));
     gap: 16px;
     width: 100%;
     padding: 3% 0 0 0;

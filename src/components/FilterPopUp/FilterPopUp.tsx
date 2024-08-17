@@ -89,7 +89,7 @@ const FilterPopUp: React.FC<FilterPopUpProps> = ({ onClose, filterType, tags,sel
       selectedTagsList.splice(index,1);
     }
   
-     selectedTags([...selectedTagsList, id]);  
+     selectedTags([...selectedTagsList, id]);
     
     
   };  const handleClearSearch = () => {
