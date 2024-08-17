@@ -9,16 +9,19 @@ import {
   faFacebookF,
   faPinterest,
   faTiktok,
+  faWeibo,
+  faWeixin,
   faWhatsapp,
   faXTwitter,
   faYelp,
 } from "@fortawesome/free-brands-svg-icons";
-import { faGlobe } from "@fortawesome/free-solid-svg-icons";
+import { faBroadcastTower, faGlobe } from "@fortawesome/free-solid-svg-icons";
 import { faInstagram } from "@fortawesome/free-brands-svg-icons";
 import MapComponent from "../../components/Map/MapComponent";
 import { getNearbayStores, getStoreBY_id, insta, items } from "./controller.shopProfile";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { faWebflow } from "@fortawesome/free-brands-svg-icons/faWebflow";
 const ShopProfile = () => {
   const params = useParams();
   const [storeDetailInfo,setStoreDetailInfo] = useState<any>();
@@ -27,6 +30,7 @@ const ShopProfile = () => {
   const [locationIndex,setLocationIndex] = useState<number>(0);
   const [searchItems,setSearchItems] = useState<string>();
   const [cityId,setCityId] = useState<string>("");
+  const [sortedLink,setSortedLink] = useState<any[]>([]);
   const [dayId,setDayId] = useState<any>({
     "1": "MONDAY",
     "2": "TUESDAY",
@@ -51,6 +55,12 @@ const ShopProfile = () => {
       .sort((a, b) => b.dayId - a.dayId);
   
     updatedStoreDetailInfo.StoreOpeningDaysAndLocation[locationIndex].fineLocation.storeOpeningDays = sortedDays;
+    const desiredOrder = [7, 8, 6, 2, 1, 3];
+
+    const sortedLinks = updatedStoreDetailInfo.storeLinks.sort((a: any, b: any) => {
+      return desiredOrder.indexOf(a.linkType) - desiredOrder.indexOf(b.linkType);
+    });
+    setSortedLink(sortedLinks);
     
     setStoreDetailInfo(updatedStoreDetailInfo);
     
@@ -74,6 +84,7 @@ const ShopProfile = () => {
 
 
 useEffect(()=>{
+
   setLoadMap(true);
 },[storeDetailInfo])
 
@@ -91,7 +102,8 @@ useEffect(() => {
 }, [locationIndex]);
 
 function convertToAmPm(time24:string) {
-  if(time24){
+  if(time24 && !time24.includes("AM") && !time24.includes("PM")){
+    console.log("time:: ", time24);
   const [hours, minutes] = time24.split(':').map(Number);
 
   const amPm = hours >= 12 ? 'PM' : 'AM';
@@ -116,7 +128,7 @@ function convertToAmPm(time24:string) {
         <div className="section1">
           <div className="section1-part1">
             <img className="images-2" alt="Images" src={storeDetailInfo.storePicture?.replace("http://", "https://").replace("api.westerlies.io", "apibeta.westerlies.com").replace("/api/","/images/")} />
-            <span> This picture belongs to {storeDetailInfo.name}  </span> 
+            <span> This picture belongs to {storeDetailInfo.name}.  </span> 
 
           </div>
           <div className="section-part-2">
@@ -134,36 +146,36 @@ function convertToAmPm(time24:string) {
               <div className="frame-9-links">
 
               {
-                storeDetailInfo.storeLinks.map((item:any) => {
-              
+                sortedLink.map((item:any) => {
+                  console.log("Item: ", item);
                   if(item.linkType == 17 && item.link != "" && item.link != null){
                     return (
                       <a className="icon-links" target="_blank" href={item.link}>
                       <FontAwesomeIcon icon={faGlobe} />
                     </a>
                     )
-                  }else if(item.linkType == 8 && item.link != "" && item.link != null){
+                  }else if(item.linkType == 2 && item.link != "" && item.link != null){
                     return (
                       <a className="icon-links" target="_blank" href={item.link}>
                       <FontAwesomeIcon icon={faFacebookF} />
                     </a>
                     )
-                  }else if(item.linkType == 1 && item.link != "" && item.link != null){
+                  }else if(item.linkType == 6 && item.link != "" && item.link != null){
                     return (
                       <a className="icon-links" target="_blank" href={item.link}>
                       <FontAwesomeIcon icon={faInstagram} />
                     </a>
                     )
-                  }else if(item.linkType == 15 && item.link != "" && item.link != null){
+                  }else if(item.linkType == 1 && item.link != "" && item.link != null){
                     return (
                       <a className="icon-links" target="_blank" href={item.link}>
-                      <FontAwesomeIcon icon={faYelp} />
+                      <FontAwesomeIcon icon={faWeibo} />
                     </a>
                     )
-                  }else if(item.linkType == 14 && item.link != "" && item.link != null){
+                  }else if(item.linkType == 3 && item.link != "" && item.link != null){
                     return (
                       <a className="icon-links" target="_blank" href={item.link}>
-                      <FontAwesomeIcon icon={faXTwitter} />
+                      <FontAwesomeIcon icon={faWeixin} />
                     </a>
                     )
                   }else if(item.linkType == 9 && item.link != "" && item.link != null){
@@ -178,10 +190,16 @@ function convertToAmPm(time24:string) {
                       <FontAwesomeIcon icon={faWhatsapp} />
                     </a>
                     )
-                  }else if(item.linkType == 16 && item.link != "" && item.link != null){
+                  }else if(item.linkType == 8 && item.link != "" && item.link != null){
                     return (
                       <a className="icon-links" target="_blank" href={item.link}>
                       <FontAwesomeIcon icon={faTiktok} />
+                    </a>
+                    )
+                  }else if(item.linkType == 7 && item.link != "" && item.link != null){
+                    return (
+                      <a className="icon-links" target="_blank" href={item.link}>
+                      <FontAwesomeIcon icon={faGlobe} />
                     </a>
                     )
                   }
