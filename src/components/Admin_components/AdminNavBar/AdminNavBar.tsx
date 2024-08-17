@@ -10,7 +10,9 @@ const AdminNavBar = () => {
   return (
     <div className="navcontainer">
       <div className="logo">
-        <img src={img}></img>
+        <Link to="/" target="_blank">
+          <img src={img}></img>
+        </Link>
       </div>
       <nav className="nav">
         <div className="nav-upper-options">

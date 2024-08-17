@@ -52,3 +52,9 @@
     font-size: 28px;
     color: #ffffff; /* Optional: add color to make the text visible */
   }
+  .Admin-container .head .header.admin-head-instance{
+    display: none;
+  }
+  .Admin-container .head-search .buttons{
+    display: none;
+  }

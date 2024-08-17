@@ -6,21 +6,19 @@ import { FaEdit } from "react-icons/fa";
 import { IoEyeSharp } from "react-icons/io5";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { useEffect, useState } from "react";
-import { deleteStore, fetchData, freeSearch } from "./controller.adminHome.ts";
+import { deleteStore, fetchData } from "./controller.adminHome.ts";
 import { StoreData } from "../Add/controller.add.ts";
-import { CiSearch } from "react-icons/ci";
+import { Head } from "../../../../components/Header/Header"; // Import Head component
 
 const AdminHome = () => {
   const [storeData, setStoreData] = useState<StoreData[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [searchText, setSearchText] = useState("");
   const [filteredData, setFilteredData] = useState<StoreData[]>([]);
   const [successMessage, setSuccessMessage] = useState<string>("");
   const [errorMessage, setErrorMessage] = useState<string>("");
-  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchText(e.target.value);
-  };
+  const [cityId, setCityId] = useState("");
+
   useEffect(() => {
     const loadStoreData = async () => {
       try {
@@ -40,32 +38,11 @@ const AdminHome = () => {
 
     loadStoreData();
   }, []);
-  const performSearch = async () => {
-    setLoading(true);
-    if (searchText.trim() !== "") {
-      try {
-        const response = await freeSearch(searchText);
-        console.log("Search results:", response);
-        setFilteredData(response);
-        setLoading(false);
-        if (response.length === 0) {
-          setErrorMessage("No records found.");
-          setTimeout(() => {
-            setErrorMessage("");
-          }, 5000);
-        }
-      } catch (error) {
-        setErrorMessage(`Error fetching search data:`);
-        setTimeout(() => {
-          setErrorMessage("");
-        }, 5000);
-      }
-    } else {
-      // If the search input is empty, display all stores
-      setFilteredData(storeData);
-      setLoading(false);
-    }
+
+  const handleSearchResults = (results: StoreData[]) => {
+    setFilteredData(results);
   };
+
   const handleEdit = (row: any) => {
     console.log("Edit", row);
     window.open("update/" + `${row.storeId}`, "_blank");
@@ -112,6 +89,7 @@ const AdminHome = () => {
     {
       name: "id",
       selector: (row: StoreData): number => row.storeId || 0, // Provide a default value
+      sortable: true,
     },
     {
       name: "Store Name",
@@ -155,17 +133,13 @@ const AdminHome = () => {
             Add Store
           </button>
         </div>
-        <div className="search-box">
-          <input
-            type="text"
-            placeholder="Search..."
-            value={searchText}
-            onChange={handleSearch}
-          />{" "}
-          <div className="search-button">
-            <CiSearch onClick={performSearch} />
-          </div>
-        </div>
+        {/* Use Head component for searching */}
+        <Head
+          headerClassName="admin-head-instance"
+          searchResult={handleSearchResults}
+          cityId={cityId}
+          setCityId={setCityId}
+        />
         {successMessage && (
           <div className="alert alert-success" role="alert">
             {successMessage}
