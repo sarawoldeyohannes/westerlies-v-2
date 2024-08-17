@@ -25,6 +25,8 @@ const ShopProfile = () => {
   const [loadMap,setLoadMap] = useState<boolean>(false);
   const [nearByStoreList,setNearByStoreList] = useState<any[]>([]);
   const [locationIndex,setLocationIndex] = useState<number>(0);
+  const [searchItems,setSearchItems] = useState<string>();
+  const [cityId,setCityId] = useState<string>("");
   const [dayId,setDayId] = useState<any>({
     "1": "MONDAY",
     "2": "TUESDAY",
@@ -41,22 +43,65 @@ const ShopProfile = () => {
   
     let storeDetail = await getStoreBY_id(storeId) ;
     let nearByStore = await getNearbayStores(parseInt(storeId));
-    setStoreDetailInfo(storeDetail[0]);
+    // storeDetail[0].StoreOpeningDaysAndLocation.name = "test";
+    // loop through and arrange the dates based on date id 
+    const updatedStoreDetailInfo = { ...storeDetail[0] };
+    console.log("UpdatedStore: ",updatedStoreDetailInfo )
+    const sortedDays = [...updatedStoreDetailInfo.StoreOpeningDaysAndLocation[locationIndex].fineLocation.storeOpeningDays]
+      .sort((a, b) => b.dayId - a.dayId);
+  
+    updatedStoreDetailInfo.StoreOpeningDaysAndLocation[locationIndex].fineLocation.storeOpeningDays = sortedDays;
+    
+    setStoreDetailInfo(updatedStoreDetailInfo);
     
     // limit nearby stores to 3
-    nearByStore = nearByStore.slice(0,3);
+    nearByStore = nearByStore.slice(0,4);
     setNearByStoreList(nearByStore);
     console.log("Store Detail",storeDetail);
   }
   
   let storeId = params.storeId as string;
   getStoreDetail(storeId);
+
+  
   
   },[]);
+
+  useEffect(()=>{
+    window.open("/search/?cityId=" + `${cityId}`, "_blank");
+
+  },[searchItems]);
+
 
 useEffect(()=>{
   setLoadMap(true);
 },[storeDetailInfo])
+
+useEffect(() => {
+  if(storeDetailInfo){
+  const updatedStoreDetailInfo = { ...storeDetailInfo };
+    console.log("UpdatedStore: ",updatedStoreDetailInfo )
+    const sortedDays = [...updatedStoreDetailInfo.StoreOpeningDaysAndLocation[locationIndex].fineLocation.storeOpeningDays]
+      .sort((a, b) => b.dayId - a.dayId);
+  
+    updatedStoreDetailInfo.StoreOpeningDaysAndLocation[locationIndex].fineLocation.storeOpeningDays = sortedDays;
+    
+  setStoreDetailInfo(updatedStoreDetailInfo);
+}
+}, [locationIndex]);
+
+function convertToAmPm(time24:string) {
+  if(time24){
+  const [hours, minutes] = time24.split(':').map(Number);
+
+  const amPm = hours >= 12 ? 'PM' : 'AM';
+  const hour12 = hours % 12 || 12; // Converts 0 to 12 for midnight (12:00 AM)
+  
+  return `${hour12}:${minutes.toString().padStart(2, '0')} ${amPm}`;
+}else{
+  return time24;
+}
+}
 
   if(storeDetailInfo === undefined){
     return(
@@ -66,13 +111,13 @@ useEffect(()=>{
   }else{
   return (
     <>
-      <Head headerClassName={undefined} searchResult={function (searchedItemList: any): void {
-        throw new Error("Function not implemented.");
-      } } cityId={""} />
+      <Head headerClassName={undefined} searchResult={setSearchItems} setCityId={setCityId} cityId={""+cityId} />
       <div className="shop-profile">
         <div className="section1">
           <div className="section1-part1">
             <img className="images-2" alt="Images" src={storeDetailInfo.storePicture?.replace("http://", "https://").replace("api.westerlies.io", "apibeta.westerlies.com").replace("/api/","/images/")} />
+            <span> This picture belongs to {storeDetailInfo.name}  </span> 
+
           </div>
           <div className="section-part-2">
             <div className="frame-7">
@@ -173,24 +218,7 @@ useEffect(()=>{
             </div> */}
           </div>
         </div>
-        <div style={{display:'flex',flexDirection:'row',width:'80%',alignSelf:'center'}}> 
-                {
-                 storeDetailInfo.StoreOpeningDaysAndLocation.map((StoreOpeningDaysAndLocation: any,index:number)=>{
-
-
-                    return(
-                      <button
-                        onClick={()=>{
-                            setLocationIndex(index);
-                        }}
-                      style={{padding: 5, borderRadius: 5, marginRight: 10 }}>
-                        {StoreOpeningDaysAndLocation.fineLocation.city}
-                      </button>
-                    )
-                  })
-                }
-
-                </div>
+    
         {
         
         
@@ -208,9 +236,9 @@ useEffect(()=>{
                         storeDetailInfo.StoreOpeningDaysAndLocation[locationIndex].fineLocation.storeOpeningDays.map((item:any) => (
                         <div className="frame-days">
                           <div className="days">{dayId[item.dayId]}</div>
-                          <div className="time">{item.openTime }</div>
+                          <div className="time">{convertToAmPm(item.openTime) }</div>
                           <p> | </p>
-                          <div className="time">{item.closeTime }</div>
+                          <div className="time">{convertToAmPm(item.closeTime)}</div>
 
                         </div>
                       ))
@@ -218,9 +246,9 @@ useEffect(()=>{
                   </div>
                   <div className="frame-13">
                     <div className="frame-address">
-                      <div className="address">
+                      {/* <div className="address">
                       {  storeDetailInfo.StoreOpeningDaysAndLocation[locationIndex].fineLocation.city || "NA"} 
-                      </div>
+                      </div> */}
                     </div>
                     <div className="frame-address">
                       <div className="address">
@@ -228,10 +256,10 @@ useEffect(()=>{
                         </div>
                     </div>
                     <div className="frame-address">
-                      <div className="address">{  storeDetailInfo.StoreOpeningDaysAndLocation[locationIndex].fineLocation.zipCode}</div>
+                      <div className="address">{ storeDetailInfo.StoreOpeningDaysAndLocation[locationIndex].fineLocation.city + "," + storeDetailInfo.StoreOpeningDaysAndLocation[locationIndex].fineLocation.city +","+ storeDetailInfo.StoreOpeningDaysAndLocation[locationIndex].fineLocation.zipCode}</div>
                     </div>
                     <div className="frame-address">
-                      <div className="address">{  storeDetailInfo.StoreOpeningDaysAndLocation[locationIndex].fineLocation.phoneNumber}</div>
+                      <div className="address">{  storeDetailInfo.StoreOpeningDaysAndLocation[locationIndex].fineLocation.country}</div>
                     </div>
                   </div>
                 </div>
@@ -240,7 +268,7 @@ useEffect(()=>{
             <div className="map-wrapper">
              {loadMap &&
              
-              <MapComponent lat={parseFloat(storeDetailInfo.StoreOpeningDaysAndLocation[locationIndex].fineLocation.lattitude)} lng={parseFloat(storeDetailInfo.StoreOpeningDaysAndLocation[locationIndex].fineLocation.longtiude)}  to_be_marked={storeDetailInfo.StoreOpeningDaysAndLocation} />
+              <MapComponent lat={parseFloat(storeDetailInfo.StoreOpeningDaysAndLocation[locationIndex].fineLocation.lattitude)} lng={parseFloat(storeDetailInfo.StoreOpeningDaysAndLocation[locationIndex].fineLocation.longtiude)}  to_be_marked={storeDetailInfo.StoreOpeningDaysAndLocation} shopeProfile={true} />
              
              }
             </div>
@@ -250,8 +278,29 @@ useEffect(()=>{
       
         }
        
+       {storeDetailInfo.StoreOpeningDaysAndLocation.length > 1 &&
+       <div style={{display:'flex',flexDirection:'row',width:'80%',alignSelf:'center',overflowX: 'scroll'}}> 
+          <span style={{margin:15}}>More locations at:</span>
+                {
+                    
+                  
+                 storeDetailInfo.StoreOpeningDaysAndLocation.map((StoreOpeningDaysAndLocation: any,index:number)=>{
 
 
+                    return(
+                      <button
+                        onClick={()=>{
+                            setLocationIndex(index);
+                        }}
+                      style={{padding: 5, borderRadius: 5, marginRight: 10, border: 'none',width: 320 }}>
+                        {StoreOpeningDaysAndLocation.fineLocation.city}
+                      </button>
+                    )
+                  })
+                }
+
+        </div>
+                }
         <div className="frame-14">  
           <div className="frame-9">
             <div className="text-wrapper-8">GALLERY</div>

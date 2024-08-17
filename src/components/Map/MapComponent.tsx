@@ -17,18 +17,24 @@ export interface Location {
   lat: number;
   lng: number;
   to_be_marked?: any[];
+  shopeProfile?: boolean;
 }
 
 const MapComponent: React.FC<Location> = (location : Location) => {
   const [activeMarker, setActiveMarker] = useState<google.maps.LatLngLiteral | null>(null);
   const [activeDescription, setActiveDescription] = useState<string | null>(null);
+  const [activeStoreName, setActiveStoreName] = useState<string | null>(null);
   const [selectedStoreId, setSelectedStoreId] = useState<number | null>(null);
   const [zoom,setZoom] = useState(11);
   const navigate = useNavigate();
-  const handleMarkerClick = (position: google.maps.LatLngLiteral, description: string, storeId: number) => {
+  const handleMarkerClick = (position: google.maps.LatLngLiteral, loc: any, storeId: number) => {
+    console.log("alert everything: ", loc);
+    if(!location.shopeProfile){
     setActiveMarker(position);
-    setActiveDescription(description || null);
+    setActiveDescription(loc.primaryTag2 || null);
+    setActiveStoreName(loc.name);
     setSelectedStoreId(storeId);
+  }
   };
 
   useEffect(()=>{
@@ -57,7 +63,7 @@ const MapComponent: React.FC<Location> = (location : Location) => {
               <Marker
                 key={index_un}
                 position={specificLocation}
-                onClick={() => handleMarkerClick(specificLocation, loc?.email , loc?.storeId)}
+                onClick={() => handleMarkerClick(specificLocation, loc , loc?.storeId)}
               />
             );
           }
@@ -67,11 +73,11 @@ const MapComponent: React.FC<Location> = (location : Location) => {
         {activeMarker && (
           <InfoWindow position={activeMarker} onCloseClick={handleCloseClick}>
             <div>
-              <h3>Store Info</h3>
-              <p>{activeDescription || 'No description available'}</p>
-              <button style={{padding: 10,borderRadius: 5, background: 'gray', color: 'white', border: 'none'}} onClick={() =>{
+              <h3  onClick={() =>{
                   navigate("/shopProfile/"+selectedStoreId);
-              }}>Detail</button>
+              }}> {activeStoreName || "NA"} </h3>
+              <p>{activeDescription || ''}</p>
+              
             </div>
           </InfoWindow>
         )}

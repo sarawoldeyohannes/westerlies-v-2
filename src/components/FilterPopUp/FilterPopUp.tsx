@@ -148,6 +148,9 @@ const FilterPopUp: React.FC<FilterPopUpProps> = ({ onClose, filterType, tags,sel
     },);
 
     }
+
+    localTagData.sort((a:any, b:any) => a.tagName.localeCompare(b.tagName));
+
     setFinalTags(localTagData);
 
   },[])
