@@ -40,9 +40,15 @@ const Footer = forwardRef<HTMLDivElement, FooterPropsWithRef>(
               <div className="connect-with-us">
                 <div className="text-wrapper-2">Connect with us</div>
               </div>
-              <div onClick={()=>{
-                window.open("https://www.instagram.com/followthewesterlies/", "_blank");
-              }} className="instagram-icon">
+              <div
+                onClick={() => {
+                  window.open(
+                    "https://www.instagram.com/followthewesterlies/",
+                    "_blank"
+                  );
+                }}
+                className="instagram-icon"
+              >
                 <FaInstagram />
               </div>
             </div>
@@ -58,6 +64,17 @@ const Footer = forwardRef<HTMLDivElement, FooterPropsWithRef>(
           <div className="footer-section-3">
             <div className="text-wrapper-5">© 2024 Westerlies. Inc.</div>
             <div className="text-wrapper-5">Web Design by Westerlies</div>
+          </div>
+          <div className="footer-section-4">
+            <div className="text-wrapper-5">
+              <a
+                className="credit"
+                href="https://joynevada.com/"
+                target="_blank"
+              >
+                Logo design by Nevada Joy
+              </a>
+            </div>
           </div>
         </div>
       </div>

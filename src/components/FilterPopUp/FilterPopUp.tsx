@@ -8,150 +8,136 @@ import {
   filterItems,
 } from "./controller.filterPopUp";
 
-const FilterPopUp: React.FC<FilterPopUpProps> = ({ onClose, filterType, tags,selectedTags,selectedTagsList }) => {
+const FilterPopUp: React.FC<FilterPopUpProps> = ({
+  onClose,
+  filterType,
+  tags,
+  selectedTags,
+  selectedTagsList,
+}) => {
   const [items, setItems] = useState<FilterItem[]>(filterItems);
   const [finalTags, setFinalTags] = useState<FilterItem[]>([]);
 
   const handleCheckboxChange = (id: number) => {
+    if (id == 1000) {
+      setItems((prevItems) =>
+        prevItems.map((item) =>
+          item.id === 1000 ? { ...item, checked: !item.checked } : item
+        )
+      );
 
-      if(id == 1000){
-        setItems((prevItems) =>
-          prevItems.map((item) =>
-            item.id === 1000 ? { ...item, checked: !item.checked } : item
-          )
-        );
-      
-        setItems((prevItems) =>
-          prevItems.map((item) =>
-            item.id === 1001 ? { ...item, checked: false } : item
-          )
-        );
+      setItems((prevItems) =>
+        prevItems.map((item) =>
+          item.id === 1001 ? { ...item, checked: false } : item
+        )
+      );
 
-        setFinalTags((prevItems) =>
-          prevItems.map((item: any) =>
-            item.tagId === 1000 ? { ...item, checked: !item.checked } : item
-          )
-        );
-    
-        setFinalTags((prevItems) =>
-          prevItems.map((item: any) =>
-            item.tagId === 1001 ? { ...item, checked: false} : item
-          )
-        );
-      }
+      setFinalTags((prevItems) =>
+        prevItems.map((item: any) =>
+          item.tagId === 1000 ? { ...item, checked: !item.checked } : item
+        )
+      );
 
-      if(id == 1001){
-        setItems((prevItems) =>
-          prevItems.map((item) =>
-            item.id === 1001 ? { ...item, checked: !item.checked } : item
-          )
-        );
-      
-        setItems((prevItems) =>
-          prevItems.map((item) =>
-            item.id === 1000 ? { ...item, checked: false } : item
-          )
-        );
-
-        setFinalTags((prevItems) =>
-          prevItems.map((item: any) =>
-            item.tagId === 1001 ? { ...item, checked: !item.checked } : item
-          )
-        );
-    
-        setFinalTags((prevItems) =>
-          prevItems.map((item: any) =>
-            item.tagId === 1000 ? { ...item, checked: false} : item
-          )
-        );
-
-      }
-      if(id != 1000 && id != 1001){
-    setItems((prevItems) =>
-      prevItems.map((item) =>
-        item.id === id ? { ...item, checked: !item.checked } : item
-      )
-    );
-
-  }
-    if(selectedTagsList.includes(id)){
-      let index = selectedTagsList.indexOf(id);
-      selectedTagsList.splice(index,1);
-
+      setFinalTags((prevItems) =>
+        prevItems.map((item: any) =>
+          item.tagId === 1001 ? { ...item, checked: false } : item
+        )
+      );
     }
 
-    if(id == 1000){
-      if(selectedTagsList.includes(1001)){
+    if (id == 1001) {
+      setItems((prevItems) =>
+        prevItems.map((item) =>
+          item.id === 1001 ? { ...item, checked: !item.checked } : item
+        )
+      );
+
+      setItems((prevItems) =>
+        prevItems.map((item) =>
+          item.id === 1000 ? { ...item, checked: false } : item
+        )
+      );
+
+      setFinalTags((prevItems) =>
+        prevItems.map((item: any) =>
+          item.tagId === 1001 ? { ...item, checked: !item.checked } : item
+        )
+      );
+
+      setFinalTags((prevItems) =>
+        prevItems.map((item: any) =>
+          item.tagId === 1000 ? { ...item, checked: false } : item
+        )
+      );
+    }
+    if (id != 1000 && id != 1001) {
+      setItems((prevItems) =>
+        prevItems.map((item) =>
+          item.id === id ? { ...item, checked: !item.checked } : item
+        )
+      );
+    }
+    if (selectedTagsList.includes(id)) {
+      let index = selectedTagsList.indexOf(id);
+      selectedTagsList.splice(index, 1);
+    }
+
+    if (id == 1000) {
+      if (selectedTagsList.includes(1001)) {
         let index = selectedTagsList.indexOf(1001);
-        selectedTagsList.splice(index,1);
+        selectedTagsList.splice(index, 1);
       }
       let index = selectedTagsList.indexOf(1000);
-      selectedTagsList.splice(index,1);
+      selectedTagsList.splice(index, 1);
     }
-  
-     selectedTags([...selectedTagsList, id]);
-    
-    
-  };  const handleClearSearch = () => {
+
+    selectedTags([...selectedTagsList, id]);
+  };
+  const handleClearSearch = () => {
     // setItems((prevItems) =>
     //   prevItems.map((item) => ({ ...item, checked: false }))
     // );
     setFinalTags((prevItems) =>
       prevItems.map((item) => ({ ...item, checked: false }))
-
     );
     selectedTags([]);
   };
 
-  useEffect(()=>{
-
-
-
-
+  useEffect(() => {
     let localTagData: any = [];
     tags.map((tag) => {
-      
-      if(tag.tagTypeId == 2 && filterType == "SOCIAL IMPACT"){
-        if(selectedTagsList.includes(tag.tagId)){
+      if (tag.tagTypeId == 2 && filterType == "SOCIAL IMPACT") {
+        if (selectedTagsList.includes(tag.tagId)) {
           tag.checked = true;
         }
         localTagData.push(tag);
       }
-      if(tag.tagTypeId == 1 && filterType == "PRODUCT"){
-        if(selectedTagsList.includes(tag.tagId)){
+      if (tag.tagTypeId == 1 && filterType == "PRODUCT") {
+        if (selectedTagsList.includes(tag.tagId)) {
           tag.checked = true;
         }
         localTagData.push(tag);
       }
-
-     
-        
-
     });
-      
-    if(filterType == "OFFER CLASS"){
-      
-      localTagData.push(  {
-        "tagId": 1000,
-        "tagTypeId": 1,
-        "tagName": "yes",
-        "tagDescription": null,
-        "checked": selectedTagsList.includes(1000)
 
-    },);
-      localTagData.push(  {
-        "tagId": 1001,
-        "tagTypeId": 1,
-        "tagName": "No",
-        "tagDescription": null,
-        "checked": selectedTagsList.includes(1001)
-    },);
-
+    if (filterType == "OFFER CLASS") {
+      localTagData.push({
+        tagId: 1000,
+        tagTypeId: 1,
+        tagName: "Yes",
+        tagDescription: null,
+        checked: selectedTagsList.includes(1000),
+      });
+      localTagData.push({
+        tagId: 1001,
+        tagTypeId: 1,
+        tagName: "No",
+        tagDescription: null,
+        checked: selectedTagsList.includes(1001),
+      });
     }
     setFinalTags(localTagData);
-
-  },[])
-
+  }, []);
 
   return (
     <div className="filter-popup-container">
@@ -166,7 +152,7 @@ const FilterPopUp: React.FC<FilterPopUpProps> = ({ onClose, filterType, tags,sel
           <div className="text-wrapper-7">{`BY ${filterType}`}</div>
         </div>
         <div className="frame-2">
-          <div className="filter-items-container">
+          <div className={`filter-items-container ${filterType}`}>
             {finalTags.map((item: any) => (
               <div key={item.id} className="filter-item">
                 <input

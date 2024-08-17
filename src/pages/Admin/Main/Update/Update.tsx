@@ -173,6 +173,9 @@ const Update = () => {
       location.zipCode
     );
   };
+  const convertBooleanToNumber = (value: boolean): number => {
+    return value ? 1 : 0;
+  };
   const formatData = (data: any) => {
     // Removing fineLocations and shopOwner from the formatted data
     const { fineLocations, shopOwner, ...restData } = data;
@@ -249,9 +252,12 @@ const Update = () => {
       bazaarDetails: data.bazaarDetails || [],
       products: data.products || [],
       shopOwner2: data.shopOwner2 || { username: "", email: "" },
-      isClaimed: data.isClaimed || 0,
-      isBazaar: data.isBazaar || 0,
-      hasClasses: data.hasClasses || 0,
+      hasClasses:
+        convertBooleanToNumber(data.hasClasses as unknown as boolean) || 0,
+      isClaimed:
+        convertBooleanToNumber(data.isClaimed as unknown as boolean) || 0,
+      isBazaar:
+        convertBooleanToNumber(data.isBazaar as unknown as boolean) || 0,
     };
   };
   const onSubmit: SubmitHandler<StoreData> = async (formData: StoreData) => {
@@ -281,7 +287,7 @@ const Update = () => {
     } finally {
       setLoading(false); // Hide loading spinner after submission is complete
     }
-    // const jsonString = JSON.stringify(formData, null, 2);
+    // const jsonString = JSON.stringify(formattedData, null, 2);
     // const blob = new Blob([jsonString], { type: "application/json" });
     // const url = URL.createObjectURL(blob);
     // const a = document.createElement("a");
@@ -343,7 +349,15 @@ const Update = () => {
                     </Col>
                     <Col>
                       <img
-                        src={getPictureUrl(formValues?.storePicture.replace("http://", "https://").replace("api.westerlies.io", "apibeta.westerlies.com").replace("/api/","/images/"))}
+                        src={getPictureUrl(
+                          formValues?.storePicture
+                            .replace("http://", "https://")
+                            .replace(
+                              "api.westerlies.io",
+                              "apibeta.westerlies.com"
+                            )
+                            .replace("/api/", "/images/")
+                        )}
                         className="img-fluid"
                         alt="..."
                       />

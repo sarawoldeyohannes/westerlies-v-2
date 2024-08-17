@@ -22,12 +22,11 @@
 .filter-popup-container .filter-popup {
   position: relative;
   background: white;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow */
   padding: 20px;
   border-radius: 10px;
   z-index: 1001;
   max-width: 60vw;
-  width: 100%;
+  min-width: 30vw;
   max-height: 70vh;
   overflow: hidden;
   display: flex;
@@ -66,7 +65,9 @@
   max-height: 50vh;
   overflow-y: scroll;
 }
-
+.filter-popup-container .filter-items-container.OFFER.CLASS{
+  grid-template-columns: repeat(1, 1fr);
+}
 .filter-popup-container .filter-item {
   display: flex;
   align-items: center;
