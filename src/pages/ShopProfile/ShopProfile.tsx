@@ -479,9 +479,13 @@ const ShopProfile = () => {
             </div>
           }
           <div className="frame-14">
+          {storeDetailInfo.instagramPhotos.length > 0 &&
+
             <div className="frame-9">
               <div className="text-wrapper-8">GALLERY</div>
+             
             </div>
+          }
             <div className="frame-15">
               {storeDetailInfo.instagramPhotos.map((item: any) => (
              
