@@ -201,7 +201,10 @@ const ShopProfile = () => {
     }
   }, [locationIndex])
   useEffect(() => {
-    window.open("/search/?cityId=" + `${cityId}`, "_blank");
+    if(cityId){
+      window.open("/search/?cityId=" + `${cityId}`, "_blank");
+
+    }
 
   }, [searchItems]);
 
