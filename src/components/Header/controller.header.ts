@@ -4,4 +4,5 @@ export interface HeaderProps {
     searchResult: (searchedItemList: any) => void;
     cityId: string;
     setCityId: (cityId: string) => void;
+    page?: string;
   }

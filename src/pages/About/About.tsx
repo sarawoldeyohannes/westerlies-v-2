@@ -7,7 +7,11 @@ import { Link } from "react-router-dom";
 const About = () => {
   return (
     <>
-      <Head headerClassName="head-instance" type="About" />
+      <Head headerClassName="head-instance" type="About" searchResult={function (searchedItemList: any): void {
+        throw new Error("Function not implemented.");
+      } } cityId={""} setCityId={function (cityId: string): void {
+        throw new Error("Function not implemented.");
+      } } />
       <div className="container-about">
         <div className="section-1">
           <div className="text-section">

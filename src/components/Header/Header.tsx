@@ -7,7 +7,7 @@ import { useState } from "react";
 import Menu from "../Menu/Menu";
 import HeaderSearch from "../HeaderSearch/HeaderSearch";
 
-export const Head = ({ headerClassName, type,searchResult,cityId ,setCityId}: HeaderProps): JSX.Element => {
+export const Head = ({ headerClassName, type,searchResult,cityId ,setCityId,page}: HeaderProps): JSX.Element => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -59,7 +59,7 @@ export const Head = ({ headerClassName, type,searchResult,cityId ,setCityId}: He
         <div className="div-wrapper">
           <div className="text-wrapper-3">|</div>
         </div> */}
-        <HeaderSearch searchResult={searchResult} cityId={cityId} setCityId={setCityId} />
+        <HeaderSearch searchResult={searchResult} cityId={cityId} setCityId={setCityId} page={page} />
       </div>
     </div>
   );

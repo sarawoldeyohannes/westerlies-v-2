@@ -13,8 +13,9 @@ interface HeaderSearchProps {
   searchResult: (searchedItemList: any) => void;
   cityId: string;
   setCityId: (cityId: string) => void;
+  page?: string;
 }
-const HeaderSearch = ({searchResult,cityId,setCityId}: HeaderSearchProps) => {
+const HeaderSearch = ({searchResult,cityId,setCityId,page}: HeaderSearchProps) => {
   const [searchType, setSearchType] = useState("free");
   const [locationList, setLocationList] = useState<any[]>([]);
   const [tags, setTags] = useState<any[]>([]);
@@ -111,6 +112,7 @@ const HeaderSearch = ({searchResult,cityId,setCityId}: HeaderSearchProps) => {
 
   return (
     <div className="head-search">
+         {page != "shopProfile" && 
       <div className="buttons">
         <div className="buttons-btn">
           <button onClick={() => setSearchType("location")}>Location</button>
@@ -119,6 +121,7 @@ const HeaderSearch = ({searchResult,cityId,setCityId}: HeaderSearchProps) => {
           <button onClick={() => setSearchType("product")}>Product</button>
         </div>
       </div>
+      }
       <div className="inputs">
         {searchType === "free" && <FreeSearch setLocationList={setLocationList} selectedLocation={selectedLocation} setSelectedLocation={setSelectedLocation} />}
         {searchType === "location" && <LocationSearchInput setSelectedTags={setSelectedTags} selectedTagsList={selectedTags}  selectedLocation={selectedLocation} setSelectedLocation={setSelectedLocation} setLocationList={setLocationList} tags={tags} />}
