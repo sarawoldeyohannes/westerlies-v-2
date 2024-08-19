@@ -14,15 +14,17 @@ interface HeaderSearchProps {
   cityId: string;
   setCityId: (cityId: string) => void;
   page?: string;
+  selectedTags1: any[];
+  setSelectedTags1: (selectedTags: string) => void;
 }
-const HeaderSearch = ({searchResult,cityId,setCityId,page}: HeaderSearchProps) => {
+const HeaderSearch = ({searchResult,cityId,setCityId,page,setSelectedTags1,selectedTags1}: HeaderSearchProps) => {
   const [searchType, setSearchType] = useState("free");
   const [locationList, setLocationList] = useState<any[]>([]);
   const [tags, setTags] = useState<any[]>([]);
   const [selectedLocation,setSelectedLocation] = useState("");
   const [selectedLocationId,setSelectedLocationId] = useState("");
   const [freeSearchValue,setFreeSearchValue] = useState("");
-  const [selectedTags,setSelectedTags] = useState<any[]>([]);
+  const [selectedTags,setSelectedTags] = useState<any[]>(selectedTags1);
   
   useEffect(()=>{
     async function getTags(){
@@ -59,9 +61,11 @@ const HeaderSearch = ({searchResult,cityId,setCityId,page}: HeaderSearchProps) =
 
 
     useEffect(()=>{
+     
         async function freeSearch(){
           //        let {tagId, cityId , socialImpact, offersClasses,freeSearch } = body;
-          let selected_tags_final = selectedTags;
+          
+          let selected_tags_final = selectedTags.length > 0 ? selectedTags : selectedTags1;
           let has_no_class = selectedTags.includes(1001) ? true : false;
           let has_class = selectedTags.includes(1000) ? true : false;
           if(has_no_class){
@@ -73,7 +77,7 @@ const HeaderSearch = ({searchResult,cityId,setCityId,page}: HeaderSearchProps) =
             let index = selectedTags.indexOf(1000);
             selected_tags_final.splice(index,1);
           }
-
+          console.log("selected_tags_final:", selectedTags1);
             if(selectedLocationId !== "" || selected_tags_final.length > 0 || freeSearchValue !== ""){
         let search_body =  {
           "freeSearch": freeSearchValue,
@@ -106,7 +110,7 @@ const HeaderSearch = ({searchResult,cityId,setCityId,page}: HeaderSearchProps) =
 
         freeSearch();
 
-    },[freeSearchValue,selectedLocationId,selectedTags])
+    },[freeSearchValue,selectedLocationId,selectedTags,selectedTags1])
 
 
 

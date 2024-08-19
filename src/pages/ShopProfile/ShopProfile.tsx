@@ -260,7 +260,9 @@ const ShopProfile = () => {
   } else {
     return (
       <>
-        <Head headerClassName={undefined} searchResult={setSearchItems} setCityId={setCityId} cityId={"" + cityId} page={"shopProfile"} />
+        <Head headerClassName={undefined} searchResult={setSearchItems} setCityId={setCityId} cityId={"" + cityId} page={"shopProfile"} selectedTags={[]} setSelectedTags={function (selectedTags: string): void {
+          throw new Error("Function not implemented.");
+        } } />
         <div className="shop-profile">
           <div className="section1">
             <div className="section1-part1">

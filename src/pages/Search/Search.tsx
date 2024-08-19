@@ -8,6 +8,7 @@ import Card from "../../components/Card/Card";
 import "./Search.css";
 import "./mobile.search.css";
 import { getCityDetail } from "../Home/controller.home";
+import { getTagsApi } from "../../components/HeaderSearch/controller.HeaderSearch";
 
 const ITEMS_PER_PAGE = 8;
 const Search = () => {
@@ -17,6 +18,8 @@ const Search = () => {
   const [searchitems,setSearchItems] = useState<any[]>([]);
   const [cityDetail,setCityDetail] = useState<Location>();
   const [cityId,setCityId] = useState("");
+  const [tagList,setTagList] = useState<any[]>([]);
+  const [selectedTagsList,setSelectedTagsList] = useState<any>([]);
   const handlePageChange = (newPage: number) => {
     setCurrentPage(newPage);
   };
@@ -36,6 +39,9 @@ const Search = () => {
     let cityId: string = params.get("cityId")?.toString() as string;
     setCityId(cityId);
     getCityDetailSearchPage(cityId);
+    getTagsApi().then((res) => {
+      setTagList(res);
+    })
   },[])
 
   useEffect(()=>{
@@ -83,9 +89,11 @@ const Search = () => {
   };
   return (
     <>
-      <Head headerClassName="head-instance" searchResult={setSearchItems}  cityId={cityId} setCityId={setCityId} />
+      <Head headerClassName="head-instance" searchResult={setSearchItems}  cityId={cityId} setCityId={setCityId} selectedTags={selectedTagsList} setSelectedTags={setSelectedTagsList} />
       <div className="search-container">
-        <FilterNavbar  />
+        
+
+        <FilterNavbar cityId={cityId} tags={tagList} setSelectedTags={setSelectedTagsList} selectedTagsList={selectedTagsList}  />
 
         <div className="map-and-items">
           <div className="items-pagination">
