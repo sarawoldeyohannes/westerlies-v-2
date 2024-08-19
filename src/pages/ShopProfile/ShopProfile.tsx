@@ -22,6 +22,7 @@ import { getNearbayStores, getStoreBY_id, insta, items } from "./controller.shop
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { faWebflow } from "@fortawesome/free-brands-svg-icons/faWebflow";
+import { Button } from "react-bootstrap";
 const ShopProfile = () => {
   const params = useParams();
   const [storeDetailInfo, setStoreDetailInfo] = useState<any>();
@@ -41,6 +42,24 @@ const ShopProfile = () => {
     "6": "SATURDAY",
     "7": "SUNDAY"
   });
+  const [tagInfo] = useState<any>({
+    "102": "B Corporation",
+    "103": "BIPOC-owned",
+    "104": "Community-owned",
+    "105": "Eco-Friendly",
+    "106": "Fair Trade",
+    "107": "Handmade",
+    "108": "LGBTQIA+-owned",
+    "109": "Made Here",
+    "110": "Refill / Zero Waste",
+    "111": "Slow Fashion",
+    "112": "Traditional Handicraft",
+    "113": "Woman-owned",
+    "114": "Veteran-owned",
+    "115": "Vegan Products",
+    "116": "Vintage"
+}
+);
 
   useEffect(() => {
     async function getLocationDetail({ lng, lat }: any) {
@@ -172,16 +191,6 @@ const ShopProfile = () => {
               street = component.long_name;
             }
           }
-          // alert("tttttttt: " + JSON.stringify({
-          //   lat,
-          //   lng,
-          //   address: results[0].formatted_address,
-          //   city,
-          //   country,
-          //   state,
-          //   zipCode,
-          //   street,
-          // }))
           setLocationUpdated({
             lat,
             lng,
@@ -255,7 +264,7 @@ const ShopProfile = () => {
         <div className="shop-profile">
           <div className="section1">
             <div className="section1-part1">
-              <img className="images-2" alt="Images" src={storeDetailInfo.storePicture?.replace("http://", "https://").replace("api.westerlies.io", "apibeta.westerlies.com").replace("/api/", "/images/")} />
+              <img className="images-2" alt="Images" src={storeDetailInfo.storePicture?.replace("http://", "https://").replace("api.westerlies.io", "apibeta.westerlies.com").replace("/api/", "/images/").replace("/https://","https://")} />
               <span> This picture belongs to {storeDetailInfo.name}.  </span>
 
             </div>
@@ -352,17 +361,20 @@ const ShopProfile = () => {
                 </a> */}
                   </div>
                 </div>
-
               }
-              {/* <div className="frame-8">
-              <div className="text-wrapper-10">JOIN IN</div>
-              <div className="frame-9-links">
-                <div className="text-wrapper-10">
-                  https://www.pistachiosonline.com/pages/events
-                </div>
-              </div>
-            </div> */}
-            </div>
+                <div className="frame-8">
+                  <div style={{display: 'flex', flexDirection: 'row', width: '80%', alignSelf: 'center', flexWrap: 'wrap', gap: 10 }}>
+                  { storeDetailInfo?.storeTags.map((tagItem: any) => (
+                    tagInfo[tagItem.tagId] &&
+                 <span style={{background: '#ebebeb',padding: 7,borderRadius: 10}}>
+                      {tagInfo[tagItem.tagId]}
+                  </span>
+                  ))
+                  }
+                    </div>
+                  </div>
+                  </div>
+            
           </div>
 
           {
@@ -453,7 +465,7 @@ const ShopProfile = () => {
 
           {storeDetailInfo.StoreOpeningDaysAndLocation.length > 1 &&
             <div style={{ display: 'flex', flexDirection: 'column', width: '80%', alignSelf: 'center', flexWrap: 'wrap' }}>
-              <span style={{ margin: 15 }}>More locations at:</span>
+              <span style={{ margin: 15 }}>More locations in:</span>
 
               <div style={{ display: 'flex', flexDirection: 'row', width: '80%', alignSelf: 'center', flexWrap: 'wrap', gap: 10 }}>
 
@@ -491,6 +503,7 @@ const ShopProfile = () => {
              
                 <iframe
                   title="Instagram Post"
+                  style={{height: 800, width: 400}}
                   src={
                     item.li +
                     "embed/captioned/?cr=1&v=14&wp=583&rd=https%3A%2F%google.com&rp=%2Fembed%3Furl%3Dhttps%253A%252F%252Fwww.instagram.com%252Fp%252FC1sw3fEJJ9W%252F%253Fhl%253Den%26id%3Dmntl-sc-block_1-0-9-iframe%26options%3De30%253D%26docId%3D8422682#%7B%22ci%22%3A0%2C%22os%22%3A1948.5%2C%22ls%22%3A430.90000000037253%2C%22le%22%3A1514.800000000745%7D"
@@ -500,6 +513,7 @@ const ShopProfile = () => {
               ))}
             </div>
           </div>
+          {storeDetailInfo.yelpReviewUrl &&
           <div className="frame-14">
             <div className="frame-9">
               <div className="text-wrapper-8">STORE REVIEWS</div>
@@ -507,13 +521,14 @@ const ShopProfile = () => {
             <div className="frame-16">
               <div className="read-button-btn">
                 <p className="read">
-                  <a href="/about" className="span">
+                  <a href={storeDetailInfo.yelpReviewUrl} target="_blank"   className="span">
                     Read reviews on yelp
                   </a>
                 </p>
               </div>
             </div>
-          </div>
+          </div>   
+        }
           <div className="frame-14">
             <div className="frame-9">
               <p className="text-wrapper-8">Others Stores You May Love</p>

@@ -74,7 +74,9 @@ const MapComponent: React.FC<Location> = (location : Location) => {
           <InfoWindow position={activeMarker} onCloseClick={handleCloseClick}>
             <div>
               <h3  onClick={() =>{
-                  navigate("/shopProfile/"+selectedStoreId);
+                      window.open("/shopProfile/" + `${selectedStoreId}`, "_blank");
+
+                  // navigate("/shopProfile/"+selectedStoreId);
               }}> {activeStoreName || "NA"} </h3>
               <p>{activeDescription || ''}</p>
               

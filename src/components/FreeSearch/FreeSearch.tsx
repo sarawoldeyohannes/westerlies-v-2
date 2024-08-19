@@ -8,9 +8,10 @@ interface locationList {
   setLocationList: (locationList: any)=> void;
   selectedLocation: string;
   setSelectedLocation: (selectedLocation: string) => void;
+  page?: string;
 }
 
-const FreeSearch = ({setLocationList,selectedLocation,setSelectedLocation}: locationList) => {
+const FreeSearch = ({setLocationList,selectedLocation,setSelectedLocation,page}: locationList) => {
 
 
   return (
@@ -21,7 +22,7 @@ const FreeSearch = ({setLocationList,selectedLocation,setSelectedLocation}: loca
           className="Location-input"
           type="text"
           value={selectedLocation}
-          placeholder="Click on Location or Product to start searching"
+          placeholder={page == "shopProfile" ? "Search a city" : "Click on Location or Product to start searching"}
           onChange={async(e:any) => {
             setSelectedLocation(e.target.value);
             let locationExists = await SearchLocation(e.target.value);

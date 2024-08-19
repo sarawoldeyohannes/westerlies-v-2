@@ -16,7 +16,7 @@ const Card = ({ name, description, storePicture , storeId,primaryTag2 }:CardProp
     }} className="card-container">
       <span>
         <img className="card-image" src={storePicture?.replace("http://", "https://")
-                  .replace("api.westerlies.io", "apibeta.westerlies.com").replace("/api/","/images/")
+                  .replace("api.westerlies.io", "apibeta.westerlies.com").replace("/api/","/images/").replace("/https://","https://")
               } alt={name} />
       </span>
       <div className="card-content">
