@@ -57,7 +57,10 @@ const ShopProfile = () => {
     "113": "Woman-owned",
     "114": "Veteran-owned",
     "115": "Vegan Products",
-    "116": "Vintage"
+    "116": "Vintage",
+    "118": "Independent Designer",
+    "119": "Community Involvement",
+    "121": "1% for the Planet",
 }
 );
 
@@ -267,7 +270,7 @@ const ShopProfile = () => {
           <div className="section1">
             <div className="section1-part1">
               <img className="images-2" alt="Images" src={storeDetailInfo.storePicture?.replace("http://", "https://").replace("api.westerlies.io", "apibeta.westerlies.com").replace("/api/", "/images/").replace("/https://","https://")} />
-              <span> This picture belongs to {storeDetailInfo.name}.  </span>
+              <span style={{fontSize: 14}}> This picture belongs to {storeDetailInfo.name}.  </span>
 
             </div>
             <div className="section-part-2">
@@ -505,7 +508,7 @@ const ShopProfile = () => {
              
                 <iframe
                   title="Instagram Post"
-                  style={{height: 800, width: 400}}
+                  style={{height: 570, width: 400}}
                   src={
                     item.li +
                     "embed/captioned/?cr=1&v=14&wp=583&rd=https%3A%2F%google.com&rp=%2Fembed%3Furl%3Dhttps%253A%252F%252Fwww.instagram.com%252Fp%252FC1sw3fEJJ9W%252F%253Fhl%253Den%26id%3Dmntl-sc-block_1-0-9-iframe%26options%3De30%253D%26docId%3D8422682#%7B%22ci%22%3A0%2C%22os%22%3A1948.5%2C%22ls%22%3A430.90000000037253%2C%22le%22%3A1514.800000000745%7D"

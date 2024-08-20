@@ -72,10 +72,13 @@ const Home = () => {
         headerClassName="head-instance"
         type="About"
         searchResult={setItems}
-        cityId={""}
-      />
+        cityId={""} setCityId={function (cityId: string): void {
+          throw new Error("Function not implemented.");
+        } } selectedTags={[]} setSelectedTags={function (selectedTags: string): void {
+          throw new Error("Function not implemented.");
+        } }      />
       <div className="home-container">
-        <FilterNavbar />
+        {/* <FilterNavbar /> */}
         <div className="splash">
           <div className="splash-text-container">
             <div className="s-container">
