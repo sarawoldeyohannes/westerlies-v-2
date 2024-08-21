@@ -101,7 +101,7 @@ const Search = () => {
               {selectedItems?.length > 0 &&  selectedItems?.map((item: any) => { 
                   
                 return(
-                <Card name={item.name} storePicture={item.storePicture} primaryTag2={item?.primaryTag2} description={""} storeId={item.storeId} />
+                <Card name={item.name} storePicture={item.storePicture} primaryTag2={item?.primaryTag2} description={""} storeId={item.storeId}  cityName={cityDetail?.city || ""} />
               );
                             
                 })}

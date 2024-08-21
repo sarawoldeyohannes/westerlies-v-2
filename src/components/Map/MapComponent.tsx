@@ -18,6 +18,7 @@ export interface Location {
   lng: number;
   to_be_marked?: any[];
   shopeProfile?: boolean;
+  city?: string;
 }
 
 const MapComponent: React.FC<Location> = (location : Location) => {

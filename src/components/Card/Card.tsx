@@ -3,7 +3,7 @@ import "./Card.css";
 import { CardProps } from "./controller.card";
 import { Link, useNavigate } from "react-router-dom";
 
-const Card = ({ name, description, storePicture , storeId,primaryTag2 }:CardProps) => {
+const Card = ({ name, description, storePicture , storeId,primaryTag2,cityName }:CardProps) => {
 
   // const navigate = useNavigate();
   
@@ -11,7 +11,7 @@ const Card = ({ name, description, storePicture , storeId,primaryTag2 }:CardProp
     <div onClick={()=>{
 
       
-       window.open('/shopProfile/'+storeId, '_blank');
+       window.open('/shopProfile/'+storeId+'/'+cityName, '_blank');
 
     }} className="card-container">
       <span>

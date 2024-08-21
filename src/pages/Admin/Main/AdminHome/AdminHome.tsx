@@ -18,6 +18,8 @@ const AdminHome = () => {
   const [successMessage, setSuccessMessage] = useState<string>("");
   const [errorMessage, setErrorMessage] = useState<string>("");
   const [cityId, setCityId] = useState("");
+  const [tag,setTag] = useState([]);
+  const [selectedTagList,setSelectedTags] = useState();
 
   useEffect(() => {
     const loadStoreData = async () => {
@@ -138,8 +140,7 @@ const AdminHome = () => {
           headerClassName="admin-head-instance"
           searchResult={handleSearchResults}
           cityId={cityId}
-          setCityId={setCityId}
-        />
+          setCityId={setCityId} selectedTags={selectedTagList} setSelectedTags={setSelectedTags}        />
         {successMessage && (
           <div className="alert alert-success" role="alert">
             {successMessage}

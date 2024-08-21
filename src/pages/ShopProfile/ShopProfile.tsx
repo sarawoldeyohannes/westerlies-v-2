@@ -33,6 +33,10 @@ const ShopProfile = () => {
   const [cityId, setCityId] = useState<string>("");
   const [sortedLink, setSortedLink] = useState<any[]>([]);
   const [locationUpdated, setLocationUpdated] = useState<any>();
+  const [tags,setTags] = useState([]);
+  const [selectedTagList,setSelectedTags] = useState<any>();
+  const [completeDays,setCompleteDays] = useState<any>();
+
   const [dayId, setDayId] = useState<any>({
     "1": "MONDAY",
     "2": "TUESDAY",
@@ -69,6 +73,7 @@ const ShopProfile = () => {
       let newPosition = { lng, lat };
       const geocoder = new google.maps.Geocoder();
       geocoder.geocode({ location: newPosition }, (results, status) => {
+          console.log("XXXXXXXXXX: ", results)
         if (status === "OK" && results && results[0].address_components) {
           const addressComponents = results[0].address_components;
           let city = "";
@@ -91,8 +96,8 @@ const ShopProfile = () => {
               zipCode = component.long_name;
             }
             if (
-              component.types.includes("route") ||
-              component.types.includes("street_address")
+              
+              component.types.includes("street_number")
             ) {
               street = component.long_name;
             }
@@ -146,12 +151,14 @@ const ShopProfile = () => {
       setStoreDetailInfo(updatedStoreDetailInfo);
 
       // limit nearby stores to 3
-      nearByStore = nearByStore.slice(0, 4);
+      nearByStore = nearByStore.slice(0, 5);
+
+      nearByStore =  nearByStore.filter((item: any) => item.storeId != storeId);
       setNearByStoreList(nearByStore);
       console.log("Store Detail", storeDetail);
     }
 
-
+  
 
     let storeId = params.storeId as string;
     getStoreDetail(storeId);
@@ -167,6 +174,7 @@ const ShopProfile = () => {
       const geocoder = new google.maps.Geocoder();
       geocoder.geocode({ location: newPosition }, (results, status) => {
         if (status === "OK" && results && results[0].address_components) {
+          console.log("XXXXXXXXXX: ", results)
           const addressComponents = results[0].address_components;
           let city = "";
           let country = "";
@@ -188,8 +196,8 @@ const ShopProfile = () => {
               zipCode = component.long_name;
             }
             if (
-              component.types.includes("route") ||
-              component.types.includes("street_address")
+            
+              component.types.includes("street_number")
             ) {
               street = component.long_name;
             }
@@ -212,7 +220,10 @@ const ShopProfile = () => {
       getLocationDetail({ lat: parseFloat(storeDetailInfo.StoreOpeningDaysAndLocation[locationIndex].fineLocation.lattitude), lng: parseFloat(storeDetailInfo.StoreOpeningDaysAndLocation[locationIndex].fineLocation.longtiude) })
     }
   }, [locationIndex])
+
+
   useEffect(() => {
+    console.log("ACTIVE: ", searchItems);
     if(cityId){
       window.open("/search/?cityId=" + `${cityId}`, "_blank");
 
@@ -222,6 +233,22 @@ const ShopProfile = () => {
 
 
   useEffect(() => {
+    async function getLocationIndex (storeId: string,cityName: string) {
+      let storeDetail = await getStoreBY_id(storeId);
+      let locationIndexLocal = storeDetail[0].StoreOpeningDaysAndLocation.findIndex((item: any) => item.fineLocation.city == cityName);
+      
+      if(locationIndexLocal == -1 && locationIndex == 0){
+        locationIndexLocal = 0;
+      }
+      setLocationIndex(locationIndex);
+    }
+
+    let storeId = params.storeId as string;
+    let cityName = params.cityName as string;
+    if(cityName){
+
+      getLocationIndex(storeId,cityName);
+    }
 
     setLoadMap(true);
   }, [storeDetailInfo])
@@ -230,11 +257,21 @@ const ShopProfile = () => {
     if (storeDetailInfo) {
       const updatedStoreDetailInfo = { ...storeDetailInfo };
       console.log("UpdatedStore: ", updatedStoreDetailInfo)
-      const sortedDays = [...updatedStoreDetailInfo.StoreOpeningDaysAndLocation[locationIndex].fineLocation.storeOpeningDays]
-        .sort((a, b) => b.dayId - a.dayId);
+      // const sortedDays = [...updatedStoreDetailInfo.StoreOpeningDaysAndLocation[locationIndex].fineLocation.storeOpeningDays]
+      //   .sort((a, b) => b.dayId - a.dayId);
 
-      updatedStoreDetailInfo.StoreOpeningDaysAndLocation[locationIndex].fineLocation.storeOpeningDays = sortedDays;
+      // updatedStoreDetailInfo.StoreOpeningDaysAndLocation[locationIndex].fineLocation.storeOpeningDays = sortedDays;
+      const dayNames = ["SUNDAY", "MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY"];
 
+      let completeDays = dayNames.map((day, index) => {
+        const dayId = (index + 1) % 7 + 1; // This will wrap around day IDs from 1 to 7
+        const matchingDay = updatedStoreDetailInfo.StoreOpeningDaysAndLocation[locationIndex].fineLocation.storeOpeningDays.find((item: any) => item.dayId === dayId);
+      
+        return matchingDay ? matchingDay : { dayId: dayId, openTime: null, closeTime: null };
+      });
+      completeDays = completeDays.sort((a: any, b: any) => a.dayId - b.dayId);
+
+      setCompleteDays(completeDays);
       setStoreDetailInfo(updatedStoreDetailInfo);
     }
   }, [locationIndex]);
@@ -263,9 +300,7 @@ const ShopProfile = () => {
   } else {
     return (
       <>
-        <Head headerClassName={undefined} searchResult={setSearchItems} setCityId={setCityId} cityId={"" + cityId} page={"shopProfile"} selectedTags={[]} setSelectedTags={function (selectedTags: string): void {
-          throw new Error("Function not implemented.");
-        } } />
+        <Head headerClassName={'shope'} searchResult={setSearchItems} setCityId={setCityId} cityId={"" + cityId} page={"shopProfile"} selectedTags={tags} setSelectedTags={setSelectedTags} />
         <div className="shop-profile">
           <div className="section1">
             <div className="section1-part1">
@@ -395,7 +430,7 @@ const ShopProfile = () => {
 
                     <div className="frame-11">
                       <div className="frame-12">
-                        {
+                        {/* {
                           storeDetailInfo.StoreOpeningDaysAndLocation[locationIndex].fineLocation.storeOpeningDays.map((item: any) => (
                             <div className="frame-days">
                               <div className="days">{dayId[item.dayId]}</div>
@@ -415,7 +450,44 @@ const ShopProfile = () => {
 
                             </div>
                           ))
-                        }
+                        } */}
+                            {/* {
+                          storeDetailInfo.StoreOpeningDaysAndLocation[locationIndex].fineLocation.storeOpeningDays.map((item: any) => (
+                            <div className="frame-days">
+                              <div className="days">{dayId[item.dayId]}</div>
+                              {convertToAmPm(item.openTime) == "Closed" ?
+                                <>
+                                  <div className="time">{convertToAmPm(item.openTime)}</div>
+
+                                </>
+                                :
+                                <>
+                                  <div className="time">{convertToAmPm(item.openTime)}</div>
+                                  <p> | </p>
+                                  <div className="time">{convertToAmPm(item.closeTime)}</div>
+                                </>
+                              }
+
+
+                            </div>
+                          ))
+                        } */}
+                            {completeDays?.map((item: any) => (
+                        <div key={item.dayId} className="frame-days">
+                          <div className="days">{dayId[item.dayId]}</div>
+                          {!item.openTime ?
+                            <div className="time">Closed</div>
+                            :
+                            <>
+                              <div className="time">{convertToAmPm(item.openTime)}</div>
+                              <p> | </p>
+                              <div className="time">{convertToAmPm(item.closeTime)}</div>
+                            </>
+                          }
+                        </div>
+                        ))}
+
+                        
                       </div>
                       <div className="frame-13">
                         <div className="frame-address">
@@ -435,11 +507,11 @@ const ShopProfile = () => {
           } */}
                         <div className="frame-address">
                           <div className="address">
-                            {locationUpdated?.street}
+                            {locationUpdated?.address.split(",")[0]}
                           </div>
                         </div>
                         <div className="frame-address">
-                          <div className="address">{locationUpdated?.address}</div>
+                          <div className="address">{locationUpdated?.address.split(",")[1] + ", " + locationUpdated?.address.split(",")[2]}</div>
                         </div>
                         <div className="frame-address">
                           <div className="address">{locationUpdated?.country}</div>
@@ -469,10 +541,10 @@ const ShopProfile = () => {
           }
 
           {storeDetailInfo.StoreOpeningDaysAndLocation.length > 1 &&
-            <div style={{ display: 'flex', flexDirection: 'column', width: '80%', alignSelf: 'center', flexWrap: 'wrap' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', width: '90%', alignSelf: 'center', flexWrap: 'wrap' }}>
               <span style={{ margin: 15 }}>More locations in:</span>
 
-              <div style={{ display: 'flex', flexDirection: 'row', width: '80%', alignSelf: 'center', flexWrap: 'wrap', gap: 10 }}>
+              <div style={{ display: 'flex', flexDirection: 'row', width: '97.5%', alignSelf: 'center', flexWrap: 'wrap', gap: 10 }}>
 
                 {
 
@@ -485,7 +557,7 @@ const ShopProfile = () => {
                         onClick={() => {
                           setLocationIndex(index);
                         }}
-                        style={{ padding: 5, borderRadius: 5, marginRight: 10, border: 'none', width: 320, backgroundColor: index == locationIndex ? 'gray' : 'lightgray' }}>
+                        style={{ padding: 5, borderRadius: 5, marginRight: 10, border: 'none',  backgroundColor: index == locationIndex ? 'gray' : 'lightgray' }}>
                         {StoreOpeningDaysAndLocation.fineLocation.city}
                       </button>
                     )

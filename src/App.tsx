@@ -21,6 +21,7 @@ function App() {
           <Route path="search/:cityId" element={<Search />} />
           <Route path="shopProfile" element={<ShopProfile />} />
           <Route path="shopProfile/:storeId" element={<ShopProfile />} />
+          <Route path="shopProfile/:storeId/:cityName" element={<ShopProfile />} />
           <Route path="login" element={<Login />} />
           <Route path="AdminHome" element={<AdminHome />} />
           <Route path="update/:id" element={<Update />} />
