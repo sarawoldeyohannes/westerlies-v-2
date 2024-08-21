@@ -675,11 +675,25 @@ const Update = () => {
                               })}
                               defaultValue={field.tagId}
                             >
-                              {tags.map((tag) => (
-                                <option key={tag.tagId} value={tag.tagId}>
-                                  {tag.tagName}
-                                </option>
-                              ))}
+                              
+                              <optgroup label="Product Tags">
+    {tags
+      .filter(tag => tag.tagTypeId === 1)
+      .map(tag => (
+        <option key={tag.tagId} value={tag.tagId}>
+          {tag.tagName}
+        </option>
+      ))}
+  </optgroup>
+  <optgroup label="Social Tags">
+    {tags
+      .filter(tag => tag.tagTypeId === 2)
+      .map(tag => (
+        <option key={tag.tagId} value={tag.tagId}>
+          {tag.tagName}
+        </option>
+      ))}
+  </optgroup>
                             </select>
                             {errors.storeTags?.[index]?.tagId && (
                               <span className="text-danger">
@@ -856,7 +870,7 @@ const Update = () => {
                                 id={`StoreOpeningDaysAndLocation.${storeOpeningDayIndex}.fineLocation.zipCode`}
                                 {...register(
                                   `StoreOpeningDaysAndLocation.${storeOpeningDayIndex}.fineLocation.zipCode`,
-                                  { required: true }
+                                  
                                 )}
                               />
                               {errors.StoreOpeningDaysAndLocation?.[
@@ -878,7 +892,7 @@ const Update = () => {
                                 id={`StoreOpeningDaysAndLocation.${storeOpeningDayIndex}.fineLocation.phoneNumber`}
                                 {...register(
                                   `StoreOpeningDaysAndLocation.${storeOpeningDayIndex}.fineLocation.phoneNumber`,
-                                  { required: true }
+                                 
                                 )}
                               />
                               {errors.StoreOpeningDaysAndLocation?.[
@@ -900,7 +914,7 @@ const Update = () => {
                                 id={`StoreOpeningDaysAndLocation.${storeOpeningDayIndex}.fineLocation.email`}
                                 {...register(
                                   `StoreOpeningDaysAndLocation.${storeOpeningDayIndex}.fineLocation.email`,
-                                  { required: true }
+                                 
                                 )}
                               />
                               {errors.StoreOpeningDaysAndLocation?.[
@@ -960,6 +974,7 @@ const Update = () => {
                         onClick={() =>
                           appendStoreOpeningDay({
                             fineLocation: {
+  fineLocationId: 0,
                               longtiude: "",
                               lattitude: "",
                               city: "",

@@ -6,9 +6,10 @@ import { FaEdit } from "react-icons/fa";
 import { IoEyeSharp } from "react-icons/io5";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { useEffect, useState } from "react";
-import { deleteStore, fetchData } from "./controller.adminHome.ts";
+import { deleteStore, fetchData, freeSearch } from "./controller.adminHome.ts";
 import { StoreData } from "../Add/controller.add.ts";
 import { Head } from "../../../../components/Header/Header"; // Import Head component
+import { CiSearch } from "react-icons/ci";
 
 const AdminHome = () => {
   const [storeData, setStoreData] = useState<StoreData[]>([]);
@@ -18,8 +19,10 @@ const AdminHome = () => {
   const [successMessage, setSuccessMessage] = useState<string>("");
   const [errorMessage, setErrorMessage] = useState<string>("");
   const [cityId, setCityId] = useState("");
-  const [tag,setTag] = useState([]);
-  const [selectedTagList,setSelectedTags] = useState();
+  const [searchText, setSearchText] = useState("");
+  const [tags, setTags] = useState<string[]>([]);
+  const [selectSelected, setSelectedTags] = useState<any>();
+
 
   useEffect(() => {
     const loadStoreData = async () => {
@@ -40,7 +43,9 @@ const AdminHome = () => {
 
     loadStoreData();
   }, []);
-
+  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchText(e.target.value);
+  };
   const handleSearchResults = (results: StoreData[]) => {
     setFilteredData(results);
   };
@@ -121,7 +126,32 @@ const AdminHome = () => {
   const handleAddStoreClick = () => {
     window.open("/add", "_blank");
   };
-
+  const performSearch = async () => {
+    setLoading(true);
+    if (searchText.trim() !== "") {
+      try {
+        const response = await freeSearch(searchText);
+        console.log("Search results:", response);
+        setFilteredData(response);
+        setLoading(false);
+        if (response.length === 0) {
+          setErrorMessage("No records found.");
+          setTimeout(() => {
+            setErrorMessage("");
+          }, 5000);
+        }
+      } catch (error) {
+        setErrorMessage(`Error fetching search data:`);
+        setTimeout(() => {
+          setErrorMessage("");
+        }, 5000);
+      }
+    } else {
+      // If the search input is empty, display all stores
+      setFilteredData(storeData);
+      setLoading(false);
+    }
+  };
   return (
     <>
       <AdminHeader />
@@ -140,7 +170,21 @@ const AdminHome = () => {
           headerClassName="admin-head-instance"
           searchResult={handleSearchResults}
           cityId={cityId}
-          setCityId={setCityId} selectedTags={selectedTagList} setSelectedTags={setSelectedTags}        />
+          setCityId={setCityId}
+          setSelectedTags={setSelectedTags}
+          selectedTags={tags}
+        />
+        <div className="search-box">
+          <input
+            type="text"
+            placeholder="Search..."
+            value={searchText}
+            onChange={handleSearch}
+          />{" "}
+          <div className="search-button">
+            <CiSearch onClick={performSearch} />
+          </div>
+        </div>
         {successMessage && (
           <div className="alert alert-success" role="alert">
             {successMessage}
