@@ -147,7 +147,19 @@ const ShopProfile = () => {
         return desiredOrder.indexOf(a.linkType) - desiredOrder.indexOf(b.linkType);
       });
       setSortedLink(sortedLinks);
+      const dayNames = ["SUNDAY", "MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY"];
 
+      let completeDays = dayNames.map((day, index) => {
+        const dayId = (index + 1) % 7 + 1; // This will wrap around day IDs from 1 to 7
+        const matchingDay = updatedStoreDetailInfo.StoreOpeningDaysAndLocation[locationIndex].fineLocation.storeOpeningDays.find((item: any) => item.dayId === dayId);
+      
+        return matchingDay ? matchingDay : { dayId: dayId, openTime: null, closeTime: null };
+      });
+      completeDays = completeDays.sort((a: any, b: any) => a.dayId - b.dayId);
+      // i want the 7th day to be the first day
+      const lastDay = completeDays.pop();
+      completeDays.unshift(lastDay);
+      setCompleteDays(completeDays);
       setStoreDetailInfo(updatedStoreDetailInfo);
 
       // limit nearby stores to 3
@@ -270,7 +282,8 @@ const ShopProfile = () => {
         return matchingDay ? matchingDay : { dayId: dayId, openTime: null, closeTime: null };
       });
       completeDays = completeDays.sort((a: any, b: any) => a.dayId - b.dayId);
-
+      const lastDay = completeDays.pop();
+      completeDays.unshift(lastDay);
       setCompleteDays(completeDays);
       setStoreDetailInfo(updatedStoreDetailInfo);
     }
