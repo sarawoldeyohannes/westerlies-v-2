@@ -974,6 +974,7 @@ const Update = () => {
                         onClick={() =>
                           appendStoreOpeningDay({
                             fineLocation: {
+  fineLocationId: 0,
                               longtiude: "",
                               lattitude: "",
                               city: "",
