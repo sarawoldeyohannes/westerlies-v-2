@@ -83,12 +83,13 @@ export interface StoreTag {
     storeTagId: number;
     storeId:    number;
     tagId:      number;
+    
 }
 export interface Tag {
     tagId:          number;
-    tagTypeId:      null;
+    tagTypeId:      number;
     tagName:        string;
-    tagDescription: null;
+    tagDescription: string;
 }
 export interface Link {
     linkTypeId: number;
