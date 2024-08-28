@@ -115,12 +115,14 @@ const Home = () => {
           </div>
           <div className="splash-image-container">
           {items.length > 0 && (
-              <img
+              <><img
                 src={getPictureUrl(items[currentImageIndex]?.storePicture.replace("http://", "https://")
                   .replace("api.westerlies.io", "apibeta.westerlies.com").replace("/api/","/images/").replace("/https://","https://"))}
                 alt="Store"
                 className="splash-image"
               />
+              <div className="splash-text-wrapper-5"> This image belongs to {items[currentImageIndex]?.name}</div>
+              </>
             )}
           </div>
         </div>
