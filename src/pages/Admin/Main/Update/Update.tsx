@@ -263,10 +263,10 @@ const Update = () => {
   const onSubmit: SubmitHandler<StoreData> = async (formData: StoreData) => {
     const formattedData = formatData(formData);
     setLoading(true);
-
+    console.log("alll: ",formattedData);
     try {
       if (id !== undefined) {
-        await UpdateStore(formattedData, id);
+         await UpdateStore(formattedData, id);
         setSuccessMessage("Store updated successfully");
 
         setTimeout(() => {
@@ -351,7 +351,7 @@ const Update = () => {
                       <img
                         src={getPictureUrl(
                           formValues?.storePicture
-                            .replace("http://", "https://")
+                            ?.replace("http://", "https://")
                             .replace(
                               "api.westerlies.io",
                               "apibeta.westerlies.com"

@@ -156,8 +156,7 @@ const ShopProfile = () => {
       });
       completeDays = completeDays.sort((a: any, b: any) => a.dayId - b.dayId);
       // i want the 7th day to be the first day
-      const lastDay = completeDays.pop();
-      completeDays.unshift(lastDay);
+     
       setCompleteDays(completeDays);
       setStoreDetailInfo(updatedStoreDetailInfo);
 
@@ -425,6 +424,9 @@ const ShopProfile = () => {
                   }
                     </div>
                   </div>
+                  <div className="frame-8">
+                    <p>{storeDetailInfo.moreInfo}</p>
+                  </div>
                   </div>
             
           </div>
@@ -523,13 +525,20 @@ const ShopProfile = () => {
                           </div>
                         </div>
                         <div className="frame-address">
+                          {locationUpdated?.address.split(",").length == 4 ?
                           <div className="address">{locationUpdated?.address.split(",")[1] + ", " + locationUpdated?.address.split(",")[2]}</div>
+                        :
+                        <div className="address">{locationUpdated?.address.split(",")[1] }</div>
+
+                        }
                         </div>
                         <div className="frame-address">
                           <div className="address">{locationUpdated?.country}</div>
                         </div>
                         <div className="frame-address">
-                          <div className="address">{""}</div>
+                          <div className="address">
+                            <a href={"mailto:"+storeDetailInfo.StoreOpeningDaysAndLocation[locationIndex].fineLocation.email +"?subject=I have found your store on Westerlies.com"}>{storeDetailInfo.StoreOpeningDaysAndLocation[locationIndex].fineLocation.email}</a>
+                            </div>
                         </div>
                         
                         <div className="frame-address">
