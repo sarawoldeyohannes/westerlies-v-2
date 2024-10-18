@@ -48,20 +48,19 @@ const ShopProfile = () => {
   });
   const [tagInfo] = useState<any>({
     "102": "B Corporation",
-    "103": "BIPOC-owned",
+    "103": "BIPOC-founded",
     "104": "Community-owned",
     "105": "Eco-Friendly",
     "106": "Fair Trade",
     "107": "Handmade",
-    "108": "LGBTQIA+-owned",
+    "108": "LGBTQ-founded",
     "109": "Made Here",
     "110": "Refill / Zero Waste",
     "111": "Slow Fashion",
     "112": "Traditional Handicraft",
-    "113": "Woman-owned",
+    "113": "Female-founded",
     "114": "Veteran-owned",
     "115": "Vegan Products",
-    "116": "Vintage",
     "118": "Independent Designer",
     "119": "Community Involvement",
     "121": "1% for the Planet",
@@ -147,7 +146,18 @@ const ShopProfile = () => {
         return desiredOrder.indexOf(a.linkType) - desiredOrder.indexOf(b.linkType);
       });
       setSortedLink(sortedLinks);
+      const dayNames = ["SUNDAY", "MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY"];
 
+      let completeDays = dayNames.map((day, index) => {
+        const dayId = (index + 1) % 7 + 1; // This will wrap around day IDs from 1 to 7
+        const matchingDay = updatedStoreDetailInfo.StoreOpeningDaysAndLocation[locationIndex].fineLocation.storeOpeningDays.find((item: any) => item.dayId === dayId);
+      
+        return matchingDay ? matchingDay : { dayId: dayId, openTime: null, closeTime: null };
+      });
+      completeDays = completeDays.sort((a: any, b: any) => a.dayId - b.dayId);
+      // i want the 7th day to be the first day
+     
+      setCompleteDays(completeDays);
       setStoreDetailInfo(updatedStoreDetailInfo);
 
       // limit nearby stores to 3
@@ -270,7 +280,8 @@ const ShopProfile = () => {
         return matchingDay ? matchingDay : { dayId: dayId, openTime: null, closeTime: null };
       });
       completeDays = completeDays.sort((a: any, b: any) => a.dayId - b.dayId);
-
+      const lastDay = completeDays.pop();
+      completeDays.unshift(lastDay);
       setCompleteDays(completeDays);
       setStoreDetailInfo(updatedStoreDetailInfo);
     }
@@ -413,6 +424,9 @@ const ShopProfile = () => {
                   }
                     </div>
                   </div>
+                  <div className="frame-8">
+                    <p>{storeDetailInfo.moreInfo}</p>
+                  </div>
                   </div>
             
           </div>
@@ -511,13 +525,20 @@ const ShopProfile = () => {
                           </div>
                         </div>
                         <div className="frame-address">
+                          {locationUpdated?.address.split(",").length == 4 ?
                           <div className="address">{locationUpdated?.address.split(",")[1] + ", " + locationUpdated?.address.split(",")[2]}</div>
+                        :
+                        <div className="address">{locationUpdated?.address.split(",")[1] }</div>
+
+                        }
                         </div>
                         <div className="frame-address">
                           <div className="address">{locationUpdated?.country}</div>
                         </div>
                         <div className="frame-address">
-                          <div className="address">{""}</div>
+                          <div className="address">
+                            <a href={"mailto:"+storeDetailInfo.StoreOpeningDaysAndLocation[locationIndex].fineLocation.email +"?subject=I have found your store on Westerlies.com"}>{storeDetailInfo.StoreOpeningDaysAndLocation[locationIndex].fineLocation.email}</a>
+                            </div>
                         </div>
                         
                         <div className="frame-address">

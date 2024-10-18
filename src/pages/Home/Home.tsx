@@ -11,7 +11,6 @@ import FilterNavbar from "../../components/FilterNavbar/FilterNavbar";
 import SignUpPopUp from "../../components/SignUpPopUp/SignUpPopUp";
 import splash from "../../assets/homePage.jpg";
 import { getItems } from "./controller.home";
-
 import { useNavigate } from "react-router-dom";
 import LocationSearchAutoComplete from "../../components/LocationSearchAutoComplete/LocationSearchAutoComplete";
 const Home = () => {
@@ -21,6 +20,7 @@ const Home = () => {
   const [showSignUp, setShowSignUp] = useState(true);
   const [items, setItems] = useState<any[]>([]);
   const navigation = useNavigate();
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   const handleToggle = () => {
     setShowMap(!showMap);
@@ -63,6 +63,23 @@ const Home = () => {
       }
     };
   }, [footerRef]);
+  // Slideshow effect for splash images
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setCurrentImageIndex((prevIndex) => (prevIndex + 1) % items.length);
+    }, 5000); // 5 seconds interval
+
+    return () => clearInterval(intervalId);
+  }, [items.length]);
+  // Helper function to format the picture URL
+  const getPictureUrl = (path: string | undefined): string => {
+    if (!path) return "";
+    // Remove the leading slash if present
+    if (path.startsWith("/")) {
+      path = path.slice(1);
+    }
+    return `${path}`;
+  };
   const handleCloseSignUp = () => {
     setShowSignUp(false);
   };
@@ -97,7 +114,16 @@ const Home = () => {
             </div>
           </div>
           <div className="splash-image-container">
-            <img src={splash} />
+          {items.length > 0 && (
+              <><img
+                src={getPictureUrl(items[currentImageIndex]?.storePicture.replace("http://", "https://")
+                  .replace("api.westerlies.io", "apibeta.westerlies.com").replace("/api/","/images/").replace("/https://","https://"))}
+                alt="Store"
+                className="splash-image"
+              />
+              <div className="splash-text-wrapper-5"> This image belongs to {items[currentImageIndex]?.name}</div>
+              </>
+            )}
           </div>
         </div>
         {showSignUp && <SignUpPopUp onClose={handleCloseSignUp} />}

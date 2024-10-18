@@ -38,7 +38,7 @@
   display: flex;
   flex-direction: row;
   width: 100%;
-  padding: 3% 0;
+  padding: 3% 0 6% 0;
 }
 .splash .splash-text-container{
   width: 40%;
@@ -77,6 +77,7 @@
 }
 .splash .splash-image-container{
   width: 60%;
+  height: 70vh;
 }
 .splash .splash-image-container img{
   width: 100%;
@@ -98,7 +99,15 @@
   letter-spacing:1px;
   font-style: normal;
 }
-
+.splash .splash-text-wrapper-5{
+  display: flex;
+  justify-content: end;
+  font-family: 'Alegreya', serif;	
+  font-weight: 100;
+  font-size: 1.0em;
+  letter-spacing:0.5px;
+  font-style: normal;
+}
 .selectLocation{
   display: flex;
   flex-direction: column;
